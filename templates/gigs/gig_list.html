@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Browse Gigs</title>
+</head>
+<body>
+
+<h1>Available Gigs</h1>
+
+<hr>
+
+{% for gig in gigs %}
+
+<div>
+
+    {% if gig.image %}
+        <img src="{{ gig.image.url }}" width="200">
+    {% endif %}
+
+    <h2>{{ gig.title }}</h2>
+
+    <p>{{ gig.category }}</p>
+
+    <p>₹ {{ gig.price }}</p>
+
+    <p>{{ gig.delivery_days }} Days Delivery</p>
+
+    <a href="/gigs/{{ gig.id }}/">
+        View Details
+    </a>
+
+</div>
+
+<hr>
+
+{% empty %}
+
+<h2>No Gigs Available</h2>
+
+{% endfor %}
+
+</body>
+</html>

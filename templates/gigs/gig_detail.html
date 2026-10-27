@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ gig.title }}</title>
+</head>
+<body>
+
+<h1>{{ gig.title }}</h1>
+
+{% if gig.image %}
+<img src="{{ gig.image.url }}" width="400">
+{% endif %}
+
+<p>{{ gig.description }}</p>
+
+<p>Category : {{ gig.category }}</p>
+
+<p>Price : ₹ {{ gig.price }}</p>
+
+<p>Delivery : {{ gig.delivery_days }} Days</p>
+
+<p>Seller : {{ gig.seller.username }}</p>
+
+<button>Buy Now</button>
+
+</body>
+</html>

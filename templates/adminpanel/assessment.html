@@ -1,0 +1,594 @@
+{% extends "adminpanel/base_admin.html" %}
+{% load static %}
+
+{% block title %}
+Assessment Questions | CertiHire
+{% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/pages/admin_assessment.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="assessment-admin-page">
+
+
+    <!-- =========================================
+         HEADER
+    ========================================== -->
+
+    <div class="assessment-header">
+
+        <div>
+
+            <span class="admin-badge">
+
+                <i class="bi bi-patch-question-fill"></i>
+
+                Assessment Management
+
+            </span>
+
+
+            <h1>
+                Question Bank
+            </h1>
+
+
+            <p>
+                Add and manage questions used for seller assessments.
+            </p>
+
+        </div>
+
+
+        <a href="{% url 'add_question' %}"
+           class="add-question-btn">
+
+            <i class="bi bi-plus-lg"></i>
+
+            Add Question
+
+        </a>
+
+    </div>
+
+
+
+    <!-- =========================================
+         QUESTION BANK SUMMARY
+    ========================================== -->
+
+    <div class="assessment-card">
+
+        <div class="question-bank-header">
+
+            <div>
+
+                <h3>
+                    Assessment Questions
+                </h3>
+
+
+                <p>
+
+                    {{ questions|length }}
+                    question{{ questions|length|pluralize }}
+                    currently available.
+
+                </p>
+
+            </div>
+
+
+            <div class="question-count">
+
+                <i class="bi bi-question-circle-fill"></i>
+
+
+                <strong>
+                    {{ questions|length }}
+                </strong>
+
+
+                <span>
+                    Questions
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================
+             QUESTIONS LIST
+        ====================================== -->
+
+        <div class="questions-list">
+
+            {% for question in questions %}
+
+
+                <div class="question-row">
+
+
+                    <!-- NUMBER -->
+
+                    <div class="question-number">
+
+                        {{ forloop.counter }}
+
+                    </div>
+
+
+
+                    <!-- QUESTION -->
+
+                    <div class="question-content">
+
+                        <h4>
+
+                            {{ question.question }}
+
+                        </h4>
+
+
+                        <div class="options">
+
+                            <span>
+
+                                <b>A.</b>
+
+                                {{ question.option_a }}
+
+                            </span>
+
+
+                            <span>
+
+                                <b>B.</b>
+
+                                {{ question.option_b }}
+
+                            </span>
+
+
+                            <span>
+
+                                <b>C.</b>
+
+                                {{ question.option_c }}
+
+                            </span>
+
+
+                            <span>
+
+                                <b>D.</b>
+
+                                {{ question.option_d }}
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- CORRECT ANSWER -->
+
+                    <div class="question-answer">
+
+                        <small>
+                            Correct Answer
+                        </small>
+
+
+                        <strong>
+
+                            {{ question.correct_answer }}
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="question-actions">
+
+
+                        <a href="{% url 'edit_question' question.id %}"
+                           class="edit-question"
+                           title="Edit Question">
+
+                            <i class="bi bi-pencil"></i>
+
+                        </a>
+
+
+
+                        <a href="{% url 'delete_question' question.id %}"
+                           class="delete-question"
+                           title="Delete Question"
+                           onclick="return confirm('Are you sure you want to delete this question?');">
+
+                            <i class="bi bi-trash"></i>
+
+                        </a>
+
+
+                    </div>
+
+
+                </div>
+
+
+            {% empty %}
+
+
+                <div class="empty-assessment">
+
+
+                    <i class="bi bi-question-circle"></i>
+
+
+                    <h4>
+                        No questions yet
+                    </h4>
+
+
+                    <p>
+                        Add your first question to the assessment question bank.
+                    </p>
+
+
+                    <a href="{% url 'add_question' %}"
+                       class="add-question-btn">
+
+                        <i class="bi bi-plus-lg"></i>
+
+                        Add Question
+
+                    </a>
+
+
+                </div>
+
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================
+         BULK UPLOAD
+    ========================================== -->
+
+    <div class="question-import-card">
+
+
+        <!-- HEADER -->
+
+        <div class="import-header">
+
+            <div>
+
+                <span class="import-icon">
+
+                    <i class="bi bi-file-earmark-zip-fill"></i>
+
+                </span>
+
+
+                <div>
+
+                    <h3>
+                        Bulk Upload Questions
+                    </h3>
+
+
+                    <p>
+
+                        Upload multiple assessment questions
+                        using a ZIP file.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- INFORMATION -->
+
+        <div class="import-info">
+
+            <i class="bi bi-info-circle-fill"></i>
+
+
+            <div>
+
+                <strong>
+                    ZIP format
+                </strong>
+
+
+                <p>
+
+                    Your ZIP file must contain a CSV file
+                    with question, four options and the
+                    correct answer.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- UPLOAD FORM -->
+
+        <form
+            method="POST"
+            action="{% url 'upload_questions_zip' %}"
+            enctype="multipart/form-data"
+            class="bulk-upload-form">
+
+
+            {% csrf_token %}
+
+
+
+            <!-- FILE SELECT -->
+
+            <label
+                for="questions_zip"
+                class="zip-upload-box">
+
+
+                <i class="bi bi-cloud-arrow-up-fill"></i>
+
+
+                <strong>
+                    Choose Questions ZIP
+                </strong>
+
+
+                <span>
+                    CSV files inside the ZIP are supported
+                </span>
+
+
+            </label>
+
+
+
+            <input
+                type="file"
+                id="questions_zip"
+                name="questions_zip"
+                accept=".zip"
+                required
+                hidden>
+
+
+
+            <!-- SELECTED FILE -->
+
+            <div
+                id="selected-file"
+                class="selected-file">
+
+                <i class="bi bi-file-earmark"></i>
+
+                No file selected
+
+            </div>
+
+
+
+            <!-- UPLOAD BUTTON -->
+
+            <button
+                type="submit"
+                class="upload-questions-btn">
+
+
+                <i class="bi bi-upload"></i>
+
+                Upload Questions
+
+
+            </button>
+
+
+        </form>
+
+
+
+        <!-- CSV FORMAT -->
+
+        <div class="csv-format">
+
+
+            <strong>
+                Required CSV columns:
+            </strong>
+
+
+            <code>
+                question, option_a, option_b,
+                option_c, option_d, correct_answer
+            </code>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+{% endblock %}
+
+
+
+<!-- =========================================
+     JAVASCRIPT
+========================================== -->
+
+{% block js %}
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        const zipInput =
+            document.getElementById(
+                "questions_zip"
+            );
+
+
+        const selectedFile =
+            document.getElementById(
+                "selected-file"
+            );
+
+
+        /*
+         * Make sure both elements exist
+         */
+
+        if (
+            !zipInput ||
+            !selectedFile
+        ) {
+
+            return;
+
+        }
+
+
+
+        /*
+         * When ZIP is selected
+         */
+
+        zipInput.addEventListener(
+            "change",
+            function () {
+
+
+                if (
+                    this.files &&
+                    this.files.length > 0
+                ) {
+
+
+                    const file =
+                        this.files[0];
+
+
+                    /*
+                     * Check ZIP file
+                     */
+
+                    if (
+                        !file.name
+                            .toLowerCase()
+                            .endsWith(".zip")
+                    ) {
+
+
+                        selectedFile.innerHTML = `
+
+                            <i class="bi bi-exclamation-circle"></i>
+
+                            Please select a ZIP file.
+
+                        `;
+
+
+                        selectedFile.classList.remove(
+                            "file-selected"
+                        );
+
+
+                        this.value = "";
+
+
+                        return;
+
+                    }
+
+
+
+                    /*
+                     * Show selected filename
+                     */
+
+                    selectedFile.innerHTML = `
+
+                        <i class="bi bi-file-earmark-zip-fill"></i>
+
+                        <span>
+                            ${file.name}
+                        </span>
+
+                    `;
+
+
+                    selectedFile.classList.add(
+                        "file-selected"
+                    );
+
+
+                }
+
+                else {
+
+
+                    selectedFile.innerHTML = `
+
+                        <i class="bi bi-file-earmark"></i>
+
+                        No file selected
+
+                    `;
+
+
+                    selectedFile.classList.remove(
+                        "file-selected"
+                    );
+
+                }
+
+            }
+        );
+
+
+    }
+);
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,882 @@
+/* =====================================================
+   CREATE GIG
+===================================================== */
+
+.create-gig-page {
+    max-width: 1250px;
+    margin: 0 auto;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.create-gig-header {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    margin-bottom: 30px;
+
+}
+
+.create-gig-badge {
+
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 8px 14px;
+
+    background: #eef4ff;
+    color: #2563eb;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+}
+
+.create-gig-header h1 {
+
+    margin: 14px 0 8px;
+
+    font-size: 34px;
+    font-weight: 700;
+
+    color: #111827;
+
+}
+
+.create-gig-header p {
+
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 15px;
+
+}
+
+.back-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+    gap: 8px;
+
+    padding: 11px 18px;
+
+    border: 1px solid #dbe3f0;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    color: #374151;
+
+    background: white;
+
+    font-weight: 500;
+
+    transition: .2s;
+
+}
+
+.back-btn:hover {
+
+    border-color: #2563eb;
+
+    color: #2563eb;
+
+}
+
+
+/* =====================================================
+   LAYOUT
+===================================================== */
+
+.create-gig-layout {
+
+    display: grid;
+
+    grid-template-columns: minmax(0, 1fr) 350px;
+
+    gap: 25px;
+
+}
+
+
+/* =====================================================
+   FORM CARD
+===================================================== */
+
+.create-gig-card {
+
+    background: #fff;
+
+    border: 1px solid #e8edf5;
+
+    border-radius: 18px;
+
+    padding: 32px;
+
+    box-shadow: 0 8px 30px rgba(15, 23, 42, .05);
+
+}
+
+.card-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding-bottom: 25px;
+
+    margin-bottom: 25px;
+
+    border-bottom: 1px solid #edf0f5;
+
+}
+
+.title-icon {
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #eef4ff;
+
+    color: #2563eb;
+
+    font-size: 20px;
+
+}
+
+.card-title h3 {
+
+    margin: 0 0 4px;
+
+    font-size: 20px;
+
+    color: #111827;
+
+}
+
+.card-title p {
+
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 13px;
+
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.form-group {
+
+    margin-bottom: 22px;
+
+}
+
+.form-group label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #1f2937;
+
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+
+    width: 100%;
+
+    padding: 13px 15px;
+
+    border: 1px solid #dce2ea;
+
+    border-radius: 10px;
+
+    background: #fff;
+
+    color: #111827;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: .2s;
+
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+
+    border-color: #2563eb;
+
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, .10);
+
+}
+
+.form-group textarea {
+
+    min-height: 150px;
+
+    resize: vertical;
+
+}
+
+.form-group small {
+
+    display: block;
+
+    margin-top: 7px;
+
+    color: #9ca3af;
+
+    font-size: 12px;
+
+}
+
+
+/* =====================================================
+   PRICE / DELIVERY
+===================================================== */
+
+.form-row {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+
+}
+
+.input-with-icon {
+
+    position: relative;
+
+}
+
+.input-with-icon > span {
+
+    position: absolute;
+
+    right: 14px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #6b7280;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+}
+
+.input-with-icon input {
+
+    padding-right: 55px;
+
+}
+
+
+/* =====================================================
+   IMAGE UPLOAD
+===================================================== */
+
+.image-upload {
+
+    position: relative;
+
+    min-height: 150px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    border: 2px dashed #d7dfec;
+
+    border-radius: 14px;
+
+    background: #fafcff;
+
+    color: #6b7280;
+
+    text-align: center;
+
+    overflow: hidden;
+
+}
+
+.image-upload > i {
+
+    font-size: 32px;
+
+    color: #2563eb;
+
+}
+
+.image-upload strong {
+
+    color: #374151;
+
+    font-size: 14px;
+
+}
+
+.image-upload span {
+
+    font-size: 12px;
+
+}
+
+.image-upload input[type="file"] {
+
+    position: absolute;
+
+    inset: 0;
+
+    opacity: 0;
+
+    cursor: pointer;
+
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.form-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    padding-top: 10px;
+
+}
+
+.cancel-btn {
+
+    padding: 12px 22px;
+
+    border-radius: 10px;
+
+    border: 1px solid #dce2ea;
+
+    background: #fff;
+
+    color: #4b5563;
+
+    text-decoration: none;
+
+    font-weight: 500;
+
+}
+
+.create-btn {
+
+    border: none;
+
+    padding: 12px 24px;
+
+    border-radius: 10px;
+
+    color: #fff;
+
+    font-weight: 600;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #6d3df5
+    );
+
+    cursor: pointer;
+
+    box-shadow: 0 7px 18px rgba(37, 99, 235, .22);
+
+    transition: .2s;
+
+}
+
+.create-btn:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 10px 22px rgba(37, 99, 235, .28);
+
+}
+
+
+/* =====================================================
+   TIPS
+===================================================== */
+
+.gig-tips {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+
+}
+
+.tips-card {
+
+    background: #fff;
+
+    border: 1px solid #e8edf5;
+
+    border-radius: 18px;
+
+    padding: 26px;
+
+    box-shadow: 0 8px 30px rgba(15, 23, 42, .05);
+
+}
+
+.tips-icon {
+
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #fff7df;
+
+    color: #f59e0b;
+
+    font-size: 20px;
+
+}
+
+.tips-card h3 {
+
+    margin: 16px 0 6px;
+
+    font-size: 20px;
+
+}
+
+.tips-card > p {
+
+    margin-bottom: 25px;
+
+    color: #6b7280;
+
+    font-size: 13px;
+
+}
+
+
+/* =====================================================
+   TIPS ITEMS
+===================================================== */
+
+.tip {
+
+    display: flex;
+
+    gap: 13px;
+
+    margin-bottom: 20px;
+
+}
+
+.tip:last-child {
+
+    margin-bottom: 0;
+
+}
+
+.tip-number {
+
+    min-width: 30px;
+    height: 30px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #eef4ff;
+
+    color: #2563eb;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+}
+
+.tip strong {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    font-size: 13px;
+
+}
+
+.tip small {
+
+    display: block;
+
+    color: #6b7280;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+}
+
+
+/* =====================================================
+   VERIFIED
+===================================================== */
+
+.verified-card {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 13px;
+
+    padding: 20px;
+
+    border-radius: 16px;
+
+    background: linear-gradient(
+        135deg,
+        #eff6ff,
+        #f5f3ff
+    );
+
+    border: 1px solid #dbeafe;
+
+}
+
+.verified-card > i {
+
+    font-size: 25px;
+
+    color: #2563eb;
+
+}
+
+.verified-card strong {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #1d4ed8;
+
+}
+
+.verified-card p {
+
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+}
+
+
+/* =====================================================
+   ERRORS
+===================================================== */
+
+.form-error,
+.field-error {
+
+    color: #dc2626;
+
+    font-size: 12px;
+
+    margin-top: 6px;
+
+}
+
+.form-error {
+
+    padding: 12px 15px;
+
+    background: #fef2f2;
+
+    border: 1px solid #fecaca;
+
+    border-radius: 10px;
+
+    margin-bottom: 20px;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .create-gig-layout {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .gig-tips {
+
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+    }
+
+}
+
+@media (max-width: 650px) {
+
+    .create-gig-header {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 18px;
+
+    }
+
+    .create-gig-header h1 {
+
+        font-size: 28px;
+
+    }
+
+    .create-gig-card {
+
+        padding: 20px;
+
+    }
+
+    .form-row {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .gig-tips {
+
+        display: flex;
+
+    }
+
+    .form-actions {
+
+        flex-direction: column-reverse;
+
+    }
+
+    .cancel-btn,
+    .create-btn {
+
+        width: 100%;
+
+        text-align: center;
+
+    }
+
+}
+
+.image-upload {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 170px;
+
+    padding: 25px;
+
+    border: 2px dashed #d8c99d;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fffdf8,
+            #f8f5ed
+        );
+
+    text-align: center;
+
+    cursor: pointer;
+
+    transition: .3s ease;
+
+    overflow: hidden;
+}
+
+.image-upload:hover {
+
+    border-color: #c6a64a;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fffaf0,
+            #f4faf6
+        );
+
+    transform: translateY(-2px);
+}
+
+.image-upload > i {
+
+    font-size: 36px;
+
+    color: #b08a2e;
+
+    margin-bottom: 10px;
+}
+
+.image-upload strong {
+
+    color: #302c25;
+
+    font-size: 15px;
+
+    margin-bottom: 5px;
+}
+
+.image-upload span {
+
+    color: #8a8478;
+
+    font-size: 12px;
+
+    max-width: 90%;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+/* Django file input */
+
+.image-upload input[type="file"] {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+
+    cursor: pointer;
+
+}
+
+
+/* =====================================================
+SELECTED IMAGE
+===================================================== */
+
+.image-upload.file-selected {
+
+    border-color: #39a875;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f3fbf7,
+            #fffdf8
+        );
+
+}
+
+
+.image-upload.file-selected > i {
+
+    color: #16835a;
+
+}
+
+
+.image-upload.file-selected strong {
+
+    color: #16835a;
+
+}
+
+
+.image-upload.file-selected span {
+
+    color: #5f7569;
+
+    font-weight: 600;
+
+}

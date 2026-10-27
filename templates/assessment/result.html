@@ -1,0 +1,33 @@
+<h1>Assessment Result</h1>
+
+<p>
+Score:
+{{ score }}/{{ total }}
+</p>
+
+<p>
+Percentage:
+{{ percentage }}%
+</p>
+
+{% if passed %}
+
+<h2 style="color:green;">
+PASS
+</h2>
+
+<a href="/dashboard/">
+Go To Dashboard
+</a>
+
+{% else %}
+
+<h2 style="color:red;">
+FAIL
+</h2>
+
+<a href="/assessment/">
+Retake Assessment
+</a>
+
+{% endif %}

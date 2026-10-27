@@ -1,0 +1,78 @@
+{% extends "base_dashboard.html" %}
+{% load static %}
+
+{% block title %}Order Summary{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/pages/order_summary.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="order-container">
+
+    <div class="order-left">
+
+        <h2>Order Summary</h2>
+
+        <div class="summary-card">
+
+            {% if gig.image %}
+            <img src="{{ gig.image.url }}">
+            {% endif %}
+
+            <div>
+
+                <h4>{{ gig.title }}</h4>
+
+                <p>{{ gig.category }}</p>
+
+                <small>Seller : {{ gig.seller.username }}</small>
+
+            </div>
+
+        </div>
+
+        <div class="details">
+
+            <div>
+
+                <span>Delivery</span>
+
+                <strong>{{ gig.delivery_days }} Days</strong>
+
+            </div>
+
+            <div>
+
+                <span>Price</span>
+
+                <strong>₹{{ gig.price }}</strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="order-right">
+
+        <div class="payment-card">
+
+            <h3>Total</h3>
+
+            <h1>₹{{ gig.price }}</h1>
+
+            <a href="{% url 'initiate_payment' gig.id %}" class="pay-btn">
+
+                Continue to Payment
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

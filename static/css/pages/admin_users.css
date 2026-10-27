@@ -1,0 +1,821 @@
+/* =========================================================
+   CERTIHIRE ADMIN — PREMIUM USERS PAGE
+========================================================= */
+
+.admin-users-page {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-bottom: 50px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.admin-users-header {
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 30px;
+}
+
+.admin-users-header h1 {
+    margin: 13px 0 6px;
+
+    color: #172033;
+
+    font-size: 34px;
+    font-weight: 800;
+
+    letter-spacing: -1px;
+}
+
+.admin-users-header p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   PREMIUM BADGE
+========================================================= */
+
+.admin-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 8px 15px;
+
+    border-radius: 50px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef2ff,
+            #f5f3ff
+        );
+
+    border: 1px solid #ddd6fe;
+
+    color: #4f46e5;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    box-shadow:
+        0 6px 18px rgba(79,70,229,.08);
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.back-btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 10px 17px;
+
+    border:
+        1px solid #dbe3ef;
+
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    color: #475569;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 5px 15px rgba(15,23,42,.05);
+
+    transition: .3s;
+}
+
+.back-btn:hover {
+    color: #4f46e5;
+
+    border-color: #c7d2fe;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f8faff,
+            #faf8ff
+        );
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 9px 20px rgba(79,70,229,.10);
+}
+
+
+/* =========================================================
+   USER SECTION
+========================================================= */
+
+.user-section {
+    position: relative;
+
+    margin-bottom: 28px;
+
+    padding: 24px;
+
+    background: #ffffff;
+
+    border:
+        1px solid #e7ebf3;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 12px 35px rgba(15,23,42,.06);
+}
+
+
+/* colored top line */
+
+.user-section::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #2563eb,
+            #7c3aed,
+            #ec4899
+        );
+}
+
+
+/* =========================================================
+   SECTION TITLE
+========================================================= */
+
+.section-title {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+
+    padding-bottom: 16px;
+
+    border-bottom:
+        1px solid #edf0f5;
+}
+
+.section-title h3 {
+    margin: 0 0 4px;
+
+    color: #172033;
+
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.section-title span {
+    color: #94a3b8;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   USERS TABLE
+========================================================= */
+
+.users-table {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+/* =========================================================
+   USER ROW
+========================================================= */
+
+.user-row {
+    min-height: 78px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(250px, 1.6fr)
+        minmax(150px, .8fr)
+        minmax(150px, .8fr);
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 14px 10px;
+
+    border-bottom:
+        1px solid #f0f3f7;
+
+    border-radius: 12px;
+
+    transition:
+        background .25s ease,
+        transform .25s ease;
+}
+
+.user-row:last-child {
+    border-bottom: none;
+}
+
+.user-row:hover {
+    background:
+        linear-gradient(
+            90deg,
+            #f8faff,
+            #faf8ff
+        );
+
+    transform:
+        translateX(3px);
+}
+
+
+/* =========================================================
+   USER INFO
+========================================================= */
+
+.user-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    min-width: 0;
+}
+
+.user-info img,
+.avatar {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+}
+
+.user-info img {
+    border:
+        3px solid #eef2ff;
+
+    box-shadow:
+        0 5px 14px rgba(79,70,229,.10);
+}
+
+
+/* =========================================================
+   AVATAR
+========================================================= */
+
+.avatar {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #4f46e5,
+            #7c3aed
+        );
+
+    color: #ffffff;
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 8px 18px rgba(79,70,229,.20);
+}
+
+
+/* =========================================================
+   USER TEXT
+========================================================= */
+
+.user-info strong {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #334155;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+.user-info small {
+    display: block;
+
+    color: #94a3b8;
+
+    font-size: 10px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+.user-date {
+    color: #64748b;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    width: fit-content;
+
+    padding: 7px 11px;
+
+    border-radius: 50px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 4px 10px rgba(15,23,42,.04);
+}
+
+
+/* =========================================================
+   BUYER
+========================================================= */
+
+.buyer-status {
+    background:
+        linear-gradient(
+            135deg,
+            #eff6ff,
+            #dbeafe
+        );
+
+    color: #2563eb;
+
+    border:
+        1px solid #bfdbfe;
+}
+
+
+/* =========================================================
+   PASSED
+========================================================= */
+
+.status.passed {
+    background:
+        linear-gradient(
+            135deg,
+            #ecfdf5,
+            #d1fae5
+        );
+
+    color: #15803d;
+
+    border:
+        1px solid #bbf7d0;
+}
+
+
+/* =========================================================
+   FAILED
+========================================================= */
+
+.status.failed {
+    background:
+        linear-gradient(
+            135deg,
+            #fef2f2,
+            #fee2e2
+        );
+
+    color: #dc2626;
+
+    border:
+        1px solid #fecaca;
+}
+
+
+/* =========================================================
+   APPROVED
+========================================================= */
+
+.status.approved {
+    background:
+        linear-gradient(
+            135deg,
+            #ecfdf5,
+            #d1fae5
+        );
+
+    color: #15803d;
+
+    border:
+        1px solid #bbf7d0;
+}
+
+
+/* =========================================================
+   WAITING
+========================================================= */
+
+.status.waiting {
+    background:
+        linear-gradient(
+            135deg,
+            #fff7ed,
+            #ffedd5
+        );
+
+    color: #c2410c;
+
+    border:
+        1px solid #fed7aa;
+}
+
+
+/* =========================================================
+   ASSESSMENT
+========================================================= */
+
+.assessment-status {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 5px;
+}
+
+.assessment-status small {
+    color: #64748b;
+
+    font-size: 10px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   APPROVAL ACTIONS
+========================================================= */
+
+.approval-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+}
+
+
+/* =========================================================
+   APPROVE BUTTON
+========================================================= */
+
+.approve-btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    padding: 8px 13px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #16a34a,
+            #10b981
+        );
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 7px 16px rgba(16,185,129,.18);
+
+    transition: .3s;
+}
+
+.approve-btn:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #15803d,
+            #059669
+        );
+
+    color: #ffffff;
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 11px 22px rgba(16,185,129,.25);
+}
+
+
+/* =========================================================
+   REJECT BUTTON
+========================================================= */
+
+.reject-btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    padding: 8px 13px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ef4444,
+            #dc2626
+        );
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 7px 16px rgba(239,68,68,.16);
+
+    transition: .3s;
+}
+
+.reject-btn:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #dc2626,
+            #b91c1c
+        );
+
+    color: #ffffff;
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 11px 22px rgba(239,68,68,.23);
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.empty-users {
+    padding: 65px 20px;
+
+    text-align: center;
+
+    color: #94a3b8;
+
+    font-size: 13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #f8faff
+        );
+}
+
+.empty-users::before {
+    content: "👥";
+
+    display: block;
+
+    margin-bottom: 12px;
+
+    font-size: 35px;
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .user-row {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .user-date {
+        text-align: right;
+    }
+
+    .assessment-status {
+        grid-column: 1;
+    }
+
+    .user-row > div:last-child {
+        grid-column: 2;
+
+        text-align: right;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .admin-users-page {
+        padding: 0 5px 40px;
+    }
+
+    .admin-users-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .admin-users-header h1 {
+        font-size: 28px;
+    }
+
+    .back-btn {
+        width: 100%;
+    }
+
+    .user-section {
+        padding: 18px;
+    }
+
+    .section-title {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 5px;
+    }
+
+    .user-row {
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 12px;
+
+        padding: 17px 8px;
+    }
+
+    .user-date {
+        text-align: left;
+    }
+
+    .user-row > div:last-child {
+        text-align: left;
+    }
+
+    .approval-actions {
+        width: 100%;
+    }
+
+    .approve-btn,
+    .reject-btn {
+        flex: 1;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+    .user-info img,
+    .avatar {
+        width: 44px;
+        height: 44px;
+    }
+
+    .user-info strong {
+        font-size: 13px;
+    }
+
+    .approval-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .approve-btn,
+    .reject-btn {
+        width: 100%;
+    }
+
+}

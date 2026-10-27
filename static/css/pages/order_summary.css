@@ -1,0 +1,731 @@
+/* =====================================================
+   CERTIHIRE — PREMIUM ANIMATED ORDER SUMMARY
+===================================================== */
+
+.order-container {
+    position: relative;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 45px 25px 70px;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 390px;
+    gap: 35px;
+
+    animation: pageEnter 0.7s ease both;
+}
+
+
+/* =====================================================
+   BACKGROUND GLOW
+===================================================== */
+
+.order-container::before {
+    content: "";
+    position: fixed;
+
+    width: 420px;
+    height: 420px;
+
+    top: 8%;
+    left: -180px;
+
+    background: radial-gradient(
+        circle,
+        rgba(99, 102, 241, 0.12),
+        transparent 70%
+    );
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    animation: floatingGlow 7s ease-in-out infinite;
+}
+
+.order-container::after {
+    content: "";
+    position: fixed;
+
+    width: 350px;
+    height: 350px;
+
+    bottom: 0;
+    right: -150px;
+
+    background: radial-gradient(
+        circle,
+        rgba(139, 92, 246, 0.10),
+        transparent 70%
+    );
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    animation: floatingGlow 9s ease-in-out infinite reverse;
+}
+
+
+/* =====================================================
+   LEFT SIDE
+===================================================== */
+
+.order-left {
+    position: relative;
+    z-index: 2;
+}
+
+.order-left h2 {
+    position: relative;
+
+    margin: 0 0 25px;
+
+    font-size: 28px;
+    font-weight: 750;
+
+    color: #111827;
+
+    letter-spacing: -0.8px;
+
+    animation: slideRight 0.6s ease both;
+}
+
+.order-left h2::after {
+    content: "";
+
+    display: block;
+
+    width: 42px;
+    height: 4px;
+
+    margin-top: 9px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        90deg,
+        #6366f1,
+        #8b5cf6
+    );
+
+    animation: lineGrow 0.8s ease both;
+}
+
+
+/* =====================================================
+   SUMMARY CARD
+===================================================== */
+
+.summary-card {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    gap: 22px;
+
+    padding: 22px;
+
+    border: 1px solid rgba(226, 232, 240, 0.9);
+
+    border-radius: 20px;
+
+    background: rgba(255, 255, 255, 0.78);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 15px 40px rgba(15, 23, 42, 0.06);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.4s cubic-bezier(.2,.8,.2,1),
+        box-shadow 0.4s ease,
+        border-color 0.4s ease;
+
+    animation: cardReveal 0.75s 0.15s ease both;
+}
+
+.summary-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 80%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.65),
+        transparent
+    );
+
+    transform: skewX(-20deg);
+
+    transition: left 0.8s ease;
+}
+
+.summary-card:hover::before {
+    left: 130%;
+}
+
+.summary-card:hover {
+    transform: translateY(-6px);
+
+    border-color: rgba(99, 102, 241, 0.25);
+
+    box-shadow:
+        0 22px 50px rgba(15, 23, 42, 0.11);
+}
+
+
+/* =====================================================
+   IMAGE
+===================================================== */
+
+.summary-card img {
+    width: 210px;
+    height: 145px;
+
+    flex-shrink: 0;
+
+    object-fit: cover;
+
+    border-radius: 16px;
+
+    background: #f1f5f9;
+
+    box-shadow:
+        0 10px 25px rgba(15, 23, 42, 0.14);
+
+    transition:
+        transform 0.5s cubic-bezier(.2,.8,.2,1),
+        box-shadow 0.5s ease;
+}
+
+.summary-card:hover img {
+    transform: scale(1.04) rotate(-1deg);
+
+    box-shadow:
+        0 18px 35px rgba(15, 23, 42, 0.20);
+}
+
+/* =====================================================
+   GIG DETAILS
+===================================================== */
+
+.summary-card h4 {
+    margin: 0 0 9px;
+
+    font-size: 18px;
+    line-height: 1.4;
+
+    font-weight: 700;
+
+    color: #111827;
+}
+
+.summary-card p {
+    margin: 0 0 10px;
+
+    font-size: 13px;
+
+    color: #6366f1;
+
+    font-weight: 600;
+}
+
+.summary-card small {
+    color: #8b95a5;
+
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   DETAILS BOX
+===================================================== */
+
+.details {
+    position: relative;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    margin-top: 20px;
+
+    border: 1px solid #e7ebf2;
+
+    border-radius: 18px;
+
+    background: rgba(255, 255, 255, 0.85);
+
+    overflow: hidden;
+
+    box-shadow:
+        0 10px 30px rgba(15, 23, 42, 0.045);
+
+    animation: cardReveal 0.75s 0.3s ease both;
+}
+
+.details > div {
+    position: relative;
+
+    padding: 23px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+
+    transition:
+        background 0.3s ease,
+        transform 0.3s ease;
+}
+
+.details > div:hover {
+    background: #fafbff;
+}
+
+.details > div + div {
+    border-left: 1px solid #edf0f4;
+}
+
+.details span {
+    font-size: 11px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    color: #9aa3b1;
+
+    font-weight: 700;
+}
+
+.details strong {
+    font-size: 18px;
+
+    color: #1f2937;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   RIGHT PAYMENT AREA
+===================================================== */
+
+.order-right {
+    position: relative;
+
+    z-index: 3;
+
+    animation: slideLeft 0.75s 0.2s ease both;
+}
+
+
+/* =====================================================
+   PAYMENT CARD
+===================================================== */
+
+.payment-card {
+    position: sticky;
+    top: 25px;
+
+    padding: 32px;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #111827,
+            #1e293b
+        );
+
+    color: white;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 25px 60px rgba(15, 23, 42, 0.22);
+
+    isolation: isolate;
+}
+
+
+/* Animated gradient */
+
+.payment-card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 280px;
+    height: 280px;
+
+    top: -150px;
+    right: -100px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(129, 140, 248, 0.45),
+            transparent 70%
+        );
+
+    border-radius: 50%;
+
+    animation: paymentGlow 6s ease-in-out infinite;
+}
+
+
+/* Second glow */
+
+.payment-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    bottom: -130px;
+    left: -80px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(168, 85, 247, 0.25),
+            transparent 70%
+        );
+
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   PAYMENT CONTENT
+===================================================== */
+
+.payment-card h3,
+.payment-card h1,
+.payment-card .pay-btn {
+    position: relative;
+
+    z-index: 2;
+}
+
+.payment-card h3 {
+    margin: 0;
+
+    font-size: 12px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1.5px;
+
+    color: #aeb8c8;
+
+    font-weight: 700;
+}
+
+.payment-card h1 {
+    margin: 12px 0 30px;
+
+    font-size: 45px;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing: -1.5px;
+
+    background: linear-gradient(
+        90deg,
+        #ffffff,
+        #c7d2fe
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: pricePulse 3s ease-in-out infinite;
+}
+
+
+/* =====================================================
+   PAYMENT BUTTON
+===================================================== */
+
+.pay-btn {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+
+    padding: 15px 20px;
+
+    border-radius: 12px;
+
+    background: linear-gradient(
+        135deg,
+        #6366f1,
+        #8b5cf6
+    );
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 10px 25px rgba(99, 102, 241, 0.35);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.pay-btn::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -100%;
+
+    width: 70%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.35),
+        transparent
+    );
+
+    transform: skewX(-20deg);
+
+    animation: buttonShine 3s infinite;
+}
+
+.pay-btn:hover {
+    color: white;
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 16px 35px rgba(99, 102, 241, 0.45);
+}
+
+.pay-btn:active {
+    transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   SECURITY TEXT
+===================================================== */
+
+.payment-card .pay-btn::after {
+    content: "";
+}
+
+
+/* =====================================================
+   ANIMATIONS
+===================================================== */
+
+@keyframes pageEnter {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+@keyframes slideRight {
+    from {
+        opacity: 0;
+        transform: translateX(-25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+@keyframes slideLeft {
+    from {
+        opacity: 0;
+        transform: translateX(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+@keyframes cardReveal {
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+@keyframes lineGrow {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 42px;
+    }
+}
+
+
+@keyframes floatingGlow {
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-30px) scale(1.08);
+    }
+}
+
+
+@keyframes paymentGlow {
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(-25px, 25px) scale(1.15);
+    }
+}
+
+
+@keyframes pricePulse {
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.82;
+    }
+}
+
+
+@keyframes buttonShine {
+    0% {
+        left: -100%;
+    }
+
+    45%,
+    100% {
+        left: 140%;
+    }
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 950px) {
+
+    .order-container {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .payment-card {
+        position: relative;
+        top: 0;
+    }
+
+    .order-right {
+        order: 2;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .order-container {
+        padding: 25px 15px 50px;
+    }
+
+    .order-left h2 {
+        font-size: 23px;
+    }
+
+    .summary-card {
+        padding: 16px;
+        gap: 15px;
+    }
+
+    .summary-card img {
+        width: 115px;
+        height: 90px;
+    }
+
+    .summary-card h4 {
+        font-size: 15px;
+    }
+
+    .details {
+        grid-template-columns: 1fr;
+    }
+
+    .details > div + div {
+        border-left: none;
+        border-top: 1px solid #edf0f4;
+    }
+
+    .payment-card {
+        padding: 26px 22px;
+        border-radius: 20px;
+    }
+
+    .payment-card h1 {
+        font-size: 38px;
+    }
+}

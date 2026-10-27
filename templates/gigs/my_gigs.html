@@ -1,0 +1,124 @@
+{% extends "base_dashboard.html" %}
+{% load static %}
+
+{% block title %}
+
+My Gigs
+
+{% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet"
+href="{% static 'css/pages/my_gigs.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h2>My Gigs</h2>
+
+        <p>
+
+            Manage all your published gigs.
+
+        </p>
+
+    </div>
+
+    <a href="{% url 'create_gig' %}"
+       class="hero-btn-primary">
+
+        <i class="bi bi-plus-circle"></i>
+
+        Create Gig
+
+    </a>
+
+</div>
+
+<div class="gig-grid">
+
+{% for gig in gigs %}
+
+<div class="gig-card">
+
+    {% if gig.image %}
+
+    <img src="{{ gig.image.url }}">
+
+    {% else %}
+
+    <img src="{% static 'images/gig-placeholder.jpg' %}">
+
+    {% endif %}
+
+    <div class="gig-body">
+
+        <span class="category">
+
+            {{ gig.category }}
+
+        </span>
+
+        <h4>
+
+            {{ gig.title }}
+
+        </h4>
+
+        <p>
+
+            ₹{{ gig.price }}
+
+        </p>
+
+        <div class="gig-actions">
+
+            <a href="{% url 'edit_gig' gig.id %}"
+               class="edit-btn">
+
+                Edit
+
+            </a>
+
+            <a href="{% url 'delete_gig' gig.id %}"
+               class="delete-btn">
+
+                Delete
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% empty %}
+
+<div class="empty-state">
+
+    <h3>
+
+        No Gigs Yet
+
+    </h3>
+
+    <p>
+
+        Create your first gig to start selling.
+
+    </p>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

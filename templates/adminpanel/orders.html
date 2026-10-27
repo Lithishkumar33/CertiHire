@@ -1,0 +1,366 @@
+{% extends "adminpanel/base_admin.html" %}
+{% load static %}
+
+{% block title %}
+Orders Management | CertiHire
+{% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/pages/admin_orders.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="admin-orders-page">
+
+
+    <!-- HEADER -->
+
+    <div class="admin-orders-header">
+
+        <div>
+
+            <span class="admin-badge">
+
+                <i class="bi bi-cart-check-fill"></i>
+
+                Order Management
+
+            </span>
+
+            <h1>
+                All Orders
+            </h1>
+
+            <p>
+                Monitor orders placed between buyers and sellers.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- STATISTICS -->
+
+    <div class="admin-order-stats">
+
+
+        <div class="order-stat-card">
+
+            <div class="order-stat-icon blue">
+
+                <i class="bi bi-cart-check-fill"></i>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Total Orders
+                </span>
+
+                <strong>
+                    {{ total_orders }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="order-stat-card">
+
+            <div class="order-stat-icon green">
+
+                <i class="bi bi-check-circle-fill"></i>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Completed
+                </span>
+
+                <strong>
+                    {{ completed_orders }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="order-stat-card">
+
+            <div class="order-stat-icon yellow">
+
+                <i class="bi bi-hourglass-split"></i>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Pending
+                </span>
+
+                <strong>
+                    {{ pending_orders }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="order-stat-card">
+
+            <div class="order-stat-icon red">
+
+                <i class="bi bi-x-circle-fill"></i>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Cancelled
+                </span>
+
+                <strong>
+                    {{ cancelled_orders }}
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ORDERS -->
+
+    <div class="admin-orders-card">
+
+        <div class="admin-orders-card-header">
+
+            <div>
+
+                <h3>
+                    Recent Orders
+                </h3>
+
+                <p>
+                    View buyer, seller, amount and order status.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="admin-orders-table">
+
+
+            <!-- TABLE HEADER -->
+
+            <div class="admin-order-row order-table-header">
+
+                <div>
+                    Order
+                </div>
+
+                <div>
+                    Buyer
+                </div>
+
+                <div>
+                    Seller
+                </div>
+
+                <div>
+                    Amount
+                </div>
+
+                <div>
+                    Status
+                </div>
+
+                <div>
+                    Date
+                </div>
+
+            </div>
+
+
+
+            {% for order in orders %}
+
+            <div class="admin-order-row">
+
+
+                <!-- ORDER -->
+
+                <div class="order-id">
+
+                    <strong>
+                        #{{ order.id }}
+                    </strong>
+
+                </div>
+
+
+
+                <!-- BUYER -->
+
+                <div class="order-user">
+
+                    <span>
+                        Buyer
+                    </span>
+
+                    <strong>
+                        {{ order.buyer.username }}
+                    </strong>
+
+                </div>
+
+
+
+                <!-- SELLER -->
+
+                <div class="order-user">
+
+                    <span>
+                        Seller
+                    </span>
+
+                    <strong>
+                        {{ order.seller.username }}
+                    </strong>
+
+                </div>
+
+
+
+                <!-- AMOUNT -->
+
+                <div class="order-amount">
+
+                    ₹{{ order.amount }}
+
+                </div>
+
+
+
+                <!-- STATUS -->
+
+                <div>
+
+    {% if order.status == "Completed" %}
+
+        <span class="order-status completed">
+            <i class="bi bi-check-circle-fill"></i>
+            Completed
+        </span>
+
+    {% elif order.status == "Pending" %}
+
+        <span class="order-status pending">
+            <i class="bi bi-hourglass-split"></i>
+            Pending
+        </span>
+
+    {% elif order.status == "Confirmed" %}
+
+        <span class="order-status confirmed">
+            <i class="bi bi-check-lg"></i>
+            Confirmed
+        </span>
+
+    {% elif order.status == "In Progress" %}
+
+        <span class="order-status progress">
+            <i class="bi bi-arrow-repeat"></i>
+            In Progress
+        </span>
+
+    {% elif order.status == "Delivered" %}
+
+        <span class="order-status delivered">
+            <i class="bi bi-box-seam-fill"></i>
+            Delivered
+        </span>
+
+    {% elif order.status == "Revision" %}
+
+        <span class="order-status revision">
+            <i class="bi bi-arrow-counterclockwise"></i>
+            Revision
+        </span>
+
+    {% elif order.status == "Cancelled" %}
+
+        <span class="order-status cancelled">
+            <i class="bi bi-x-circle-fill"></i>
+            Cancelled
+        </span>
+
+    {% else %}
+
+        <span class="order-status other">
+            {{ order.status }}
+        </span>
+
+    {% endif %}
+
+</div>
+
+
+
+                <!-- DATE -->
+
+                <div class="order-date">
+
+                    {{ order.created_at|date:"d M Y" }}
+
+                </div>
+
+
+            </div>
+
+
+            {% empty %}
+
+            <div class="empty-orders">
+
+                <i class="bi bi-cart-x"></i>
+
+                <h4>
+                    No Orders Yet
+                </h4>
+
+                <p>
+                    There are no orders on the platform yet.
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+</div>
+
+{% endblock %}

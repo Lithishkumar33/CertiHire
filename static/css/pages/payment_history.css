@@ -1,0 +1,71 @@
+.summary-card{
+
+    background:#ffffff;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.summary-card h6{
+
+    color:#6c757d;
+
+    margin-bottom:10px;
+
+}
+
+.summary-card h2{
+
+    font-weight:700;
+
+    color:#198754;
+
+}
+
+.payment-card{
+
+    border:none;
+
+    border-radius:18px;
+
+}
+
+.payment-card table{
+
+    margin-bottom:0;
+
+}
+
+.payment-card thead{
+
+    background:#f8f9fa;
+
+}
+
+.payment-card th{
+
+    font-weight:600;
+
+}
+
+.payment-card td{
+
+    vertical-align:middle;
+
+}
+
+.payment-card tbody tr{
+
+    transition:.25s;
+
+}
+
+.payment-card tbody tr:hover{
+
+    background:#f8f9fa;
+
+}

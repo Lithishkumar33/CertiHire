@@ -1,0 +1,2014 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Seller Assessment | CertiHire</title>
+
+
+    <!-- Google Font -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+
+    <!-- Bootstrap Icons -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+
+    <!-- Assessment CSS -->
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/pages/assessment.css' %}">
+
+    <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     TOP BAR
+====================================================== -->
+
+<header class="assessment-navbar">
+
+
+    <div class="brand">
+
+
+        <div class="brand-icon">
+
+            <i class="bi bi-shield-check"></i>
+
+        </div>
+
+
+        <div>
+
+            <strong>
+                CertiHire
+            </strong>
+
+            <span>
+                Seller Assessment
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="assessment-status">
+
+
+        <!-- TIMER -->
+
+        <div class="timer-box">
+
+            <i class="bi bi-clock"></i>
+
+            <span id="timer">
+                30:00
+            </span>
+
+        </div>
+
+
+
+        <!-- WARNING COUNT -->
+
+        <div class="warning-counter">
+
+            <i class="bi bi-exclamation-triangle"></i>
+
+            Warnings:
+
+            <strong id="warning-count">
+                0/2
+            </strong>
+
+        </div>
+
+
+    </div>
+
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+====================================================== -->
+
+<main class="assessment-container">
+
+
+    <!-- =================================================
+         PAGE HEADER
+    ================================================== -->
+
+    <div class="assessment-heading">
+
+
+        <div>
+
+
+            <span class="assessment-badge">
+
+                <i class="bi bi-patch-question-fill"></i>
+
+                Seller Verification
+
+            </span>
+
+
+            <h1>
+                Seller Assessment
+            </h1>
+
+
+            <p>
+                Complete the assessment carefully.
+                Your assessment will be reviewed by
+                the CertiHire team.
+            </p>
+
+
+        </div>
+
+
+
+        <!-- CAMERA -->
+
+        <div class="camera-card">
+
+
+            <div class="camera-header">
+
+
+                <span>
+
+                    <i class="bi bi-camera-video-fill"></i>
+
+                    Camera Monitoring
+
+                </span>
+
+
+                <span
+                    id="camera-status"
+                    class="camera-active">
+
+                    <span class="status-dot"></span>
+
+                    Active
+
+                </span>
+
+
+            </div>
+
+
+            <video
+                id="camera-preview"
+                autoplay
+                muted
+                playsinline>
+            </video>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         RULES
+    ================================================== -->
+
+    <div class="assessment-rules">
+
+
+        <div class="rule">
+
+            <i class="bi bi-question-circle-fill"></i>
+
+            <div>
+
+                <strong>
+                    {{ questions|length }} Questions
+                </strong>
+
+                <span>
+                    Answer all questions.
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="rule">
+
+            <i class="bi bi-clock-fill"></i>
+
+            <div>
+
+                <strong>
+                    30 Minutes
+                </strong>
+
+                <span>
+                    Timer starts when assessment begins.
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="rule">
+
+            <i class="bi bi-trophy-fill"></i>
+
+            <div>
+
+                <strong>
+                    35 / 50 Required
+                </strong>
+
+                <span>
+                    Minimum score to pass.
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="rule warning-rule">
+
+            <i class="bi bi-shield-exclamation"></i>
+
+            <div>
+
+                <strong>
+                    2 Warnings
+                </strong>
+
+                <span>
+                    A third violation terminates the assessment.
+                </span>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         ASSESSMENT FORM
+    ================================================== -->
+
+    <form
+        method="POST"
+        id="assessment-form">
+
+
+        {% csrf_token %}
+
+
+        <div class="questions-card">
+
+
+            {% for q in questions %}
+
+
+            <!-- QUESTION -->
+
+            <div class="question-card">
+
+
+                <div class="question-top">
+
+
+                    <span class="question-number">
+
+                        Question {{ forloop.counter }}
+
+                    </span>
+
+
+                </div>
+
+
+
+                <h2>
+                    {{ q.question }}
+                </h2>
+
+
+
+                <div class="answer-options">
+
+
+                    <!-- OPTION A -->
+
+                    <label class="answer-option">
+
+
+                        <input
+                            type="radio"
+                            name="{{ q.id }}"
+                            value="A">
+
+
+                        <span class="option-letter">
+                            A
+                        </span>
+
+
+                        <span class="option-text">
+                            {{ q.option_a }}
+                        </span>
+
+
+                    </label>
+
+
+
+                    <!-- OPTION B -->
+
+                    <label class="answer-option">
+
+
+                        <input
+                            type="radio"
+                            name="{{ q.id }}"
+                            value="B">
+
+
+                        <span class="option-letter">
+                            B
+                        </span>
+
+
+                        <span class="option-text">
+                            {{ q.option_b }}
+                        </span>
+
+
+                    </label>
+
+
+
+                    <!-- OPTION C -->
+
+                    <label class="answer-option">
+
+
+                        <input
+                            type="radio"
+                            name="{{ q.id }}"
+                            value="C">
+
+
+                        <span class="option-letter">
+                            C
+                        </span>
+
+
+                        <span class="option-text">
+                            {{ q.option_c }}
+                        </span>
+
+
+                    </label>
+
+
+
+                    <!-- OPTION D -->
+
+                    <label class="answer-option">
+
+
+                        <input
+                            type="radio"
+                            name="{{ q.id }}"
+                            value="D">
+
+
+                        <span class="option-letter">
+                            D
+                        </span>
+
+
+                        <span class="option-text">
+                            {{ q.option_d }}
+                        </span>
+
+
+                    </label>
+
+
+                </div>
+
+
+            </div>
+
+
+            {% empty %}
+
+
+            <!-- NO QUESTIONS -->
+
+            <div class="empty-assessment">
+
+
+                <i class="bi bi-question-circle"></i>
+
+
+                <h2>
+                    No questions available
+                </h2>
+
+
+                <p>
+                    Please contact the CertiHire team.
+                </p>
+
+
+            </div>
+
+
+            {% endfor %}
+
+
+
+            {% if questions %}
+
+
+            <!-- =================================================
+                 SUBMIT SECTION
+            ================================================== -->
+
+            <div class="submit-section">
+
+
+                <div>
+
+                    <strong>
+                        Ready to submit?
+                    </strong>
+
+
+                    <p>
+                        Make sure you have answered
+                        every question.
+                    </p>
+
+                </div>
+
+
+
+                <button
+                    type="submit"
+                    class="submit-assessment-btn"
+                    id="submit-btn">
+
+
+                    <i class="bi bi-send-fill"></i>
+
+                    Submit Assessment
+
+
+                </button>
+
+
+            </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+
+    </form>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     MALPRACTICE WARNING
+====================================================== -->
+
+<div
+    id="malpractice-warning"
+    class="malpractice-warning">
+
+
+    <div class="warning-icon">
+
+        <i class="bi bi-exclamation-triangle-fill"></i>
+
+    </div>
+
+
+    <div class="warning-content">
+
+
+        <strong>
+            Malpractice Warning
+        </strong>
+
+
+        <p id="warning-reason"></p>
+
+
+        <span>
+
+            Warning
+
+            <b id="warning-display">
+                0/2
+            </b>
+
+        </span>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     TERMINATION MODAL
+====================================================== -->
+
+<div
+    id="termination-modal"
+    class="termination-overlay">
+
+
+    <div class="termination-card">
+
+
+        <div class="termination-icon">
+
+            <i class="bi bi-shield-x"></i>
+
+        </div>
+
+
+        <h2>
+            Assessment Terminated
+        </h2>
+
+
+        <p>
+            You exceeded the maximum number
+            of malpractice warnings.
+        </p>
+
+
+        <p class="termination-note">
+
+            You are no longer eligible to become
+            a seller on CertiHire.
+
+            Your account can only be used
+            as a buyer.
+
+        </p>
+
+
+        <button
+            type="button"
+            onclick="goToDisqualified()">
+
+            Continue
+
+        </button>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script>
+
+/* =====================================================
+   GLOBAL VARIABLES
+===================================================== */
+
+let malpracticeWarnings = 0;
+
+const MAX_WARNINGS = 2;
+
+let assessmentTerminated = false;
+
+let assessmentSubmitting = false;
+
+let lastViolationTime = 0;
+
+const VIOLATION_COOLDOWN = 3000;
+
+let windowAway = false;
+
+let cameraStream = null;
+
+
+/* =====================================================
+   FACE DETECTION VARIABLES
+===================================================== */
+
+let faceDetectionRunning = false;
+
+let faceMissingSince = null;
+
+let faceViolationReported = false;
+
+const FACE_GRACE_PERIOD = 3000; // 3 seconds
+
+let faceDetectionModelLoaded = false;
+
+
+/* =====================================================
+   MALPRACTICE DETECTION
+===================================================== */
+
+function reportMalpractice(reason) {
+
+    if (
+        assessmentTerminated ||
+        assessmentSubmitting
+    ) {
+        return;
+    }
+
+
+    const now = Date.now();
+
+
+    /*
+     * Prevent multiple events from creating
+     * multiple warnings for the same action.
+     */
+
+    if (
+        now - lastViolationTime <
+        VIOLATION_COOLDOWN
+    ) {
+        return;
+    }
+
+
+    lastViolationTime = now;
+
+
+    malpracticeWarnings++;
+
+
+    updateWarningUI(reason);
+
+
+    /*
+     * Send malpractice warning to backend.
+     */
+
+    fetch(
+        "{% url 'assessment_malpractice' %}",
+        {
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json",
+
+                "X-CSRFToken":
+                    getCookie("csrftoken")
+            },
+
+            body: JSON.stringify({
+                reason: reason
+            })
+        }
+    )
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        if (
+            data.status === "terminated"
+        ) {
+
+            terminateAssessment();
+
+        }
+
+    })
+
+    .catch(error => {
+
+        console.error(
+            "Malpractice error:",
+            error
+        );
+
+    });
+
+
+    /*
+     * Third violation
+     */
+
+    if (
+        malpracticeWarnings >
+        MAX_WARNINGS
+    ) {
+
+        terminateAssessment();
+
+    }
+
+}
+
+
+
+/* =====================================================
+   WARNING UI
+===================================================== */
+
+function updateWarningUI(reason) {
+
+    const warning =
+        document.getElementById(
+            "malpractice-warning"
+        );
+
+
+    const reasonElement =
+        document.getElementById(
+            "warning-reason"
+        );
+
+
+    const countElement =
+        document.getElementById(
+            "warning-display"
+        );
+
+
+    const headerCount =
+        document.getElementById(
+            "warning-count"
+        );
+
+
+    if (reasonElement) {
+
+        reasonElement.textContent =
+            reason;
+
+    }
+
+
+    if (countElement) {
+
+        countElement.textContent =
+            `${malpracticeWarnings}/${MAX_WARNINGS}`;
+
+    }
+
+
+    if (headerCount) {
+
+        headerCount.textContent =
+            `${malpracticeWarnings}/${MAX_WARNINGS}`;
+
+    }
+
+
+    if (warning) {
+
+        warning.classList.add("show");
+
+
+        setTimeout(
+            () => {
+
+                warning.classList.remove(
+                    "show"
+                );
+
+            },
+            5000
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   TAB SWITCH / MINIMIZE DETECTION
+===================================================== */
+
+
+/*
+ * Detect tab switching.
+ */
+
+document.addEventListener(
+    "visibilitychange",
+    function () {
+
+        if (
+            assessmentTerminated ||
+            assessmentSubmitting
+        ) {
+
+            return;
+
+        }
+
+
+        if (
+            document.visibilityState ===
+            "hidden"
+        ) {
+
+            windowAway = true;
+
+
+            reportMalpractice(
+                "You switched away from the assessment or minimized the browser."
+            );
+
+        }
+
+        else {
+
+            windowAway = false;
+
+        }
+
+    }
+);
+
+
+
+/*
+ * Detect browser losing focus.
+ */
+
+window.addEventListener(
+    "blur",
+    function () {
+
+        if (
+            assessmentTerminated ||
+            assessmentSubmitting
+        ) {
+
+            return;
+
+        }
+
+
+        windowAway = true;
+
+
+        reportMalpractice(
+            "You left the assessment window or minimized the browser."
+        );
+
+    }
+);
+
+
+
+/*
+ * Detect browser becoming active again.
+ */
+
+window.addEventListener(
+    "focus",
+    function () {
+
+        windowAway = false;
+
+    }
+);
+
+
+
+/*
+ * Additional visibility check.
+ */
+
+setInterval(
+    function () {
+
+        if (
+            assessmentTerminated ||
+            assessmentSubmitting
+        ) {
+
+            return;
+
+        }
+
+
+        if (
+            document.visibilityState ===
+                "hidden" &&
+            !windowAway
+        ) {
+
+            windowAway = true;
+
+
+            reportMalpractice(
+                "The assessment window is no longer visible."
+            );
+
+        }
+
+    },
+    1000
+);
+
+
+
+/* =====================================================
+   CAMERA
+===================================================== */
+
+async function startCamera() {
+
+    try {
+
+        cameraStream =
+            await navigator.mediaDevices
+                .getUserMedia({
+                    video: true,
+                    audio: false
+                });
+
+
+        const video =
+            document.getElementById(
+                "camera-preview"
+            );
+
+
+        if (video) {
+
+            video.srcObject =
+                cameraStream;
+
+
+            /*
+             * Wait until camera video is ready.
+             */
+
+            video.addEventListener(
+                "loadeddata",
+                function () {
+
+                    loadFaceDetectionModels();
+
+                },
+                {
+                    once: true
+                }
+            );
+
+        }
+
+
+        const cameraStatus =
+            document.getElementById(
+                "camera-status"
+            );
+
+
+        if (cameraStatus) {
+
+            cameraStatus.innerHTML =
+                '<span class="status-dot"></span> Active';
+
+        }
+
+
+        /*
+         * Detect camera track stopping.
+         */
+
+        cameraStream
+            .getVideoTracks()
+            .forEach(
+                track => {
+
+
+                    track.addEventListener(
+                        "ended",
+                        function () {
+
+                            if (
+                                !assessmentSubmitting &&
+                                !assessmentTerminated
+                            ) {
+
+                                reportMalpractice(
+                                    "Camera access was stopped."
+                                );
+
+                            }
+
+                        }
+                    );
+
+
+                    track.addEventListener(
+                        "mute",
+                        function () {
+
+                            if (
+                                !assessmentSubmitting &&
+                                !assessmentTerminated
+                            ) {
+
+                                reportMalpractice(
+                                    "Camera was disabled."
+                                );
+
+                            }
+
+                        }
+                    );
+
+
+                }
+            );
+
+
+    }
+
+    catch (error) {
+
+
+        console.error(
+            "Camera error:",
+            error
+        );
+
+
+        const cameraStatus =
+            document.getElementById(
+                "camera-status"
+            );
+
+
+        if (cameraStatus) {
+
+            cameraStatus.innerHTML =
+                '<span class="status-dot inactive"></span> Inactive';
+
+        }
+
+
+        reportMalpractice(
+            "Camera permission is required for the assessment."
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   LOAD FACE DETECTION MODEL
+===================================================== */
+
+async function loadFaceDetectionModels() {
+
+    if (
+        faceDetectionModelLoaded
+    ) {
+
+        startFaceDetection();
+
+        return;
+
+    }
+
+
+    try {
+
+        const MODEL_URL =
+            "https://justadudewhohacks.github.io/face-api.js/models";
+
+
+        await faceapi.nets.tinyFaceDetector.loadFromUri(
+            MODEL_URL
+        );
+
+
+        faceDetectionModelLoaded =
+            true;
+
+
+        console.log(
+            "Face detection model loaded successfully."
+        );
+
+
+        startFaceDetection();
+
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Face detection model failed:",
+            error
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   START FACE DETECTION
+===================================================== */
+
+function startFaceDetection() {
+
+    const video =
+        document.getElementById(
+            "camera-preview"
+        );
+
+
+    if (!video) {
+
+        return;
+
+    }
+
+
+    if (
+        faceDetectionRunning
+    ) {
+
+        return;
+
+    }
+
+
+    faceDetectionRunning = true;
+
+
+    detectFace(video);
+
+}
+
+
+
+/* =====================================================
+   FACE DETECTION LOOP
+===================================================== */
+
+async function detectFace(video) {
+
+    if (
+        !faceDetectionRunning ||
+        assessmentTerminated ||
+        assessmentSubmitting
+    ) {
+
+        return;
+
+    }
+
+
+    /*
+     * Camera not ready yet.
+     */
+
+    if (
+        video.readyState < 2
+    ) {
+
+        setTimeout(
+            () => detectFace(video),
+            500
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        const detection =
+            await faceapi.detectSingleFace(
+                video,
+                new faceapi.TinyFaceDetectorOptions({
+                    inputSize: 320,
+                    scoreThreshold: 0.5
+                })
+            );
+
+
+        /*
+         * FACE FOUND
+         */
+
+        if (detection) {
+
+            handleFaceDetected();
+
+        }
+
+
+        /*
+         * FACE NOT FOUND
+         */
+
+        else {
+
+            handleFaceMissing();
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Face detection error:",
+            error
+        );
+
+    }
+
+
+    /*
+     * Check again after 500ms.
+     */
+
+    setTimeout(
+        () => detectFace(video),
+        500
+    );
+
+}
+
+
+
+/* =====================================================
+   FACE DETECTED
+===================================================== */
+
+function handleFaceDetected() {
+
+    faceMissingSince = null;
+
+    faceViolationReported = false;
+
+
+    updateFaceStatus(true);
+
+}
+
+
+
+/* =====================================================
+   FACE MISSING
+===================================================== */
+
+function handleFaceMissing() {
+
+    if (
+        assessmentTerminated ||
+        assessmentSubmitting
+    ) {
+
+        return;
+
+    }
+
+
+    /*
+     * Start 3-second grace period.
+     */
+
+    if (!faceMissingSince) {
+
+        faceMissingSince =
+            Date.now();
+
+
+        updateFaceStatus(false);
+
+
+        return;
+
+    }
+
+
+    const missingTime =
+        Date.now() -
+        faceMissingSince;
+
+
+    /*
+     * Give seller 3 seconds.
+     */
+
+    if (
+        missingTime <
+        FACE_GRACE_PERIOD
+    ) {
+
+        return;
+
+    }
+
+
+    /*
+     * Already reported this
+     * disappearance.
+     */
+
+    if (
+        faceViolationReported
+    ) {
+
+        return;
+
+    }
+
+
+    faceViolationReported =
+        true;
+
+
+    reportMalpractice(
+        "Your face is not visible in the camera. Please keep your face clearly visible during the assessment."
+    );
+
+}
+
+
+
+/* =====================================================
+   FACE STATUS UI
+===================================================== */
+
+function updateFaceStatus(faceVisible) {
+
+    const cameraStatus =
+        document.getElementById(
+            "camera-status"
+        );
+
+
+    if (!cameraStatus) {
+
+        return;
+
+    }
+
+
+    if (faceVisible) {
+
+        cameraStatus.innerHTML =
+            '<span class="status-dot"></span> Face Detected';
+
+
+        cameraStatus.classList.remove(
+            "camera-warning"
+        );
+
+
+        cameraStatus.classList.add(
+            "camera-active"
+        );
+
+    }
+
+    else {
+
+        cameraStatus.innerHTML =
+            '<span class="status-dot warning-dot"></span> Face Not Visible';
+
+
+        cameraStatus.classList.remove(
+            "camera-active"
+        );
+
+
+        cameraStatus.classList.add(
+            "camera-warning"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   START CAMERA
+===================================================== */
+
+startCamera();
+
+
+
+/* =====================================================
+   TERMINATE ASSESSMENT
+===================================================== */
+
+function terminateAssessment() {
+
+    if (
+        assessmentTerminated
+    ) {
+
+        return;
+
+    }
+
+
+    assessmentTerminated =
+        true;
+
+
+    faceDetectionRunning =
+        false;
+
+
+    /*
+     * Stop camera.
+     */
+
+    if (cameraStream) {
+
+        cameraStream
+            .getTracks()
+            .forEach(
+                track => {
+
+                    track.stop();
+
+                }
+            );
+
+    }
+
+
+    /*
+     * Show termination modal.
+     */
+
+    const terminationModal =
+        document.getElementById(
+            "termination-modal"
+        );
+
+
+    if (terminationModal) {
+
+        terminationModal.classList.add(
+            "show"
+        );
+
+    }
+
+
+    /*
+     * Disable assessment form.
+     */
+
+    const inputs =
+        document.querySelectorAll(
+            "#assessment-form input, #assessment-form button"
+        );
+
+
+    inputs.forEach(
+        input => {
+
+            input.disabled =
+                true;
+
+        }
+    );
+
+
+    /*
+     * Tell backend.
+     */
+
+    fetch(
+        "{% url 'terminate_assessment' %}",
+        {
+
+            method: "POST",
+
+            headers: {
+
+                "Content-Type":
+                    "application/json",
+
+                "X-CSRFToken":
+                    getCookie("csrftoken")
+
+            },
+
+            body: JSON.stringify({
+
+                reason:
+                    "Maximum malpractice warnings exceeded"
+
+            })
+
+        }
+    )
+
+    .catch(error => {
+
+        console.error(
+            "Termination error:",
+            error
+        );
+
+    });
+
+}
+
+
+
+/* =====================================================
+   DISQUALIFIED PAGE
+===================================================== */
+
+function goToDisqualified() {
+
+    window.location.href =
+        "{% url 'assessment_disqualified' %}";
+
+}
+
+
+
+/* =====================================================
+   CSRF
+===================================================== */
+
+function getCookie(name) {
+
+    let cookieValue = null;
+
+
+    if (document.cookie) {
+
+        const cookies =
+            document.cookie.split(";");
+
+
+        for (
+            let cookie of cookies
+        ) {
+
+            cookie =
+                cookie.trim();
+
+
+            if (
+                cookie.substring(
+                    0,
+                    name.length + 1
+                ) ===
+                (name + "=")
+            ) {
+
+                cookieValue =
+                    decodeURIComponent(
+                        cookie.substring(
+                            name.length + 1
+                        )
+                    );
+
+
+                break;
+
+            }
+
+        }
+
+    }
+
+
+    return cookieValue;
+
+}
+
+
+
+/* =====================================================
+   PREVENT ACCIDENTAL PAGE EXIT
+===================================================== */
+
+window.addEventListener(
+    "beforeunload",
+    function (event) {
+
+        /*
+         * Don't show browser warning when
+         * seller intentionally submits.
+         */
+
+        if (
+            !assessmentTerminated &&
+            !assessmentSubmitting
+        ) {
+
+            event.preventDefault();
+
+            event.returnValue = "";
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   ASSESSMENT SUBMISSION
+   + ALL QUESTION VALIDATION
+===================================================== */
+
+const assessmentForm =
+    document.getElementById(
+        "assessment-form"
+    );
+
+
+if (assessmentForm) {
+
+    assessmentForm.addEventListener(
+        "submit",
+        function (event) {
+
+
+            /*
+             * =========================================
+             * CHECK ALL QUESTIONS
+             * =========================================
+             */
+
+            const questions =
+                document.querySelectorAll(
+                    ".question-card"
+                );
+
+
+            let unanswered = [];
+
+
+            questions.forEach(
+                function (
+                    question,
+                    index
+                ) {
+
+                    const selected =
+                        question.querySelector(
+                            'input[type="radio"]:checked'
+                        );
+
+
+                    if (!selected) {
+
+                        unanswered.push(
+                            index + 1
+                        );
+
+                    }
+
+                }
+            );
+
+
+            /*
+             * =========================================
+             * BLOCK IF QUESTIONS ARE UNANSWERED
+             * =========================================
+             */
+
+            if (
+                unanswered.length > 0
+            ) {
+
+                event.preventDefault();
+
+
+                alert(
+                    "Please answer all questions before submitting.\n\n" +
+                    "Unanswered questions: " +
+                    unanswered.join(", ")
+                );
+
+
+                /*
+                 * Find first unanswered question.
+                 */
+
+                const firstUnanswered =
+                    Array.from(
+                        questions
+                    ).find(
+                        question =>
+                            !question.querySelector(
+                                'input[type="radio"]:checked'
+                            )
+                    );
+
+
+                if (firstUnanswered) {
+
+                    firstUnanswered.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center"
+                    });
+
+                }
+
+
+                return false;
+
+            }
+
+
+            /*
+             * =========================================
+             * BLOCK IF TERMINATED
+             * =========================================
+             */
+
+            if (
+                assessmentTerminated
+            ) {
+
+                event.preventDefault();
+
+                return false;
+
+            }
+
+
+            /*
+             * =========================================
+             * MARK AS SUBMITTING
+             * =========================================
+             */
+
+            assessmentSubmitting =
+                true;
+
+
+            windowAway =
+                false;
+
+
+            /*
+             * Stop face detection.
+             */
+
+            faceDetectionRunning =
+                false;
+
+
+            /*
+             * Stop camera.
+             */
+
+            if (cameraStream) {
+
+                cameraStream
+                    .getTracks()
+                    .forEach(
+                        track => {
+
+                            track.stop();
+
+                        }
+                    );
+
+            }
+
+
+            /*
+             * Disable submit button.
+             */
+
+            const submitButton =
+                document.getElementById(
+                    "submit-btn"
+                );
+
+
+            if (submitButton) {
+
+                submitButton.disabled =
+                    true;
+
+
+                submitButton.innerHTML =
+                    '<i class="bi bi-hourglass-split"></i> Submitting...';
+
+            }
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   TIMER
+===================================================== */
+
+let timeRemaining =
+    30 * 60;
+
+
+const timerElement =
+    document.getElementById(
+        "timer"
+    );
+
+
+const timerInterval =
+    setInterval(
+        function () {
+
+
+            /*
+             * Stop timer if finished.
+             */
+
+            if (
+                assessmentTerminated ||
+                assessmentSubmitting
+            ) {
+
+                clearInterval(
+                    timerInterval
+                );
+
+                return;
+
+            }
+
+
+            const minutes =
+                Math.floor(
+                    timeRemaining / 60
+                );
+
+
+            const seconds =
+                timeRemaining % 60;
+
+
+            if (timerElement) {
+
+                timerElement.textContent =
+                    `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+
+            }
+
+
+            /*
+             * Last 5 minutes.
+             */
+
+            if (
+                timeRemaining <= 300
+            ) {
+
+                if (
+                    timerElement &&
+                    timerElement.parentElement
+                ) {
+
+                    timerElement
+                        .parentElement
+                        .classList.add(
+                            "timer-warning"
+                        );
+
+                }
+
+            }
+
+
+            /*
+             * Time finished.
+             */
+
+            if (
+                timeRemaining <= 0
+            ) {
+
+                clearInterval(
+                    timerInterval
+                );
+
+
+                if (assessmentForm) {
+
+                    assessmentForm.requestSubmit();
+
+                }
+
+
+                return;
+
+            }
+
+
+            timeRemaining--;
+
+        },
+
+        1000
+    );
+
+
+</script>
+
+
+</body>
+
+</html>

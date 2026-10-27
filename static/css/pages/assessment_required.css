@@ -1,0 +1,465 @@
+/* =========================================================
+   SELLER ASSESSMENT REQUIRED / PENDING
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+
+    min-height: 100vh;
+
+    font-family: "Poppins", Arial, sans-serif;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            #eef4ff 0,
+            #f8fafc 38%,
+            #ffffff 100%
+        );
+
+    color: #111827;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.assessment-required-page {
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 20px;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.assessment-required-card {
+    width: 100%;
+    max-width: 650px;
+
+    padding: 42px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 24px;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 60px rgba(15, 23, 42, 0.08);
+}
+
+
+/* =========================================================
+   ICON
+========================================================= */
+
+.assessment-icon {
+    width: 76px;
+    height: 76px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 20px;
+
+    border-radius: 22px;
+
+    background: #eef4ff;
+
+    color: #2563eb;
+
+    font-size: 34px;
+}
+
+.success-icon {
+    background: #ecfdf5;
+
+    color: #059669;
+}
+
+
+/* =========================================================
+   BADGE
+========================================================= */
+
+.assessment-badge {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 7px 14px;
+
+    border-radius: 30px;
+
+    background: #eef4ff;
+
+    color: #2563eb;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.2px;
+}
+
+.success-badge {
+    background: #ecfdf5;
+
+    color: #059669;
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.assessment-required-card h1 {
+    margin: 18px 0 10px;
+
+    color: #111827;
+
+    font-size: 30px;
+
+    line-height: 1.25;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.intro {
+    max-width: 520px;
+
+    margin: 0 auto 30px;
+
+    color: #6b7280;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   INFORMATION BOXES
+========================================================= */
+
+.assessment-info {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+
+    margin-bottom: 22px;
+
+    text-align: left;
+}
+
+.info-item {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 12px;
+
+    padding: 16px;
+
+    border: 1px solid #edf0f4;
+
+    border-radius: 13px;
+
+    background: #f8fafc;
+}
+
+.info-item > i {
+    flex-shrink: 0;
+
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #eef4ff;
+
+    color: #2563eb;
+
+    font-size: 15px;
+}
+
+.info-item strong {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #111827;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.info-item span {
+    display: block;
+
+    color: #6b7280;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   WARNING / INFORMATION
+========================================================= */
+
+.assessment-warning {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    margin-bottom: 25px;
+
+    padding: 14px 16px;
+
+    border: 1px solid #dbeafe;
+
+    border-radius: 12px;
+
+    background: #eff6ff;
+
+    text-align: left;
+}
+
+.assessment-warning > i {
+    flex-shrink: 0;
+
+    margin-top: 2px;
+
+    color: #2563eb;
+
+    font-size: 15px;
+}
+
+.assessment-warning p {
+    margin: 0;
+
+    color: #475569;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   START BUTTON
+========================================================= */
+
+.start-assessment-btn {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    padding: 14px 20px;
+
+    border-radius: 11px;
+
+    background: #2563eb;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: all 0.2s ease;
+}
+
+.start-assessment-btn:hover {
+    background: #1d4ed8;
+
+    color: #ffffff;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 20px rgba(37, 99, 235, 0.20);
+}
+
+
+/* =========================================================
+   PENDING MESSAGE
+========================================================= */
+
+.pending-message {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 15px;
+
+    margin: 28px 0 20px;
+
+    padding: 20px;
+
+    border: 1px solid #dbeafe;
+
+    border-radius: 14px;
+
+    background: #f8fafc;
+
+    text-align: left;
+}
+
+.pending-message > i {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 11px;
+
+    background: #eef4ff;
+
+    color: #2563eb;
+
+    font-size: 18px;
+}
+
+.pending-message strong {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #111827;
+
+    font-size: 14px;
+}
+
+.pending-message p {
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   APPROVAL NOTE
+========================================================= */
+
+.approval-note {
+    margin: 0 0 25px;
+
+    color: #6b7280;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+.logout-link {
+    display: inline-block;
+
+    margin-top: 18px;
+
+    color: #6b7280;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 500;
+}
+
+.logout-link:hover {
+    color: #dc2626;
+
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .assessment-required-card {
+        padding: 30px 22px;
+
+        border-radius: 20px;
+    }
+
+    .assessment-required-card h1 {
+        font-size: 25px;
+    }
+
+    .assessment-info {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 400px) {
+
+    .assessment-required-page {
+        padding: 20px 12px;
+    }
+
+    .assessment-required-card {
+        padding: 25px 18px;
+    }
+
+}

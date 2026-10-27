@@ -1,0 +1,593 @@
+{% extends "adminpanel/base_admin.html" %}
+{% load static %}
+
+{% block title %}
+Admin Dashboard | CertiHire
+{% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/pages/admin_dashboard.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="admin-dashboard-page">
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <div class="admin-dashboard-header">
+
+        <div>
+
+            <span class="admin-badge">
+
+                <i class="bi bi-shield-check"></i>
+
+                Admin Control Center
+
+            </span>
+
+            <h1>
+                Dashboard
+            </h1>
+
+            <p>
+                Monitor and manage the CertiHire marketplace from one place.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         MAIN STATISTICS
+    ====================================================== -->
+
+    <div class="dashboard-stats">
+
+
+        <!-- BUYERS -->
+
+        <div class="dashboard-stat-card">
+
+            <div class="dashboard-stat-icon blue">
+
+                <i class="bi bi-people-fill"></i>
+
+            </div>
+
+            <div class="dashboard-stat-content">
+
+                <span>
+                    Total Buyers
+                </span>
+
+                <strong>
+                    {{ total_buyers }}
+                </strong>
+
+                <small>
+                    Registered buyers
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SELLERS -->
+
+        <div class="dashboard-stat-card">
+
+            <div class="dashboard-stat-icon purple">
+
+                <i class="bi bi-person-workspace"></i>
+
+            </div>
+
+            <div class="dashboard-stat-content">
+
+                <span>
+                    Total Sellers
+                </span>
+
+                <strong>
+                    {{ total_sellers }}
+                </strong>
+
+                <small>
+                    Registered sellers
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- GIGS -->
+
+        <div class="dashboard-stat-card">
+
+            <div class="dashboard-stat-icon orange">
+
+                <i class="bi bi-briefcase-fill"></i>
+
+            </div>
+
+            <div class="dashboard-stat-content">
+
+                <span>
+                    Total Gigs
+                </span>
+
+                <strong>
+                    {{ total_gigs }}
+                </strong>
+
+                <small>
+                    Published services
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ORDERS -->
+
+        <div class="dashboard-stat-card">
+
+            <div class="dashboard-stat-icon green">
+
+                <i class="bi bi-cart-check-fill"></i>
+
+            </div>
+
+            <div class="dashboard-stat-content">
+
+                <span>
+                    Total Orders
+                </span>
+
+                <strong>
+                    {{ total_orders }}
+                </strong>
+
+                <small>
+                    Platform orders
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         REVENUE + APPROVAL
+    ====================================================== -->
+
+    <div class="dashboard-main-grid">
+
+
+        <!-- REVENUE -->
+
+        <div class="dashboard-revenue-card">
+
+            <div class="dashboard-card-header">
+
+                <div>
+
+                    <span class="dashboard-card-label">
+
+                        <i class="bi bi-currency-rupee"></i>
+
+                        Platform Revenue
+
+                    </span>
+
+                    <h2>
+                        ₹{{ total_revenue }}
+                    </h2>
+
+                    <p>
+                        Revenue from completed orders
+                    </p>
+
+                </div>
+
+                <a href="{% url 'revenue_management' %}"
+                   class="dashboard-view-btn">
+
+                    View Revenue
+
+                    <i class="bi bi-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+
+            <div class="revenue-line">
+
+                <div class="revenue-line-fill"></div>
+
+            </div>
+
+
+            <div class="revenue-footer">
+
+                <span>
+                    <i class="bi bi-check-circle-fill"></i>
+
+                    Completed orders only
+                </span>
+
+                <strong>
+                    ₹{{ total_revenue }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SELLER APPROVAL -->
+
+        <div class="dashboard-approval-card">
+
+            <div class="dashboard-card-header">
+
+                <div>
+
+                    <span class="dashboard-card-label">
+
+                        <i class="bi bi-person-check-fill"></i>
+
+                        Seller Verification
+
+                    </span>
+
+                    <h3>
+                        Approval Overview
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="approval-list">
+
+
+                <div class="approval-item">
+
+                    <div class="approval-item-left">
+
+                        <span class="approval-dot submitted"></span>
+
+                        Assessment Submitted
+
+                    </div>
+
+                    <strong>
+                        {{ assessment_submitted }}
+                    </strong>
+
+                </div>
+
+
+                <div class="approval-item">
+
+                    <div class="approval-item-left">
+
+                        <span class="approval-dot passed"></span>
+
+                        Passed Assessment
+
+                    </div>
+
+                    <strong>
+                        {{ passed_assessments }}
+                    </strong>
+
+                </div>
+
+
+                <div class="approval-item">
+
+                    <div class="approval-item-left">
+
+                        <span class="approval-dot pending"></span>
+
+                        Pending Approval
+
+                    </div>
+
+                    <strong>
+                        {{ pending_approvals }}
+                    </strong>
+
+                </div>
+
+
+                <div class="approval-item">
+
+                    <div class="approval-item-left">
+
+                        <span class="approval-dot approved"></span>
+
+                        Approved Sellers
+
+                    </div>
+
+                    <strong>
+                        {{ approved_sellers }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <a href="{% url 'manage_users' %}"
+               class="approval-manage-btn">
+
+                Manage Sellers
+
+                <i class="bi bi-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         QUICK MANAGEMENT
+    ====================================================== -->
+
+    <div class="dashboard-section">
+
+
+        <div class="dashboard-section-header">
+
+            <div>
+
+                <span class="section-label">
+                    MANAGEMENT
+                </span>
+
+                <h3>
+                    Quick Management
+                </h3>
+
+                <p>
+                    Access important areas of the CertiHire administration.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="quick-management-grid">
+
+
+            <!-- USERS -->
+
+            <a href="{% url 'manage_users' %}"
+               class="quick-management-card">
+
+                <div class="quick-icon blue">
+
+                    <i class="bi bi-people-fill"></i>
+
+                </div>
+
+                <div>
+
+                    <h4>
+                        Users
+                    </h4>
+
+                    <p>
+                        Manage buyers and sellers.
+                    </p>
+
+                </div>
+
+                <i class="bi bi-arrow-up-right quick-arrow"></i>
+
+            </a>
+
+
+
+            <!-- ASSESSMENTS -->
+
+            <a href="{% url 'assessment_management' %}"
+               class="quick-management-card">
+
+                <div class="quick-icon purple">
+
+                    <i class="bi bi-patch-question-fill"></i>
+
+                </div>
+
+                <div>
+
+                    <h4>
+                        Assessments
+                    </h4>
+
+                    <p>
+                        Manage seller questions.
+                    </p>
+
+                </div>
+
+                <i class="bi bi-arrow-up-right quick-arrow"></i>
+
+            </a>
+
+
+
+            <!-- GIGS -->
+
+            <a href="{% url 'manage_gigs' %}"
+               class="quick-management-card">
+
+                <div class="quick-icon orange">
+
+                    <i class="bi bi-briefcase-fill"></i>
+
+                </div>
+
+                <div>
+
+                    <h4>
+                        Gigs
+                    </h4>
+
+                    <p>
+                        Review published gigs.
+                    </p>
+
+                </div>
+
+                <i class="bi bi-arrow-up-right quick-arrow"></i>
+
+            </a>
+
+
+
+            <!-- ORDERS -->
+
+            <a href="{% url 'manage_orders' %}"
+               class="quick-management-card">
+
+                <div class="quick-icon green">
+
+                    <i class="bi bi-cart-check-fill"></i>
+
+                </div>
+
+                <div>
+
+                    <h4>
+                        Orders
+                    </h4>
+
+                    <p>
+                        Monitor marketplace orders.
+                    </p>
+
+                </div>
+
+                <i class="bi bi-arrow-up-right quick-arrow"></i>
+
+            </a>
+
+
+
+            <!-- REVENUE -->
+
+            <a href="{% url 'revenue_management' %}"
+               class="quick-management-card">
+
+                <div class="quick-icon teal">
+
+                    <i class="bi bi-bar-chart-fill"></i>
+
+                </div>
+
+                <div>
+
+                    <h4>
+                        Revenue
+                    </h4>
+
+                    <p>
+                        Analyze platform revenue.
+                    </p>
+
+                </div>
+
+                <i class="bi bi-arrow-up-right quick-arrow"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         PLATFORM OVERVIEW
+    ====================================================== -->
+
+    <div class="platform-overview">
+
+
+        <div class="platform-overview-icon">
+
+            <i class="bi bi-shield-check"></i>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                CertiHire Platform Overview
+            </h3>
+
+            <p>
+                Sellers must successfully complete the assessment
+                before they can be approved by the company.
+                Admin approval controls seller access to the marketplace.
+            </p>
+
+        </div>
+
+
+        <div class="platform-overview-status">
+
+            <span>
+                Platform Status
+            </span>
+
+            <strong>
+
+                <i class="bi bi-circle-fill"></i>
+
+                Operational
+
+            </strong>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+{% endblock %}

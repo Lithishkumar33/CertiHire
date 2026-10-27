@@ -1,0 +1,237 @@
+{% extends "adminpanel/base_admin.html" %}
+{% load static %}
+
+{% block title %}
+Edit Question | CertiHire
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet"
+      href="{% static 'css/pages/admin_question_form.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="question-form-page">
+
+    <!-- HEADER -->
+    <div class="question-form-header">
+
+        <div>
+
+            <span class="admin-badge">
+                <i class="bi bi-pencil-square"></i>
+                Assessment Management
+            </span>
+
+            <h1>Edit Question</h1>
+
+            <p>
+                Update this question in the seller assessment question bank.
+            </p>
+
+        </div>
+
+        <a href="{% url 'assessment_management' %}"
+           class="back-btn">
+
+            <i class="bi bi-arrow-left"></i>
+            Back
+
+        </a>
+
+    </div>
+
+
+    <!-- FORM CARD -->
+    <div class="question-form-card">
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <!-- QUESTION -->
+            <div class="form-group">
+
+                <label for="question">
+                    Question
+                </label>
+
+                <textarea
+                    id="question"
+                    name="question"
+                    rows="5"
+                    placeholder="Enter the assessment question..."
+                    required>{{ question.question }}</textarea>
+
+            </div>
+
+
+            <!-- OPTIONS -->
+            <div class="options-section">
+
+                <h3>
+                    Answer Options
+                </h3>
+
+                <p>
+                    Update the four possible answers.
+                </p>
+
+
+                <div class="options-grid">
+
+                    <!-- A -->
+                    <div class="form-group">
+
+                        <label for="option_a">
+                            <span class="option-label">A</span>
+                            Option A
+                        </label>
+
+                        <input
+                            id="option_a"
+                            type="text"
+                            name="option_a"
+                            value="{{ question.option_a }}"
+                            required>
+
+                    </div>
+
+
+                    <!-- B -->
+                    <div class="form-group">
+
+                        <label for="option_b">
+                            <span class="option-label">B</span>
+                            Option B
+                        </label>
+
+                        <input
+                            id="option_b"
+                            type="text"
+                            name="option_b"
+                            value="{{ question.option_b }}"
+                            required>
+
+                    </div>
+
+
+                    <!-- C -->
+                    <div class="form-group">
+
+                        <label for="option_c">
+                            <span class="option-label">C</span>
+                            Option C
+                        </label>
+
+                        <input
+                            id="option_c"
+                            type="text"
+                            name="option_c"
+                            value="{{ question.option_c }}"
+                            required>
+
+                    </div>
+
+
+                    <!-- D -->
+                    <div class="form-group">
+
+                        <label for="option_d">
+                            <span class="option-label">D</span>
+                            Option D
+                        </label>
+
+                        <input
+                            id="option_d"
+                            type="text"
+                            name="option_d"
+                            value="{{ question.option_d }}"
+                            required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CORRECT ANSWER -->
+            <div class="form-group correct-answer-group">
+
+                <label for="correct_answer">
+                    Correct Answer
+                </label>
+
+                <select
+                    id="correct_answer"
+                    name="correct_answer"
+                    required>
+
+                    <option value="A"
+                        {% if question.correct_answer == "A" %}
+                            selected
+                        {% endif %}>
+                        A
+                    </option>
+
+                    <option value="B"
+                        {% if question.correct_answer == "B" %}
+                            selected
+                        {% endif %}>
+                        B
+                    </option>
+
+                    <option value="C"
+                        {% if question.correct_answer == "C" %}
+                            selected
+                        {% endif %}>
+                        C
+                    </option>
+
+                    <option value="D"
+                        {% if question.correct_answer == "D" %}
+                            selected
+                        {% endif %}>
+                        D
+                    </option>
+
+                </select>
+
+                <small>
+                    Select which option is the correct answer.
+                </small>
+
+            </div>
+
+
+            <!-- ACTIONS -->
+            <div class="form-actions">
+
+                <a href="{% url 'assessment_management' %}"
+                   class="cancel-btn">
+
+                    Cancel
+
+                </a>
+
+                <button type="submit"
+                        class="save-question-btn">
+
+                    <i class="bi bi-check-lg"></i>
+
+                    Update Question
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

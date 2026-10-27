@@ -1,0 +1,189 @@
+/* ===============================
+   SIDEBAR
+================================= */
+
+.sidebar{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:280px;
+
+height:100vh;
+
+background:#111827;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:space-between;
+
+padding:30px 0;
+
+overflow-y:auto;
+
+z-index:1000;
+
+}
+
+/* Logo */
+
+.logo{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+padding:0 28px 30px;
+
+font-size:30px;
+
+font-weight:700;
+
+color:#fff;
+
+border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+.logo i{
+
+font-size:34px;
+
+color:#2563EB;
+
+}
+
+/* Menu */
+
+.menu{
+
+padding:25px 15px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:8px;
+
+}
+
+/* Section Title */
+
+.menu-title{
+
+font-size:12px;
+
+font-weight:700;
+
+letter-spacing:1px;
+
+color:#6B7280;
+
+padding:20px 15px 8px;
+
+text-transform:uppercase;
+
+}
+
+/* Menu Links */
+
+.menu a{
+
+display:flex;
+
+align-items:center;
+
+gap:14px;
+
+padding:14px 18px;
+
+border-radius:14px;
+
+text-decoration:none;
+
+font-size:16px;
+
+font-weight:500;
+
+color:#D1D5DB;
+
+transition:.3s ease;
+
+}
+
+.menu a i{
+
+font-size:20px;
+
+min-width:24px;
+
+text-align:center;
+
+}
+
+/* Hover */
+
+.menu a:hover{
+
+background:#1F2937;
+
+color:#fff;
+
+transform:translateX(6px);
+
+}
+
+/* Active */
+
+.menu a.active{
+
+background:linear-gradient(135deg,#2563EB,#7C3AED);
+
+color:#fff;
+
+box-shadow:0 12px 25px rgba(37,99,235,.30);
+
+}
+
+/* Logout */
+
+.logout{
+
+padding:20px 15px;
+
+border-top:1px solid rgba(255,255,255,.08);
+
+}
+
+.logout a{
+
+display:flex;
+
+align-items:center;
+
+gap:14px;
+
+padding:14px 18px;
+
+border-radius:14px;
+
+color:#F87171;
+
+text-decoration:none;
+
+transition:.3s;
+
+}
+
+.logout a:hover{
+
+background:#1F2937;
+
+}

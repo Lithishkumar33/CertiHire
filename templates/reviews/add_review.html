@@ -1,0 +1,103 @@
+{% extends "base_dashboard.html" %}
+{% load static %}
+
+{% block title %}Leave Review{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-7">
+
+            <div class="card shadow border-0">
+
+                <div class="card-header bg-warning">
+
+                    <h4 class="mb-0">
+
+                        ⭐ Leave a Review
+
+                    </h4>
+
+                </div>
+
+                <div class="card-body">
+
+                    <h5>
+
+                        {{ order.gig.title }}
+
+                    </h5>
+
+                    <p class="text-muted">
+
+                        Seller:
+                        <strong>
+
+                            {{ order.seller.username }}
+
+                        </strong>
+
+                    </p>
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Rating
+
+                            </label>
+
+                            {{ form.rating }}
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Title
+
+                            </label>
+
+                            {{ form.title }}
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Review
+
+                            </label>
+
+                            {{ form.comment }}
+
+                        </div>
+
+                        <button class="btn btn-warning">
+
+                            Submit Review
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

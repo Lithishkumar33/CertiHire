@@ -1,0 +1,329 @@
+{% extends "base_dashboard.html" %}
+{% load static %}
+
+{% block title %}
+Messages
+{% endblock %}
+
+
+{% block css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/pages/messages.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="messages-page">
+
+    <!-- =====================================================
+    PAGE HEADER
+    ===================================================== -->
+
+    <div class="messages-header">
+
+        <div>
+
+            <span class="messages-eyebrow">
+                COMMUNICATION
+            </span>
+
+            <h2>
+                Messages
+            </h2>
+
+            <p>
+                Manage your conversations and stay connected.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+    MESSAGES CARD
+    ===================================================== -->
+
+    <div class="messages-card">
+
+
+        <!-- SEARCH -->
+
+        <div class="messages-search">
+
+            <div class="search-wrapper">
+
+                <i class="bi bi-search"></i>
+
+                <input
+                    type="text"
+                    id="conversationSearch"
+                    placeholder="Search conversations..."
+                    autocomplete="off">
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+        CONVERSATIONS
+        ================================================= -->
+
+        <div class="conversation-list">
+
+            {% for conversation in conversations %}
+
+            <a href="{% url 'chat_room' conversation.order.id %}"
+               class="conversation-item">
+
+                <!-- AVATAR -->
+
+                <div class="conversation-avatar-wrapper">
+
+                    <img
+                        src="https://ui-avatars.com/api/?name={% if user.is_seller %}{{ conversation.order.buyer.username }}{% else %}{{ conversation.order.seller.username }}{% endif %}&background=171a21&color=d4af37&bold=true"
+                        class="conversation-avatar"
+                        alt="User">
+
+                    {% if conversation.unread_count > 0 %}
+
+                    <span class="unread-count">
+
+                        {{ conversation.unread_count }}
+
+                    </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- CONTENT -->
+
+                <div class="conversation-content">
+
+
+                    <!-- TOP -->
+
+                    <div class="conversation-top">
+
+                        <div class="conversation-user">
+
+                            {% if user.is_seller %}
+
+                                {{ conversation.order.buyer.username }}
+
+                            {% else %}
+
+                                {{ conversation.order.seller.username }}
+
+                            {% endif %}
+
+                        </div>
+
+
+                        {% if conversation.last_message %}
+
+                        <span class="conversation-time">
+
+                            {{ conversation.last_message.created_at|timesince }}
+                            ago
+
+                        </span>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- GIG -->
+
+                    <div class="conversation-gig">
+
+                        <i class="bi bi-briefcase-fill"></i>
+
+                        {{ conversation.order.gig.title }}
+
+                    </div>
+
+
+                    <!-- MESSAGE -->
+
+                    <div class="conversation-message">
+
+                        {% if conversation.last_message %}
+
+                            {% if conversation.last_message.sender == user %}
+
+                                <span class="you-label">
+                                    You:
+                                </span>
+
+                            {% endif %}
+
+                            {{ conversation.last_message.message|truncatechars:70 }}
+
+                        {% else %}
+
+                            <span class="no-message">
+                                No messages yet
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- BOTTOM -->
+
+                    <div class="conversation-bottom">
+
+
+                        <!-- STATUS -->
+
+                        <span class="order-status
+                            {% if conversation.order.status == 'Completed' %}
+                                status-completed
+                            {% elif conversation.order.status == 'Delivered' %}
+                                status-delivered
+                            {% elif conversation.order.status == 'In Progress' %}
+                                status-progress
+                            {% elif conversation.order.status == 'Pending' %}
+                                status-pending
+                            {% elif conversation.order.status == 'Revision' %}
+                                status-revision
+                            {% else %}
+                                status-default
+                            {% endif %}
+                        ">
+
+                            <span class="status-dot"></span>
+
+                            {{ conversation.order.status }}
+
+                        </span>
+
+
+                        <!-- ARROW -->
+
+                        <span class="conversation-arrow">
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+            {% empty %}
+
+
+            <!-- =================================================
+            EMPTY STATE
+            ================================================= -->
+
+            <div class="messages-empty">
+
+                <div class="empty-icon">
+
+                    <i class="bi bi-chat-heart-fill"></i>
+
+                </div>
+
+                <h3>
+                    No conversations yet
+                </h3>
+
+                <p>
+                    Your conversations will appear here
+                    once an order is placed.
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+SEARCH
+===================================================== -->
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const search =
+            document.getElementById(
+                "conversationSearch"
+            );
+
+        const conversations =
+            document.querySelectorAll(
+                ".conversation-item"
+            );
+
+
+        if (!search) {
+            return;
+        }
+
+
+        search.addEventListener(
+            "input",
+            function () {
+
+                const value =
+                    this.value
+                    .toLowerCase()
+                    .trim();
+
+
+                conversations.forEach(
+                    function (item) {
+
+                        const text =
+                            item.innerText
+                            .toLowerCase();
+
+
+                        if (
+                            text.includes(value)
+                        ) {
+
+                            item.style.display =
+                                "flex";
+
+                        } else {
+
+                            item.style.display =
+                                "none";
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+    }
+);
+
+</script>
+
+{% endblock %}

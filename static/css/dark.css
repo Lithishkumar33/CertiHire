@@ -1,0 +1,98 @@
+.dark-mode{
+
+    background:#0f172a;
+
+    color:#f8fafc;
+
+}
+
+/* Sidebar */
+
+.dark-mode .sidebar{
+
+    background:#111827;
+
+}
+
+/* Navbar */
+
+.dark-mode .dashboard-navbar{
+
+    background:#111827;
+
+    border-bottom:1px solid #334155;
+
+}
+
+/* Cards */
+
+.dark-mode .card,
+.dark-mode .dashboard-card,
+.dark-mode .order-card,
+.dark-mode .price-card{
+
+    background:#1e293b;
+
+    color:#fff;
+
+    border-color:#334155;
+
+}
+
+/* Forms */
+
+.dark-mode input,
+.dark-mode textarea,
+.dark-mode select{
+
+    background:#0f172a;
+
+    color:#fff;
+
+    border:1px solid #334155;
+
+}
+
+/* Tables */
+
+.dark-mode table{
+
+    color:#fff;
+
+}
+
+.dark-mode th,
+.dark-mode td{
+
+    border-color:#334155;
+
+}
+
+/* Dropdown */
+
+.dark-mode .dropdown-menu{
+
+    background:#1e293b;
+
+}
+
+.dark-mode .dropdown-item{
+
+    color:#fff;
+
+}
+
+.dark-mode .dropdown-item:hover{
+
+    background:#334155;
+
+}
+.form-switch .form-check-input{
+
+    width:3rem;
+
+    height:1.5rem;
+
+    cursor:pointer;
+
+}

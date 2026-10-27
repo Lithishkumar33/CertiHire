@@ -1,0 +1,155 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg custom-navbar">
+
+    <div class="container">
+
+        <!-- Logo -->
+
+        <a href="{% url 'home' %}" class="logo">
+
+            <i class="bi bi-patch-check-fill"></i>
+
+            <span>CertiHire</span>
+
+        </a>
+
+
+        <!-- Mobile Toggle -->
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarMenu"
+            aria-controls="navbarMenu"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+
+            <i class="bi bi-list"></i>
+
+        </button>
+
+
+        <!-- Menu -->
+
+        <div
+            class="collapse navbar-collapse"
+            id="navbarMenu">
+
+            <ul class="navbar-nav mx-auto">
+
+
+                <!-- HOME -->
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}"
+                        href="{% url 'home' %}">
+
+                        Home
+
+                    </a>
+
+                </li>
+
+
+
+                <!-- CATEGORIES -->
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="#category">
+
+                        Categories
+
+                    </a>
+
+                </li>
+
+
+                <!-- HOW IT WORKS -->
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="#working">
+
+                        How it Works
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="#free">
+
+                        Featured Freelancers
+
+                    </a>
+
+                </li>
+
+
+                <!-- BECOME SELLER -->
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="{% url 'register' %}?role=seller">
+
+                        Become Seller
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+
+            <!-- RIGHT SIDE BUTTONS -->
+
+            <div class="nav-buttons">
+
+
+                <!-- LOGIN -->
+
+                <a
+                    href="{% url 'login' %}"
+                    class="btn-login">
+
+                    Login
+
+                </a>
+
+
+                <!-- JOIN -->
+
+                <a
+                    href="{% url 'register' %}"
+                    class="join-btn">
+
+                    Join
+
+                </a>
+
+
+                <!-- ADMIN -->
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>

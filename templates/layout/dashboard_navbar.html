@@ -1,0 +1,486 @@
+{% load static %}
+
+<nav class="dashboard-navbar">
+
+    <!-- Left -->
+    <div class="navbar-left">
+
+        
+
+    </div>
+
+    <!-- Right -->
+    <div class="navbar-right">
+
+        <!-- ================= Notifications ================= -->
+
+<div class="dropdown">
+
+    <a
+        href="#"
+        class="nav-icon position-relative text-dark"
+        data-bs-toggle="dropdown"
+        aria-expanded="false">
+
+        <i class="bi bi-bell-fill"></i>
+
+        <span
+            id="notificationBadge"
+            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger {% if unread_notifications == 0 %}d-none{% endif %}">
+
+            {{ unread_notifications }}
+
+        </span>
+
+    </a>
+
+    <ul
+        id="notificationDropdown"
+        class="dropdown-menu dropdown-menu-end shadow"
+        style="width:360px;">
+
+        <li class="dropdown-header d-flex justify-content-between align-items-center">
+
+            <strong>Notifications</strong>
+
+            <a
+                href="{% url 'mark_all_notifications' %}"
+                class="text-decoration-none small">
+
+                Mark all read
+
+            </a>
+
+        </li>
+
+        <li><hr class="dropdown-divider"></li>
+
+        {% for notification in header_notifications %}
+
+        <li>
+
+            <a
+                class="dropdown-item"
+                href="{% url 'mark_notification_read' notification.id %}">
+
+                <div>
+
+                    <strong>
+
+                        {{ notification.title }}
+
+                    </strong>
+
+                </div>
+
+                <small class="text-muted">
+
+                    {{ notification.message }}
+
+                </small>
+
+                <br>
+
+                <small class="text-secondary">
+
+                    {{ notification.created_at|timesince }} ago
+
+                </small>
+
+            </a>
+
+        </li>
+
+        {% empty %}
+
+        <li id="noNotifications">
+
+            <span class="dropdown-item text-muted">
+
+                No notifications yet.
+
+            </span>
+
+        </li>
+
+        {% endfor %}
+
+        <li><hr class="dropdown-divider"></li>
+
+        <li>
+
+            <a
+                href="{% url 'notifications' %}"
+                class="dropdown-item text-center fw-semibold">
+
+                View All Notifications
+
+            </a>
+
+        </li>
+
+    </ul>
+
+</div>
+
+        <!-- ================= Messages ================= -->
+
+        <div class="dropdown">
+
+            <a
+                href="#"
+                class="nav-icon position-relative text-dark"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+
+                <i class="bi bi-chat-dots-fill"></i>
+
+                {% if unread_messages > 0 %}
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {{ unread_messages }}
+                </span>
+                {% endif %}
+
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-end shadow" style="width:360px;">
+
+                <li class="dropdown-header">
+
+                    <strong>Messages</strong>
+
+                </li>
+
+                <li><hr class="dropdown-divider"></li>
+
+                {% for msg in header_messages %}
+
+                <li>
+
+                    <a
+                        class="dropdown-item"
+                        href="{% url 'chat_room' msg.order.id %}">
+
+                        <strong>{{ msg.sender.username }}</strong>
+
+                        <br>
+
+                        <small class="text-muted">
+
+                            {{ msg.message|truncatechars:45 }}
+
+                        </small>
+
+                        <br>
+
+                        <small class="text-secondary">
+
+                            {{ msg.created_at|timesince }} ago
+
+                        </small>
+
+                    </a>
+
+                </li>
+
+                {% empty %}
+
+                <li>
+
+                    <span class="dropdown-item text-muted">
+
+                        No messages yet.
+
+                    </span>
+
+                </li>
+
+                {% endfor %}
+
+                <li><hr class="dropdown-divider"></li>
+
+                <li>
+
+                    <a
+                        href="{% url 'messages' %}"
+                        class="dropdown-item text-center fw-semibold">
+
+                        View All Messages
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+        <!-- ================= Profile ================= -->
+
+        <div class="dropdown">
+
+            <a
+                href="#"
+                class="profile-box text-decoration-none"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+
+                {% if user.profile.profile_photo %}
+
+<img
+    src="{{ user.profile.profile_photo.url }}"
+    alt="Profile"
+    class="rounded-circle">
+
+{% else %}
+
+<img
+    src="https://ui-avatars.com/api/?name={{ user.username }}&background=2563EB&color=ffffff"
+    alt="Profile"
+    class="rounded-circle">
+
+{% endif %}
+                    
+
+                <div class="profile-info">
+
+                    <h6>{{ user.username }}</h6>
+
+                    <small>
+
+                        {% if user.is_seller %}
+                            Seller
+                        {% else %}
+                            Buyer
+                        {% endif %}
+
+                    </small>
+
+                </div>
+
+                <i class="bi bi-chevron-down"></i>
+
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-end shadow">
+
+                <li>
+
+                    <a class="dropdown-item" href="{% url 'dashboard' %}">
+
+                        <i class="bi bi-speedometer2 me-2"></i>
+
+                        Dashboard
+
+                    </a>
+
+                </li>
+
+                <li>
+
+                    <a class="dropdown-item" href="{% url 'profile' %}">
+
+                        <i class="bi bi-person me-2"></i>
+
+                        My Profile
+
+                    </a>
+
+                </li>
+
+                <li>
+
+                    <a class="dropdown-item" href="{% url 'settings' %}">
+
+                        <i class="bi bi-gear me-2"></i>
+
+                        Settings
+
+                    </a>
+
+                </li>
+
+                <li><hr class="dropdown-divider"></li>
+
+                <li>
+
+                    <a class="dropdown-item text-danger" href="{% url 'logout' %}">
+
+                        <i class="bi bi-box-arrow-right me-2"></i>
+
+                        Logout
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+<script>
+
+const wsScheme =
+    window.location.protocol === "https:" ? "wss" : "ws";
+
+const notificationSocket = new WebSocket(
+
+    wsScheme +
+    "://" +
+    window.location.host +
+    "/ws/notifications/"
+
+);
+
+// Browser Notification Permission
+if ("Notification" in window &&
+    Notification.permission !== "granted") {
+
+    Notification.requestPermission();
+
+}
+
+notificationSocket.onopen = function(){
+
+    console.log("Notification WebSocket Connected");
+
+};
+
+notificationSocket.onmessage = function(e){
+
+    const data = JSON.parse(e.data);
+
+    console.log(data);
+
+    //------------------------------------------------
+    // Badge
+    //------------------------------------------------
+
+    const badge =
+        document.getElementById("notificationBadge");
+
+    let unread =
+        parseInt(badge.innerText || "0");
+
+    unread++;
+
+    badge.innerText = unread;
+
+    badge.classList.remove("d-none");
+
+    //------------------------------------------------
+    // Remove "No notifications yet"
+    //------------------------------------------------
+
+    const empty =
+        document.getElementById("noNotifications");
+
+    if(empty){
+
+        empty.remove();
+
+    }
+
+    //------------------------------------------------
+    // Add new notification to dropdown
+    //------------------------------------------------
+
+    const dropdown =
+        document.getElementById("notificationDropdown");
+
+    const item =
+        document.createElement("li");
+
+    item.innerHTML = `
+
+        <a
+            class="dropdown-item"
+            href="/notifications/read/${data.notification_id}/">
+
+            <div>
+
+                <strong>
+
+                    ${data.title}
+
+                </strong>
+
+            </div>
+
+            <small class="text-muted">
+
+                ${data.message}
+
+            </small>
+
+            <br>
+
+            <small class="text-secondary">
+
+                Just now
+
+            </small>
+
+        </a>
+
+    `;
+
+    const divider =
+        dropdown.querySelector("hr.dropdown-divider");
+
+    divider.parentNode.insertBefore(
+        item,
+        divider.nextSibling
+    );
+
+    //------------------------------------------------
+    // Browser Notification
+    //------------------------------------------------
+
+    if(
+
+        "Notification" in window &&
+
+        Notification.permission==="granted"
+
+    ){
+
+        new Notification(
+
+            data.title,
+
+            {
+
+                body:data.message,
+
+                icon:"https://cdn-icons-png.flaticon.com/512/1827/1827392.png"
+
+            }
+
+        );
+
+    }
+
+};
+
+notificationSocket.onerror = function(error){
+
+    console.error(
+        "Notification Socket Error:",
+        error
+    );
+
+};
+
+notificationSocket.onclose = function(){
+
+    console.log(
+        "Notification WebSocket Closed"
+    );
+
+};
+
+</script>

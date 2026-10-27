@@ -1,0 +1,689 @@
+{% extends "base_dashboard.html" %}
+{% load static %}
+
+{% block title %}
+Create Gig | CertiHire
+{% endblock %}
+
+
+{% block css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/pages/create_gig.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="create-gig-page">
+
+
+    <!-- =====================================================
+    HEADER
+    ===================================================== -->
+
+    <div class="create-gig-header">
+
+        <div>
+
+            <span class="create-gig-badge">
+
+                <i class="bi bi-rocket-takeoff-fill"></i>
+
+                Seller Workspace
+
+            </span>
+
+
+            <h1>
+                Create a New Gig
+            </h1>
+
+
+            <p>
+                Showcase your skills and offer your services
+                to buyers on CertiHire.
+            </p>
+
+        </div>
+
+
+        <a href="{% url 'my_gigs' %}"
+           class="back-btn">
+
+            <i class="bi bi-arrow-left"></i>
+
+            My Gigs
+
+        </a>
+
+    </div>
+
+
+
+    <!-- =====================================================
+    MAIN LAYOUT
+    ===================================================== -->
+
+    <div class="create-gig-layout">
+
+
+        <!-- =================================================
+        FORM CARD
+        ================================================= -->
+
+        <div class="create-gig-card">
+
+
+            <!-- CARD TITLE -->
+
+            <div class="card-title">
+
+                <div class="title-icon">
+
+                    <i class="bi bi-pencil-square"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Gig Information
+                    </h3>
+
+                    <p>
+                        Tell buyers what you can offer.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FORM -->
+
+            <form method="POST"
+                  enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+
+                <!-- =================================================
+                ERRORS
+                ================================================= -->
+
+                {% if form.non_field_errors %}
+
+                    <div class="form-error">
+
+                        {{ form.non_field_errors }}
+
+                    </div>
+
+                {% endif %}
+
+
+
+                <!-- =================================================
+                TITLE
+                ================================================= -->
+
+                <div class="form-group">
+
+                    <label for="{{ form.title.id_for_label }}">
+
+                        Gig Title
+
+                    </label>
+
+
+                    {{ form.title }}
+
+
+                    {% if form.title.errors %}
+
+                        <div class="field-error">
+
+                            {{ form.title.errors }}
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <small>
+
+                        Make your title clear and attractive to buyers.
+
+                    </small>
+
+                </div>
+
+
+
+                <!-- =================================================
+                DESCRIPTION
+                ================================================= -->
+
+                <div class="form-group">
+
+                    <label for="{{ form.description.id_for_label }}">
+
+                        Description
+
+                    </label>
+
+
+                    {{ form.description }}
+
+
+                    {% if form.description.errors %}
+
+                        <div class="field-error">
+
+                            {{ form.description.errors }}
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <small>
+
+                        Explain what you will deliver and what buyers can expect.
+
+                    </small>
+
+                </div>
+
+
+
+                <!-- =================================================
+                CATEGORY
+                ================================================= -->
+
+                <div class="form-group">
+
+                    <label for="{{ form.category.id_for_label }}">
+
+                        Category
+
+                    </label>
+
+
+                    {{ form.category }}
+
+
+                    {% if form.category.errors %}
+
+                        <div class="field-error">
+
+                            {{ form.category.errors }}
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+
+                <!-- =================================================
+                PRICE + DELIVERY
+                ================================================= -->
+
+                <div class="form-row">
+
+
+                    <!-- PRICE -->
+
+                    <div class="form-group">
+
+                        <label for="{{ form.price.id_for_label }}">
+
+                            Price
+
+                        </label>
+
+
+                        <div class="input-with-icon">
+
+                            <span>₹</span>
+
+                            {{ form.price }}
+
+                        </div>
+
+
+                        {% if form.price.errors %}
+
+                            <div class="field-error">
+
+                                {{ form.price.errors }}
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+
+                    <!-- DELIVERY -->
+
+                    <div class="form-group">
+
+                        <label for="{{ form.delivery_days.id_for_label }}">
+
+                            Delivery Time
+
+                        </label>
+
+
+                        <div class="input-with-icon">
+
+                            {{ form.delivery_days }}
+
+                            <span>
+                                Days
+                            </span>
+
+                        </div>
+
+
+                        {% if form.delivery_days.errors %}
+
+                            <div class="field-error">
+
+                                {{ form.delivery_days.errors }}
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                GIG IMAGE
+                ================================================= -->
+
+                <div class="form-group">
+
+                    <label for="{{ form.image.id_for_label }}">
+
+                        Gig Image
+
+                    </label>
+
+
+                    <div class="image-upload"
+                         id="imageUpload">
+
+
+                        <i class="bi bi-cloud-arrow-up-fill"></i>
+
+
+                        <strong id="uploadText">
+
+                            Upload your gig image
+
+                        </strong>
+
+
+                        <span id="fileName">
+
+                            JPG, PNG or WEBP
+
+                        </span>
+
+
+                        {{ form.image }}
+
+                    </div>
+
+
+                    {% if form.image.errors %}
+
+                        <div class="field-error">
+
+                            {{ form.image.errors }}
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+
+                <!-- =================================================
+                BUTTONS
+                ================================================= -->
+
+                <div class="form-actions">
+
+
+                    <a href="{% url 'my_gigs' %}"
+                       class="cancel-btn">
+
+                        Cancel
+
+                    </a>
+
+
+                    <button type="submit"
+                            class="create-btn">
+
+                        <i class="bi bi-plus-circle-fill"></i>
+
+                        Create Gig
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+
+        <!-- =====================================================
+        RIGHT INFORMATION
+        ===================================================== -->
+
+        <div class="gig-tips">
+
+
+            <!-- TIPS -->
+
+            <div class="tips-card">
+
+
+                <div class="tips-icon">
+
+                    <i class="bi bi-lightbulb-fill"></i>
+
+                </div>
+
+
+                <h3>
+
+                    Create a Great Gig
+
+                </h3>
+
+
+                <p>
+
+                    Follow these tips to attract more buyers.
+
+                </p>
+
+
+
+                <!-- TIP 1 -->
+
+                <div class="tip">
+
+                    <div class="tip-number">
+
+                        1
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+
+                            Use a clear title
+
+                        </strong>
+
+
+                        <small>
+
+                            Tell buyers exactly what service you provide.
+
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- TIP 2 -->
+
+                <div class="tip">
+
+                    <div class="tip-number">
+
+                        2
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+
+                            Write a detailed description
+
+                        </strong>
+
+
+                        <small>
+
+                            Explain your skills, process and deliverables.
+
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- TIP 3 -->
+
+                <div class="tip">
+
+                    <div class="tip-number">
+
+                        3
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+
+                            Choose the right price
+
+                        </strong>
+
+
+                        <small>
+
+                            Keep your pricing competitive and realistic.
+
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- TIP 4 -->
+
+                <div class="tip">
+
+                    <div class="tip-number">
+
+                        4
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+
+                            Add a quality image
+
+                        </strong>
+
+
+                        <small>
+
+                            A professional image helps your gig stand out.
+
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- VERIFIED SELLER -->
+
+            <div class="verified-card">
+
+                <i class="bi bi-patch-check-fill"></i>
+
+
+                <div>
+
+                    <strong>
+
+                        Verified Seller
+
+                    </strong>
+
+
+                    <p>
+
+                        Your assessment verification helps buyers
+                        trust your skills.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+IMAGE FILE NAME SCRIPT
+===================================================== -->
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const imageInput =
+            document.getElementById(
+                "{{ form.image.id_for_label }}"
+            );
+
+        const fileName =
+            document.getElementById(
+                "fileName"
+            );
+
+        const uploadText =
+            document.getElementById(
+                "uploadText"
+            );
+
+        const imageUpload =
+            document.getElementById(
+                "imageUpload"
+            );
+
+
+        if (!imageInput) {
+            return;
+        }
+
+
+        imageInput.addEventListener(
+            "change",
+            function () {
+
+                if (
+                    this.files &&
+                    this.files.length > 0
+                ) {
+
+                    const file =
+                        this.files[0];
+
+
+                    /* Show filename */
+
+                    fileName.textContent =
+                        file.name;
+
+
+                    /* Change title */
+
+                    uploadText.textContent =
+                        "Image Selected";
+
+
+                    /* Premium selected state */
+
+                    imageUpload.classList.add(
+                        "file-selected"
+                    );
+
+
+                } else {
+
+                    fileName.textContent =
+                        "JPG, PNG or WEBP";
+
+
+                    uploadText.textContent =
+                        "Upload your gig image";
+
+
+                    imageUpload.classList.remove(
+                        "file-selected"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+);
+
+</script>
+
+{% endblock %}

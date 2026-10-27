@@ -1,0 +1,532 @@
+.whatsapp-page {
+    max-width: 1200px;
+    margin: auto;
+    padding: 10px 5px 50px;
+}
+
+
+/* HEADER */
+
+.whatsapp-header {
+    margin-bottom: 28px;
+}
+
+.whatsapp-header h1 {
+    margin: 13px 0 6px;
+    color: #172033;
+    font-size: 34px;
+    font-weight: 800;
+}
+
+.whatsapp-header p {
+    margin: 0;
+    color: #64748b;
+    font-size: 13px;
+}
+
+
+/* BADGE */
+
+.whatsapp-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 8px 15px;
+
+    border-radius: 50px;
+
+    background: linear-gradient(
+        135deg,
+        #ecfdf5,
+        #d1fae5
+    );
+
+    border: 1px solid #a7f3d0;
+
+    color: #059669;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* STAT */
+
+.whatsapp-stat {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    width: fit-content;
+
+    padding: 18px 25px;
+    margin-bottom: 25px;
+
+    background: #fff;
+
+    border: 1px solid #e7ebf3;
+    border-radius: 18px;
+
+    box-shadow:
+        0 10px 30px rgba(15,23,42,.06);
+}
+
+.whatsapp-stat-icon {
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background: linear-gradient(
+        135deg,
+        #d1fae5,
+        #ecfdf5
+    );
+
+    color: #059669;
+
+    font-size: 21px;
+}
+
+.whatsapp-stat span {
+    display: block;
+
+    color: #64748b;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.whatsapp-stat strong {
+    display: block;
+
+    margin-top: 2px;
+
+    color: #172033;
+
+    font-size: 25px;
+    font-weight: 800;
+}
+
+
+/* CARD */
+
+.whatsapp-card {
+    position: relative;
+
+    margin-bottom: 25px;
+
+    padding: 28px;
+
+    overflow: hidden;
+
+    background: #fff;
+
+    border: 1px solid #e7ebf3;
+    border-radius: 22px;
+
+    box-shadow:
+        0 14px 40px rgba(15,23,42,.07);
+}
+
+.whatsapp-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background: linear-gradient(
+        90deg,
+        #10b981,
+        #059669,
+        #2563eb,
+        #7c3aed
+    );
+}
+
+
+/* CARD HEADER */
+
+.whatsapp-card-header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 25px;
+
+    padding-bottom: 18px;
+
+    border-bottom: 1px solid #edf0f5;
+}
+
+.whatsapp-card-header h3 {
+    margin: 0 0 5px;
+
+    color: #172033;
+
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.whatsapp-card-header p {
+    margin: 0;
+
+    color: #94a3b8;
+
+    font-size: 12px;
+}
+
+.campaign-icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: linear-gradient(
+        135deg,
+        #ede9fe,
+        #f5f3ff
+    );
+
+    color: #7c3aed;
+
+    font-size: 20px;
+}
+
+
+/* FORM */
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #334155;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    border: 1px solid #dbe3ef;
+
+    border-radius: 12px;
+
+    outline: none;
+
+    color: #334155;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    background: #fafcff;
+
+    transition: .25s;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #10b981;
+
+    background: #fff;
+
+    box-shadow:
+        0 0 0 4px rgba(16,185,129,.08);
+}
+
+
+/* RECIPIENT */
+
+.recipient-box {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 15px;
+
+    margin-bottom: 20px;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ecfdf5,
+            #f0fdf4
+        );
+
+    border: 1px solid #bbf7d0;
+}
+
+.recipient-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #10b981;
+
+    color: #fff;
+
+    font-size: 18px;
+}
+
+.recipient-box strong {
+    display: block;
+
+    color: #166534;
+
+    font-size: 13px;
+}
+
+.recipient-box small {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #4d7c5b;
+
+    font-size: 10px;
+}
+
+
+/* SEND BUTTON */
+
+.send-campaign-btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 13px 22px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #10b981,
+            #059669
+        );
+
+    color: #fff;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 22px rgba(16,185,129,.20);
+
+    transition: .3s;
+}
+
+.send-campaign-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 15px 30px rgba(16,185,129,.28);
+}
+
+
+/* CAMPAIGN HISTORY */
+
+.campaign-history {
+    padding-bottom: 10px;
+}
+
+.campaign-row {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 17px 5px;
+
+    border-bottom: 1px solid #f0f3f7;
+}
+
+.campaign-row:last-child {
+    border-bottom: none;
+}
+
+.campaign-row-icon {
+    width: 43px;
+    height: 43px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: linear-gradient(
+        135deg,
+        #eef2ff,
+        #f5f3ff
+    );
+
+    color: #6366f1;
+}
+
+.campaign-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.campaign-details strong {
+    display: block;
+
+    color: #334155;
+
+    font-size: 13px;
+}
+
+.campaign-details p {
+    margin: 3px 0;
+
+    color: #64748b;
+
+    font-size: 11px;
+}
+
+.campaign-details small {
+    color: #94a3b8;
+
+    font-size: 9px;
+}
+
+.campaign-count {
+    text-align: right;
+}
+
+.campaign-count strong {
+    display: block;
+
+    color: #059669;
+
+    font-size: 17px;
+}
+
+.campaign-count span {
+    color: #94a3b8;
+
+    font-size: 9px;
+}
+
+
+/* EMPTY */
+
+.empty-campaigns {
+    padding: 50px 20px;
+
+    text-align: center;
+}
+
+.empty-campaigns i {
+    display: block;
+
+    margin-bottom: 12px;
+
+    color: #a5b4fc;
+
+    font-size: 40px;
+}
+
+.empty-campaigns h4 {
+    margin: 0 0 5px;
+
+    color: #334155;
+
+    font-size: 17px;
+}
+
+.empty-campaigns p {
+    margin: 0;
+
+    color: #94a3b8;
+
+    font-size: 11px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .whatsapp-page {
+        padding: 5px 2px 40px;
+    }
+
+    .whatsapp-header h1 {
+        font-size: 27px;
+    }
+
+    .whatsapp-card {
+        padding: 20px;
+        border-radius: 18px;
+    }
+
+    .whatsapp-card-header {
+        align-items: flex-start;
+    }
+
+    .campaign-row {
+        align-items: flex-start;
+    }
+
+    .campaign-count {
+        display: none;
+    }
+
+    .send-campaign-btn {
+        width: 100%;
+    }
+
+}

@@ -1,0 +1,273 @@
+/* =========================================================
+   CERTIHIRE FOOTER
+========================================================= */
+
+.footer {
+    background: #111827;
+    padding: 75px 0 30px;
+    color: #d1d5db;
+    margin-top: 100px;
+}
+
+
+/* =========================================================
+   FOOTER GRID
+========================================================= */
+
+.footer .row {
+    display: grid;
+
+    grid-template-columns:
+        1.5fr
+        1fr
+        1.2fr;
+
+    gap: 90px;
+
+    align-items: start;
+}
+
+
+/* Override Bootstrap columns */
+
+.footer .row > div {
+    width: auto;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.footer-icon {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 14px;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #7c3aed
+    );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #fff;
+    font-size: 22px;
+
+    box-shadow:
+        0 10px 25px rgba(37, 99, 235, .25);
+}
+
+.footer h3 {
+    margin: 0;
+
+    color: #fff;
+
+    font-size: 25px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.footer p {
+    max-width: 390px;
+
+    margin: 0;
+
+    color: #9ca3af;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   HEADINGS
+========================================================= */
+
+.footer h5 {
+    margin: 5px 0 22px;
+
+    color: #fff;
+
+    font-size: 16px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   LINKS
+========================================================= */
+
+.footer ul {
+    padding: 0;
+    margin: 0;
+
+    list-style: none;
+}
+
+.footer li {
+    margin-bottom: 14px;
+}
+
+.footer a {
+    color: #9ca3af;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    transition: .3s ease;
+}
+
+.footer a:hover {
+    color: #fff;
+
+    padding-left: 4px;
+}
+
+
+/* =========================================================
+   SOCIAL LINKS
+========================================================= */
+
+.social-links {
+    display: flex;
+
+    gap: 12px;
+
+    margin-top: 25px;
+}
+
+.social-links a {
+    width: 42px;
+    height: 42px;
+
+    padding: 0 !important;
+
+    border-radius: 50%;
+
+    background: #1f2937;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #9ca3af;
+
+    font-size: 17px;
+
+    transition: .3s ease;
+}
+
+.social-links a:hover {
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #7c3aed
+    );
+
+    color: #fff;
+
+    transform: translateY(-4px);
+
+    padding-left: 0 !important;
+}
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.footer hr {
+    margin: 55px 0 25px;
+
+    border: 0;
+
+    border-top: 1px solid #273244;
+
+    opacity: 1;
+}
+
+
+/* =========================================================
+   COPYRIGHT
+========================================================= */
+
+.copyright {
+    text-align: center;
+
+    color: #9ca3af;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 991px) {
+
+    .footer .row {
+        grid-template-columns:
+            1fr
+            1fr;
+
+        gap: 45px;
+    }
+
+    .footer .row > div:first-child {
+        grid-column: 1 / -1;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 576px) {
+
+    .footer {
+        padding: 55px 20px 25px;
+
+        margin-top: 70px;
+    }
+
+    .footer .row {
+        grid-template-columns: 1fr;
+
+        gap: 35px;
+    }
+
+    .footer .row > div:first-child {
+        grid-column: auto;
+    }
+
+    .footer p {
+        max-width: 100%;
+    }
+
+    .footer hr {
+        margin: 40px 0 20px;
+    }
+
+}

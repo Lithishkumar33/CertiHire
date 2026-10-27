@@ -1,0 +1,481 @@
+{% extends "base_dashboard.html" %}
+{% load static %}
+
+{% block title %}
+Settings | CertiHire
+{% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/pages/settings.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="settings-page">
+
+
+    <!-- ==========================================
+         SUCCESS / ERROR MESSAGE
+    =========================================== -->
+
+    {% if messages %}
+
+        {% for message in messages %}
+
+            <div class="settings-message
+                {% if message.tags == 'success' %}
+                    settings-success
+                {% elif message.tags == 'error' %}
+                    settings-error
+                {% else %}
+                    settings-info
+                {% endif %}">
+
+                <div class="message-icon">
+
+                    {% if message.tags == 'success' %}
+
+                        <i class="bi bi-check-circle-fill"></i>
+
+                    {% elif message.tags == 'error' %}
+
+                        <i class="bi bi-exclamation-circle-fill"></i>
+
+                    {% else %}
+
+                        <i class="bi bi-info-circle-fill"></i>
+
+                    {% endif %}
+
+                </div>
+
+                <div class="message-content">
+
+                    {% if message.tags == 'success' %}
+
+                        <strong>Success</strong>
+
+                    {% elif message.tags == 'error' %}
+
+                        <strong>Error</strong>
+
+                    {% else %}
+
+                        <strong>Information</strong>
+
+                    {% endif %}
+
+                    <span>
+                        {{ message }}
+                    </span>
+
+                </div>
+
+                <button type="button"
+                        class="message-close"
+                        onclick="this.parentElement.remove()">
+
+                    <i class="bi bi-x"></i>
+
+                </button>
+
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+
+    <!-- ==========================================
+         HEADER
+    =========================================== -->
+
+    <div class="settings-header">
+
+        <span class="settings-badge">
+
+            <i class="bi bi-sliders"></i>
+
+            Account Settings
+
+        </span>
+
+        <h1>
+            Settings
+        </h1>
+
+        <p>
+            Manage your preferences, notifications and account security.
+        </p>
+
+    </div>
+
+
+    <!-- ==========================================
+         SETTINGS FORM
+    =========================================== -->
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+
+        <!-- ==========================================
+             APPEARANCE
+        =========================================== -->
+
+        <div class="settings-card">
+
+            <div class="settings-card-header">
+
+                <div class="settings-icon appearance">
+
+                    <i class="bi bi-palette-fill"></i>
+
+                </div>
+
+                <div>
+
+                    <h3>
+                        Appearance
+                    </h3>
+
+                    <p>
+                        Customize how CertiHire looks for you.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- DARK MODE -->
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <strong>
+                        Dark Mode
+                    </strong>
+
+                    <small>
+                        Use a darker interface that is easier on the eyes.
+                    </small>
+
+                </div>
+
+
+                <label class="switch">
+
+                    {{ form.dark_mode }}
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==========================================
+             NOTIFICATIONS
+        =========================================== -->
+
+        <div class="settings-card">
+
+            <div class="settings-card-header">
+
+                <div class="settings-icon notification">
+
+                    <i class="bi bi-bell-fill"></i>
+
+                </div>
+
+                <div>
+
+                    <h3>
+                        Notifications
+                    </h3>
+
+                    <p>
+                        Choose which updates you want to receive.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ORDER -->
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <strong>
+                        Order Updates
+                    </strong>
+
+                    <small>
+                        Get notified when your order status changes.
+                    </small>
+
+                </div>
+
+                <label class="switch">
+
+                    {{ form.order_notifications }}
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <strong>
+                        Message Notifications
+                    </strong>
+
+                    <small>
+                        Get notified when someone sends you a message.
+                    </small>
+
+                </div>
+
+                <label class="switch">
+
+                    {{ form.message_notifications }}
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <strong>
+                        Email Notifications
+                    </strong>
+
+                    <small>
+                        Receive important CertiHire updates by email.
+                    </small>
+
+                </div>
+
+                <label class="switch">
+
+                    {{ form.email_notifications }}
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==========================================
+             SECURITY
+        =========================================== -->
+
+        <div class="settings-card">
+
+            <div class="settings-card-header">
+
+                <div class="settings-icon security">
+
+                    <i class="bi bi-shield-lock-fill"></i>
+
+                </div>
+
+                <div>
+
+                    <h3>
+                        Account Security
+                    </h3>
+
+                    <p>
+                        Keep your CertiHire account secure.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="security-row">
+
+                <div>
+
+                    <strong>
+                        Password
+                    </strong>
+
+                    <small>
+                        Change your account password regularly.
+                    </small>
+
+                </div>
+
+                <a href="{% url 'password_change' %}"
+                   class="security-btn">
+
+                    <i class="bi bi-key-fill"></i>
+
+                    Change Password
+
+                </a>
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="security-row">
+
+                <div>
+
+                    <strong>
+                        Account Email
+                    </strong>
+
+                    <small>
+                        {{ request.user.email }}
+                    </small>
+
+                </div>
+
+                <span class="verified-label">
+
+                    <i class="bi bi-check-circle-fill"></i>
+
+                    Verified
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==========================================
+             SAVE
+        =========================================== -->
+
+        <div class="settings-actions">
+
+            <button type="submit"
+                    class="save-settings">
+
+                <i class="bi bi-check-circle-fill"></i>
+
+                Save Changes
+
+            </button>
+
+        </div>
+
+    </form>
+
+
+    <!-- ==========================================
+         DANGER ZONE
+    =========================================== -->
+
+    <div class="danger-card">
+
+        <div>
+
+            <div class="danger-title">
+
+                <i class="bi bi-exclamation-triangle-fill"></i>
+
+                Account Actions
+
+            </div>
+
+            <p>
+                Sign out from your CertiHire account.
+            </p>
+
+        </div>
+
+
+        <!-- LOGOUT -->
+
+        <form method="POST"
+              action="{% url 'logout' %}">
+
+            {% csrf_token %}
+
+            <button type="submit"
+                    class="logout-btn">
+
+                <i class="bi bi-box-arrow-right"></i>
+
+                Logout
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ==========================================
+     AUTO HIDE MESSAGE
+=========================================== -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const message = document.querySelector(".settings-message");
+
+    if (message) {
+
+        setTimeout(function () {
+
+            message.style.opacity = "0";
+            message.style.transform = "translateY(-8px)";
+
+            setTimeout(function () {
+
+                message.remove();
+
+            }, 300);
+
+        }, 4000);
+
+    }
+
+});
+
+</script>
+
+{% endblock %}

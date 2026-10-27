@@ -1,0 +1,311 @@
+{% extends "base_dashboard.html" %}
+{% load static %}
+
+{% block title %}
+Seller Dashboard
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet"
+      href="{% static 'css/pages/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- =====================================================
+HERO
+===================================================== -->
+
+<section class="dashboard-hero">
+
+    <div class="hero-left">
+
+        <span class="hero-badge">
+            👋 Welcome Back
+        </span>
+
+        <h1>
+            Hello, {{ user.username }}
+        </h1>
+
+        <p>
+            Manage your gigs, orders, earnings and grow your
+            freelance business with CertiHire.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="{% url 'create_gig' %}"
+               class="hero-btn-primary">
+
+                <i class="bi bi-plus-circle-fill"></i>
+                Create Gig
+
+            </a>
+
+            <a href="{% url 'my_gigs' %}"
+               class="hero-btn-secondary">
+
+                <i class="bi bi-grid-fill"></i>
+                My Gigs
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="hero-right">
+
+        <img src="{% static 'images/heroo.png' %}"
+             alt="Hero">
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+STATISTICS
+===================================================== -->
+
+<section class="stats-grid">
+
+    <div class="stat-card">
+
+        <div class="stat-icon revenue">
+
+            <i class="bi bi-currency-rupee"></i>
+
+        </div>
+
+        <div>
+
+            <span>Total Revenue</span>
+
+            <h3>₹{{ total_revenue }}</h3>
+
+            <small>Completed Orders</small>
+
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon orders">
+
+            <i class="bi bi-bag-check-fill"></i>
+
+        </div>
+
+        <div>
+
+            <span>Orders Received</span>
+
+            <h3>{{ total_orders }}</h3>
+
+            <small>Total Orders</small>
+
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon gigs">
+
+            <i class="bi bi-briefcase-fill"></i>
+
+        </div>
+
+        <div>
+
+            <span>My Gigs</span>
+
+            <h3>{{ total_gigs }}</h3>
+
+            <small>Published Gigs</small>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+ROW 2
+===================================================== -->
+
+<section class="dashboard-grid">
+
+
+    <!-- REVENUE CHART -->
+
+    <div class="dashboard-card chart-card">
+
+    <div class="revenue-header">
+
+        <div>
+            <span class="revenue-label">TOTAL REVENUE</span>
+
+            <h2 class="revenue-value">
+                ₹{{ total_revenue }}
+            </h2>
+
+            <span class="revenue-subtitle">
+                From completed orders
+            </span>
+        </div>
+
+        <div class="revenue-icon">
+            <i class="bi bi-graph-up-arrow"></i>
+        </div>
+
+    </div>
+
+    <div class="revenue-chart-wrapper">
+
+        <canvas id="revenueChart"></canvas>
+
+    </div>
+
+    {{ chart_labels|json_script:"chart-labels" }}
+    {{ chart_data|json_script:"chart-data" }}
+
+</div>
+
+
+    <!-- ASSESSMENT -->
+
+    <div class="dashboard-card assessment-card">
+
+        <div class="assessment-icon">
+
+            <i class="bi bi-patch-check-fill"></i>
+
+        </div>
+
+        <h3>Assessment Completed</h3>
+
+        <span class="badge bg-success fs-6 px-3 py-2 mb-3">
+
+            <i class="bi bi-patch-check-fill me-1"></i>
+
+            Verified
+
+        </span>
+
+        <p class="text-muted mb-0">
+
+            Congratulations! You have successfully completed
+            the CertiHire seller assessment and your account
+            is verified.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+RECENT ORDERS
+===================================================== -->
+
+<section class="dashboard-card mt-4">
+
+    <div class="card-header">
+
+        <h4>Recent Orders</h4>
+
+    </div>
+
+    <div class="table-responsive">
+
+        <table class="table align-middle">
+
+            <thead>
+
+                <tr>
+
+                    <th>Buyer</th>
+                    <th>Gig</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Date</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for order in recent_orders %}
+
+                <tr>
+
+                    <td>
+                        {{ order.buyer.username }}
+                    </td>
+
+                    <td>
+                        {{ order.gig.title }}
+                    </td>
+
+                    <td>
+                        ₹{{ order.amount }}
+                    </td>
+
+                    <td>
+
+                        <span class="badge bg-primary">
+                            {{ order.status }}
+                        </span>
+
+                    </td>
+
+                    <td>
+                        {{ order.created_at|date:"d M Y" }}
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="5"
+                        class="text-center">
+
+                        No Orders Yet
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+
+<!-- =====================================================
+SELLER DASHBOARD JAVASCRIPT
+===================================================== -->
+
+{% block js %}
+
+<script src="{% static 'js/dashboard.js' %}"></script>
+
+{% endblock %}

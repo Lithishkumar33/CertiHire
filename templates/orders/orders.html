@@ -1,0 +1,401 @@
+{% extends "base_dashboard.html" %}
+{% load static %}
+
+{% block title %}
+Orders
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet"
+      href="{% static 'css/pages/orders.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h2>Orders</h2>
+
+        <p>
+
+            {% if user.is_seller %}
+
+                Manage your customer orders.
+
+            {% else %}
+
+                Track all your purchased services.
+
+            {% endif %}
+
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="table-responsive">
+
+    <table class="table orders-table align-middle">
+
+        <thead>
+
+            <tr>
+
+                {% if user.is_seller %}
+
+                    <th>Buyer</th>
+
+                {% else %}
+
+                    <th>Seller</th>
+
+                {% endif %}
+
+                <th>Gig</th>
+
+                <th>Amount</th>
+
+                <th>Status</th>
+
+                <th>Date</th>
+
+
+                {% if user.is_seller %}
+
+                    <th>Action</th>
+
+                {% endif %}
+
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+
+            {% for order in orders %}
+
+            <tr>
+
+
+                <!-- =================================
+                     BUYER / SELLER
+                ================================== -->
+
+                {% if user.is_seller %}
+
+                    <td>
+                        {{ order.buyer.username }}
+                    </td>
+
+                {% else %}
+
+                    <td>
+                        {{ order.seller.username }}
+                    </td>
+
+                {% endif %}
+
+
+                <!-- =================================
+                     GIG
+                ================================== -->
+
+                <td>
+
+                    <a
+                        href="{% url 'order_detail' order.id %}"
+                        class="order-link">
+
+                        {{ order.gig.title }}
+
+                    </a>
+
+                </td>
+
+
+                <!-- =================================
+                     AMOUNT
+                ================================== -->
+
+                <td>
+
+                    ₹{{ order.amount }}
+
+                </td>
+
+
+                <!-- =================================
+                     STATUS
+                ================================== -->
+
+                <td>
+
+
+                    {% if order.status == "Pending" %}
+
+                        <span class="badge bg-warning text-dark">
+
+                            Pending
+
+                        </span>
+
+
+                    {% elif order.status == "Confirmed" %}
+
+                        <span class="badge bg-info">
+
+                            Confirmed
+
+                        </span>
+
+
+                    {% elif order.status == "In Progress" %}
+
+                        <span class="badge bg-primary">
+
+                            In Progress
+
+                        </span>
+
+
+                    {% elif order.status == "Delivered" %}
+
+                        <span class="badge bg-secondary">
+
+                            Delivered
+
+                        </span>
+
+
+                    {% elif order.status == "Revision" %}
+
+                        <span class="badge bg-warning text-dark">
+
+                            Revision
+
+                        </span>
+
+
+                    {% elif order.status == "Completed" %}
+
+                        <span class="badge bg-success">
+
+                            Completed
+
+                        </span>
+
+
+                    {% else %}
+
+                        <span class="badge bg-danger">
+
+                            Cancelled
+
+                        </span>
+
+                    {% endif %}
+
+
+                </td>
+
+
+                <!-- =================================
+                     DATE
+                ================================== -->
+
+                <td>
+
+                    {{ order.created_at|date:"d M Y" }}
+
+                </td>
+
+
+                <!-- =================================
+                     SELLER ACTIONS
+                ================================== -->
+
+                {% if user.is_seller %}
+
+                <td>
+
+
+                    {% if order.status == "Pending" %}
+
+
+                        <a
+                            href="{% url 'accept_order' order.id %}"
+                            class="btn btn-success btn-sm">
+
+                            Accept
+
+                        </a>
+
+
+                    {% elif order.status == "Confirmed" %}
+
+
+                        <a
+                            href="{% url 'start_order' order.id %}"
+                            class="btn btn-primary btn-sm">
+
+                            Start Work
+
+                        </a>
+
+
+                    {% elif order.status == "In Progress" %}
+
+
+                        <a
+                            href="{% url 'upload_deliverable' order.id %}"
+                            class="btn btn-primary btn-sm">
+
+                            Upload Deliverables
+
+                        </a>
+
+
+                    {% elif order.status == "Delivered" %}
+
+
+                        <span class="badge bg-secondary">
+
+                            Waiting for Buyer Approval
+
+                        </span>
+
+
+                    {% elif order.status == "Completed" %}
+
+
+                        <div class="d-flex flex-column gap-2">
+
+
+                            <!-- COMPLETED -->
+
+                            <span class="text-success fw-semibold">
+
+                                ✔ Completed
+
+                            </span>
+
+
+                            <!-- =================================
+                                 FIRST COMPLETED ORDER CERTIFICATE
+                            ================================== -->
+
+                            {% if order.id == first_completed_order_id %}
+
+
+                                {% if order.certificate_downloaded %}
+
+
+                                    <button
+                                        type="button"
+                                        class="certificate-btn certificate-disabled"
+                                        disabled>
+
+                                        <i class="bi bi-check-circle-fill"></i>
+
+                                        Certificate Downloaded
+
+                                    </button>
+
+
+                                {% else %}
+
+
+                                    <a
+                                        href="{% url 'download_certificate' order.id %}"
+                                        class="certificate-btn">
+
+                                        <i class="bi bi-award-fill"></i>
+
+                                        Download Certificate
+
+                                    </a>
+
+
+                                {% endif %}
+
+
+                            {% endif %}
+
+
+                        </div>
+
+
+                    {% endif %}
+
+
+                </td>
+
+                {% endif %}
+
+
+            </tr>
+
+
+            {% empty %}
+
+
+            <!-- =================================
+                 NO ORDERS
+            ================================== -->
+
+            <tr>
+
+                <td
+                    colspan="{% if user.is_seller %}6{% else %}5{% endif %}"
+                    class="text-center py-5">
+
+
+                    <h5>
+
+                        No Orders Found
+
+                    </h5>
+
+
+                    <p class="text-muted">
+
+
+                        {% if user.is_seller %}
+
+                            Orders from buyers will appear here.
+
+
+                        {% else %}
+
+                            Your purchased services will appear here.
+
+
+                        {% endif %}
+
+
+                    </p>
+
+
+                </td>
+
+            </tr>
+
+
+            {% endfor %}
+
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+{% endblock %}

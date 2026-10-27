@@ -1,0 +1,310 @@
+{% extends "base_dashboard.html" %}
+{% load static %}
+
+{% block title %}
+My Profile
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/pages/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="card shadow border-0">
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <!-- LEFT PROFILE -->
+
+                <div class="col-lg-4 text-center">
+
+                    {% if profile.profile_photo %}
+
+                        <img src="{{ profile.profile_photo.url }}"
+                             class="rounded-circle mb-3"
+                             width="180"
+                             height="180"
+                             style="object-fit:cover;">
+
+                    {% else %}
+
+                        <img src="https://ui-avatars.com/api/?name={{ user.username }}&size=200&background=2563EB&color=fff"
+                             class="rounded-circle mb-3">
+
+                    {% endif %}
+
+                    <h3>{{ user.username }}</h3>
+
+                    {% if user.is_seller %}
+
+                        <span class="badge bg-success">
+
+                            <i class="bi bi-patch-check-fill"></i>
+
+                            Verified Seller
+
+                        </span>
+
+                    {% else %}
+
+                        <span class="badge bg-primary">
+
+                            Buyer
+
+                        </span>
+
+                    {% endif %}
+
+                    {% if user.is_seller %}
+
+                        <p class="mt-3">
+
+                            {{ profile.bio|default:"No bio added yet." }}
+
+                        </p>
+
+                    {% endif %}
+
+                    <hr>
+
+                    <p>
+
+                        📍 {{ profile.location|default:"Not Added" }}
+
+                    </p>
+
+                    <p>
+
+                        📞 {{ profile.phone|default:"Not Added" }}
+
+                    </p>
+
+                    {% if user.is_seller %}
+
+                        <p>
+
+                            🛠 {{ profile.skills|default:"Not Added" }}
+
+                        </p>
+
+                        <p>
+
+                            🌐 {{ profile.website|default:"Not Added" }}
+
+                        </p>
+
+                        <p>
+
+                            💻 {{ profile.github|default:"Not Added" }}
+
+                        </p>
+
+                        <p>
+
+                            💼 {{ profile.linkedin|default:"Not Added" }}
+
+                        </p>
+
+                    {% endif %}
+
+                    <p>
+
+                        📅 Member Since {{ profile.created_at|date:"M Y" }}
+
+                    </p>
+
+                </div>
+
+                <!-- RIGHT -->
+
+                <div class="col-lg-8">
+
+                    <h3>Edit Profile</h3>
+
+                    <form method="POST"
+                          enctype="multipart/form-data">
+
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+
+                            <label>Profile Photo</label>
+
+                            {{ form.profile_photo }}
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label>Phone Number</label>
+
+                            {{ form.phone }}
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label>Location</label>
+
+                            {{ form.location }}
+
+                        </div>
+
+                        {% if user.is_seller %}
+
+                            <div class="mb-3">
+
+                                <label>Bio</label>
+
+                                {{ form.bio }}
+
+                            </div>
+
+                            <div class="mb-3">
+
+                                <label>Skills</label>
+
+                                {{ form.skills }}
+
+                            </div>
+
+                            <div class="mb-3">
+
+                                <label>Website</label>
+
+                                {{ form.website }}
+
+                            </div>
+
+                            <div class="mb-3">
+
+                                <label>GitHub</label>
+
+                                {{ form.github }}
+
+                            </div>
+
+                            <div class="mb-3">
+
+                                <label>LinkedIn</label>
+
+                                {{ form.linkedin }}
+
+                            </div>
+
+                        {% endif %}
+
+                        <button class="btn btn-primary">
+
+                            Save Changes
+
+                        </button>
+
+                    </form>
+
+                    <hr>
+
+                    <div class="row g-3">
+
+                        <div class="col-md-4">
+
+                            <div class="card text-center">
+
+                                <div class="card-body">
+
+                                    <h4>{{ completed_orders }}</h4>
+
+                                    <small>Completed Orders</small>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        {% if user.is_seller %}
+
+                            <div class="col-md-4">
+
+                                <div class="card text-center">
+
+                                    <div class="card-body">
+
+                                        <h4>{{ active_gigs }}</h4>
+
+                                        <small>Active Gigs</small>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-4">
+
+                                <div class="card text-center">
+
+                                    <div class="card-body">
+
+                                        <h4>⭐ {{ average_rating }}</h4>
+
+                                        <small>Average Rating</small>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <div class="card text-center">
+
+                                    <div class="card-body">
+
+                                        <h4>{{ total_reviews }}</h4>
+
+                                        <small>Total Reviews</small>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <div class="card text-center">
+
+                                    <div class="card-body">
+
+                                        <h4>₹{{ total_earnings }}</h4>
+
+                                        <small>Total Earnings</small>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

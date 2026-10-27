@@ -1,0 +1,121 @@
+{% extends "base_dashboard.html" %}
+{% load static %}
+
+{% block title %}Marketplace{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/pages/marketplace.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+<div class="page-header">
+    <div>
+        <h2>Marketplace</h2>
+        <p>Discover verified freelancers and trusted services.</p>
+    </div>
+</div>
+
+<!-- Filters -->
+<form method="GET" action="" id="filter-form" class="marketplace-toolbar">
+    <div class="search-box-market">
+        <i class="bi bi-search"></i>
+        <input 
+            type="text" 
+            name="q" 
+            id="search-input"
+            value="{{ search_query }}"
+            placeholder="Search services..."
+            autocomplete="off">
+    </div>
+
+    <select name="category" onchange="this.form.submit()">
+        <option value="All Categories">All Categories</option>
+        <option value="Web Development" {% if selected_category == "Web Development" %}selected{% endif %}>Web Development</option>
+        <option value="UI/UX Design" {% if selected_category == "UI/UX Design" %}selected{% endif %}>UI/UX Design</option>
+        <option value="Mobile App" {% if selected_category == "Mobile App" %}selected{% endif %}>Mobile App</option>
+        <option value="AI / ML" {% if selected_category == "AI / ML" %}selected{% endif %}>AI / ML</option>
+    </select>
+
+    <select name="sort" onchange="this.form.submit()">
+        <option value="">Price</option>
+        <option value="low_high" {% if price_sort == "low_high" %}selected{% endif %}>Low to High</option>
+        <option value="high_low" {% if price_sort == "high_low" %}selected{% endif %}>High to Low</option>
+    </select>
+</form>
+
+<!-- Gig Grid -->
+<div class="gig-grid">
+    {% for gig in gigs %}
+    <div class="gig-card">
+        {% if gig.image %}
+        <img src="{{ gig.image.url }}" alt="{{ gig.title }}">
+        {% else %}
+        <img src="{% static 'images/gig-placeholder.jpg' %}" alt="Gig">
+        {% endif %}
+
+        <div class="gig-body">
+            <div class="seller">
+                <img src="https://ui-avatars.com/api/?name={{ gig.seller.username }}&background=2563EB&color=ffffff">
+                <div>
+                    <h6>
+                        {{ gig.seller.username }}
+                    </h6>
+                    <small>
+                        Verified Seller
+                    </small>
+                </div>
+            </div>
+
+            <h5>
+                {{ gig.title }}
+            </h5>
+
+            <p class="gig-category">
+                {{ gig.category }}
+            </p>
+
+            <div class="gig-footer">
+                <span>
+                    Delivery: {{ gig.delivery_days }} Days
+                </span>
+                <strong>
+                    ₹{{ gig.price }}
+                </strong>
+            </div>
+
+            <a href="{% url 'gig_detail' gig.id %}" class="view-btn">
+                View Details
+            </a>
+        </div>
+    </div>
+    {% empty %}
+    <div class="empty-state">
+        <i class="bi bi-folder-x"></i>
+        <h3>
+            No Gigs Available
+        </h3>
+        <p>
+            Sellers haven't published any gigs yet or no matches found.
+        </p>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Live Search Script -->
+<script>
+    let typingTimer;
+    const typingInterval = 400; // Milliseconds to wait after user stops typing (0.4s)
+    const searchInput = document.getElementById('search-input');
+    const filterForm = document.getElementById('filter-form');
+
+    searchInput.addEventListener('input', function() {
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(function() {
+            filterForm.submit();
+        }, typingInterval);
+    });
+</script>
+
+{% endblock %}

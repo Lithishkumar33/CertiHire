@@ -1,0 +1,430 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Admin Login | CertiHire</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet">
+
+<link rel="stylesheet"
+      href="{% static 'css/pages/admin_login.css' %}">
+
+
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     BACKGROUND VIDEO
+====================================================== -->
+
+<video
+    class="admin-bg-video"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto">
+
+    <source
+        src="{% static 'images/4k2.mp4' %}"
+        type="video/mp4">
+
+</video>
+
+
+<!-- =====================================================
+     VIDEO OVERLAY
+====================================================== -->
+
+<div class="admin-video-overlay"></div>
+
+
+<!-- =====================================================
+     LOGIN PAGE
+====================================================== -->
+
+<main class="admin-login-page">
+
+
+    <div class="admin-login-card">
+
+
+        <!-- LOGO -->
+
+        <div class="admin-logo">
+
+            <div class="logo-icon">
+
+                <i class="bi bi-shield-lock-fill"></i>
+
+            </div>
+
+        </div>
+
+
+        <!-- TITLE -->
+
+        <h1>
+            CertiHire Admin
+        </h1>
+
+
+        <p class="subtitle">
+            Sign in to manage the CertiHire platform.
+        </p>
+
+
+        <!-- MESSAGES -->
+
+        {% if messages %}
+
+            {% for message in messages %}
+
+                <div class="login-alert">
+
+                    <i class="bi bi-exclamation-circle-fill"></i>
+
+                    <span>
+                        {{ message }}
+                    </span>
+
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+
+        <!-- LOGIN FORM -->
+
+        <form method="POST" id="adminLoginForm">
+
+            {% csrf_token %}
+
+
+            <!-- USERNAME -->
+
+            <div class="form-group">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <div class="input-box">
+
+                    <i class="bi bi-person"></i>
+
+                    <input
+                        id="username"
+                        type="text"
+                        name="username"
+                        placeholder="Enter admin username"
+                        autocomplete="username"
+                        required>
+
+                </div>
+
+                <small
+                    id="usernameError"
+                    class="validation-error">
+                </small>
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="input-box">
+
+                    <i class="bi bi-lock"></i>
+
+                    <input
+                        id="password"
+                        type="password"
+                        name="password"
+                        placeholder="Enter password"
+                        autocomplete="current-password"
+                        required>
+
+                </div>
+
+                <small
+                    id="passwordError"
+                    class="validation-error">
+                </small>
+
+            </div>
+
+
+            <!-- LOGIN BUTTON -->
+
+            <button
+                type="submit"
+                class="admin-login-btn">
+
+                <i class="bi bi-box-arrow-in-right"></i>
+
+                Sign In
+
+            </button>
+
+        </form>
+
+
+        <!-- BACK HOME -->
+
+        <div class="back-home">
+
+            <a href="{% url 'home' %}">
+
+                <i class="bi bi-arrow-left"></i>
+
+                Back to CertiHire
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const form =
+            document.getElementById("adminLoginForm");
+
+        const username =
+            document.getElementById("username");
+
+        const password =
+            document.getElementById("password");
+
+        const usernameError =
+            document.getElementById("usernameError");
+
+        const passwordError =
+            document.getElementById("passwordError");
+
+
+        /* ==============================
+           USERNAME VALIDATION
+        ============================== */
+
+        function validateUsername() {
+
+            const value = username.value.trim();
+
+            usernameError.textContent = "";
+
+            username.classList.remove("validation-invalid");
+
+
+            if (value === "") {
+
+                usernameError.textContent =
+                    "Username is required.";
+
+                username.classList.add(
+                    "validation-invalid"
+                );
+
+                return false;
+            }
+
+
+            if (value.length < 3) {
+
+                usernameError.textContent =
+                    "Username must be at least 3 characters.";
+
+                username.classList.add(
+                    "validation-invalid"
+                );
+
+                return false;
+            }
+
+
+            if (value.length > 30) {
+
+                usernameError.textContent =
+                    "Username cannot exceed 30 characters.";
+
+                username.classList.add(
+                    "validation-invalid"
+                );
+
+                return false;
+            }
+
+
+            if (!/^[A-Za-z0-9_.]+$/.test(value)) {
+
+                usernameError.textContent =
+                    "Username can contain only letters, numbers, underscore and dot.";
+
+                username.classList.add(
+                    "validation-invalid"
+                );
+
+                return false;
+            }
+
+
+            return true;
+
+        }
+
+
+        /* ==============================
+           PASSWORD VALIDATION
+        ============================== */
+
+        function validatePassword() {
+
+            const value = password.value;
+
+            passwordError.textContent = "";
+
+            password.classList.remove(
+                "validation-invalid"
+            );
+
+
+            if (value === "") {
+
+                passwordError.textContent =
+                    "Password is required.";
+
+                password.classList.add(
+                    "validation-invalid"
+                );
+
+                return false;
+            }
+
+
+            if (value.length < 8) {
+
+                passwordError.textContent =
+                    "Password must be at least 8 characters.";
+
+                password.classList.add(
+                    "validation-invalid"
+                );
+
+                return false;
+            }
+
+
+            return true;
+
+        }
+
+
+        /* ==============================
+           FORM SUBMIT
+        ============================== */
+
+        form.addEventListener("submit", function (event) {
+
+            const usernameValid =
+                validateUsername();
+
+            const passwordValid =
+                validatePassword();
+
+
+            if (!usernameValid || !passwordValid) {
+
+                event.preventDefault();
+
+
+                if (!usernameValid) {
+
+                    username.focus();
+
+                } else {
+
+                    password.focus();
+
+                }
+
+            }
+
+        });
+
+
+        /* ==============================
+           LIVE USERNAME VALIDATION
+        ============================== */
+
+        username.addEventListener(
+            "input",
+            function () {
+
+                this.value =
+                    this.value.replace(/\s/g, "");
+
+                if (this.value !== "") {
+
+                    validateUsername();
+
+                }
+
+            }
+        );
+
+
+        /* ==============================
+           LIVE PASSWORD VALIDATION
+        ============================== */
+
+        password.addEventListener(
+            "input",
+            function () {
+
+                if (this.value !== "") {
+
+                    validatePassword();
+
+                }
+
+            }
+        );
+
+    });
+
+</script>
+
+
+</body>
+
+</html>

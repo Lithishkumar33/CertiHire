@@ -1,0 +1,183 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+
+        {% block title %}
+
+        CertiHire
+
+        {% endblock %}
+
+    </title>
+
+    <!-- Google Font -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- Bootstrap -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+          rel="stylesheet">
+
+    <!-- Global CSS -->
+
+    <link rel="stylesheet"
+          href="{% static 'css/variables.css' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'css/layout.css' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'css/utilities.css' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'css/animations.css' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'css/responsive.css' %}">
+
+    <!-- Components -->
+
+    <link rel="stylesheet"
+          href="{% static 'css/components/navbar.css' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'css/components/buttons.css' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'css/components/cards.css' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'css/components/forms.css' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'css/components/footer.css' %}">
+
+      <!-- CertiHire Favicon --> 
+    <link rel="icon" type="image/png" href="{% static 'images/certi1.png' %}">
+
+    <!-- Page CSS -->
+
+    {% block css %}
+
+    {% endblock %}
+
+</head>
+
+<body>
+
+    <!-- Navbar -->
+
+    {% include "layout/navbar.html" %}
+
+    <!-- Main -->
+
+    <main>
+
+        {% block content %}
+
+        {% endblock %}
+
+    </main>
+
+    <!-- Footer -->
+
+    {% include "layout/footer.html" %}
+
+    <!-- Bootstrap -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+
+    {% block js %}
+
+    {% endblock %}
+
+    <!-- Login Required Modal -->
+
+<div class="modal fade"
+     id="loginRequiredModal"
+     tabindex="-1">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content border-0 shadow-lg">
+
+            <div class="modal-body text-center p-5">
+
+                <i class="bi bi-person-lock display-3 text-primary"></i>
+
+                <h3 class="mt-4">
+
+                    Login Required
+
+                </h3>
+
+                <p class="text-muted mt-3">
+
+                    Create a free CertiHire account to view seller gigs,
+                    hire verified professionals, chat securely and
+                    make protected payments.
+
+                </p>
+
+                <div class="d-grid gap-2 mt-4">
+
+                    <a href="{% url 'login' %}"
+                       class="btn btn-primary btn-lg">
+
+                        Login
+
+                    </a>
+
+                    <a href="{% url 'register' %}"
+                       class="btn btn-outline-primary btn-lg">
+
+                        Create Account
+
+                    </a>
+
+                </div>
+
+                <button
+                    class="btn btn-link mt-3 text-secondary"
+                    data-bs-dismiss="modal">
+
+                    Continue Browsing
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

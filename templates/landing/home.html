@@ -1,0 +1,672 @@
+{% extends "base_public.html" %}
+{% load static %}
+
+{% block title %}CertiHire - Assessment Based Freelance Marketplace{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/pages/home.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+<section class="hero">
+
+    <!-- MP4 Background -->
+    <video
+        class="hero-bg-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto">
+
+        <source
+            src="{% static 'images/4k.mp4' %}"
+            type="video/mp4">
+
+        Your browser does not support video.
+    </video>
+
+
+    <!-- Dark overlay -->
+    <div class="hero-overlay"></div>
+
+
+    <!-- Hero content -->
+    <div class="container hero-content">
+
+        <div class="row align-items-center">
+
+            <!-- LEFT -->
+
+            <div class="col-lg-6">
+
+                <span class="hero-chip">
+                    🚀 India's First Assessment Based
+                    Freelance Marketplace
+                </span>
+
+                <h1 class="hero-title">
+
+                    <span class="hero-line hero-line-1">
+                        <span>Hire</span>
+                    </span>
+
+                    <span class="hero-line hero-line-2">
+                        <span class="hero-gradient">
+                            Verified Freelancers
+                        </span>
+                    </span>
+
+                    <span class="hero-line hero-line-3">
+                        <span>With Confidence.</span>
+                    </span>
+
+                </h1>
+
+                <p>
+                    Every freelancer on CertiHire must pass a professional
+                    assessment before selling services. Quality work starts
+                    with verified skills.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="{% url 'register' %}"
+                       class="btn-register">
+                        Get Started
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT -->
+
+            <div class="col-lg-6 text-center">
+
+                <img
+                    src="{% static 'images/heroo.png' %}"
+                    class="hero-image"
+                    alt="Hero">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<section class="featured-gigs">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <span>Popular Services</span>
+
+            <h2>Featured Gigs</h2>
+
+            <p>
+                Browse services from our highest rated verified freelancers.
+            </p>
+
+        </div>
+
+        <div class="gig-grid">
+
+            {% for item in featured_gigs %}
+
+            <div class="gig-card">
+
+                {% if item.gig.image %}
+
+                    <img src="{{ item.gig.image.url }}" alt="{{ item.gig.title }}">
+
+                {% else %}
+
+                    <img src="{% static 'images/gigs/web.jpg' %}" alt="{{ item.gig.title }}">
+
+                {% endif %}
+
+                <div class="gig-content">
+
+                    <div class="gig-user">
+
+                        {% if item.seller.profile.profile_photo %}
+
+                            <img
+                                src="{{ item.seller.profile.profile_photo.url }}"
+                                alt="{{ item.seller.username }}">
+
+                        {% else %}
+
+                            <img
+                                src="https://ui-avatars.com/api/?name={{ item.seller.username|urlencode }}&background=2563EB&color=fff"
+                                alt="{{ item.seller.username }}">
+
+                        {% endif %}
+
+                        <div>
+
+                            <h5>{{ item.seller.username }}</h5>
+
+                            <small>Verified Seller</small>
+
+                        </div>
+
+                    </div>
+
+                    <h4>
+
+                        {{ item.gig.title|truncatechars:65 }}
+
+                    </h4>
+
+                    <div class="gig-rating">
+
+                        ⭐ {{ item.rating }} ({{ item.review_count }})
+
+                    </div>
+
+                    <div class="gig-footer">
+
+                        <span>Starting at</span>
+
+                        <h3>₹{{ item.gig.price }}</h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+                <div class="col-12 text-center">
+
+                    <h5>No active gigs available yet.</h5>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ==========================================
+POPULAR CATEGORIES
+========================================== -->
+
+<section class="categories" id="category">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <span>Explore Services</span>
+
+            <h2>
+
+                Popular Categories
+
+            </h2>
+
+            <p>
+
+                Find verified professionals across the most in-demand skills.
+
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            {% for category in categories %}
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="category-card">
+
+                    <div class="category-icon {{ category.style }}">
+
+                        <i class="bi {{ category.icon }}"></i>
+
+                    </div>
+
+                    <h4>{{ category.name }}</h4>
+
+                    <p>{{ category.count }} Freelancers</p>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="col-12 text-center">
+
+                <h5>No categories available yet.</h5>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ==========================================
+WHY CERTIHIRE
+========================================== -->
+
+<section class="why-section" id="working">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <span>Why Choose Us</span>
+
+            <h2>
+
+                Why Choose CertiHire?
+
+            </h2>
+
+            <p>
+
+                We ensure every freelancer is verified through skill assessments,
+                giving buyers confidence and sellers credibility.
+
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-lg-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon verify">
+
+                        <i class="bi bi-patch-check-fill"></i>
+
+                    </div>
+
+                    <h4>Verified Freelancers</h4>
+
+                    <p>
+
+                        Every seller must successfully pass an assessment
+                        before publishing services.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon payment">
+
+                        <i class="bi bi-shield-check"></i>
+
+                    </div>
+
+                    <h4>Secure Payments</h4>
+
+                    <p>
+
+                        Safe and transparent transactions with complete
+                        payment protection.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon chat">
+
+                        <i class="bi bi-chat-dots-fill"></i>
+
+                    </div>
+
+                    <h4>Real-Time Collaboration</h4>
+
+                    <p>
+
+                        Built-in messaging keeps buyers and freelancers
+                        connected throughout the project.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ==========================================
+FEATURED FREELANCERS
+========================================== -->
+
+<section class="freelancers" id="free">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <span>Top Talent</span>
+
+            <h2>Featured Freelancers</h2>
+
+            <p>
+
+                Meet verified professionals who passed our skill assessments.
+
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Card 1 -->
+
+            {% for item in featured_sellers %}
+
+<div class="col-lg-4">
+
+    <div class="freelancer-card">
+
+        <div class="freelancer-top">
+
+            {% if item.seller.profile.profile_photo %}
+
+                <img
+                    src="{{ item.seller.profile.profile_photo.url }}"
+                    alt="{{ item.seller.username }}">
+
+            {% else %}
+
+                <img
+                    src="https://ui-avatars.com/api/?name={{ item.seller.username }}&background=2563EB&color=fff"
+                    alt="{{ item.seller.username }}">
+
+            {% endif %}
+
+            <span class="verified">
+
+                <i class="bi bi-patch-check-fill"></i>
+
+                Verified
+
+            </span>
+
+        </div>
+
+        <h4>
+
+            {{ item.seller.username }}
+
+        </h4>
+
+        <p class="skill">
+
+            {% if item.seller.profile.skills %}
+
+                {{ item.seller.profile.skills|truncatechars:35 }}
+
+            {% else %}
+
+                Verified Freelancer
+
+            {% endif %}
+
+        </p>
+
+        <div class="rating">
+
+            ⭐ {{ item.rating }}
+
+            <span>
+
+                ({{ item.review_count }} Reviews)
+
+            </span>
+
+        </div>
+
+        <div class="price">
+
+            Starting at
+
+            <strong>
+
+                ₹{{ item.starting_price }}
+
+            </strong>
+
+        </div>
+
+        {% if user.is_authenticated %}
+
+<a href="{% url 'gig_list' %}?seller={{ item.seller.id }}"
+   class="profile-btn">
+
+    View Gigs
+
+</a>
+
+{% else %}
+
+<button
+    class="profile-btn"
+    data-bs-toggle="modal"
+    data-bs-target="#loginRequiredModal">
+
+    View Gigs
+
+</button>
+
+{% endif %}
+
+    </div>
+
+</div>
+
+{% empty %}
+
+<div class="col-12 text-center">
+
+    <h5>
+
+        No verified sellers available yet.
+
+    </h5>
+
+</div>
+
+{% endfor %}
+
+</section>
+<!-- ==========================================
+PLATFORM STATS
+========================================== -->
+
+<section class="platform-stats">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <span>Our Growth</span>
+
+            <h2>Trusted by Thousands</h2>
+
+            <p>
+
+                CertiHire is growing every day with verified freelancers and happy clients.
+
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="counter-card">
+
+                    <div class="counter-icon users">
+
+                        <i class="bi bi-people-fill"></i>
+
+                    </div>
+
+                    <h2>{{ registered_user_count }}+</h2>
+
+                    <p>Registered Users</p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="counter-card">
+
+                    <div class="counter-icon gigs">
+
+                        <i class="bi bi-briefcase-fill"></i>
+
+                    </div>
+
+                    <h2>{{ completed_project_count }}+</h2>
+
+                    <p>Projects Completed</p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="counter-card">
+
+                    <div class="counter-icon verify">
+
+                        <i class="bi bi-patch-check-fill"></i>
+
+                    </div>
+
+                    <h2>{{ verified_seller_count }}+</h2>
+
+                    <p>Verified Freelancers</p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="counter-card">
+
+                    <div class="counter-icon rating">
+
+                        <i class="bi bi-star-fill"></i>
+
+                    </div>
+
+                    <h2>{{ average_rating }}★</h2>
+
+                    <p>Average Rating</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================================
+FINAL CTA
+========================================== -->
+
+<section class="final-cta">
+
+    <div class="container">
+
+        <div class="cta-box">
+
+            <div class="row align-items-center">
+
+                <div class="col-lg-8">
+
+                    <span class="cta-chip">
+
+                        🚀 Join India's Smartest Freelance Marketplace
+
+                    </span>
+
+                    <h2>
+
+                        Ready to Hire Verified Talent?
+
+                    </h2>
+
+                    <p>
+
+                        Whether you're hiring top freelancers or becoming one,
+                        CertiHire helps you work with confidence through
+                        assessment-based verification.
+
+                    </p>
+
+                </div>
+
+                <div class="col-lg-4 text-lg-end text-center">
+
+                    <a href="{% url 'register' %}" class="cta-primary">
+
+                        Get Started
+
+                    </a>
+
+                    <a href="#" class="cta-secondary">
+
+                        Become Seller
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

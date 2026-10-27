@@ -1,0 +1,165 @@
+{% extends "base_public.html" %}
+{% load static %}
+
+{% block title %}
+Verify OTP | CertiHire
+{% endblock %}
+
+{% block css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/pages/auth.css' %}"
+>
+
+<style>
+
+.otp-input {
+
+    height:65px;
+
+    text-align:center;
+
+    font-size:28px;
+
+    font-weight:700;
+
+    letter-spacing:12px;
+
+    border-radius:16px;
+
+}
+
+.otp-help {
+
+    text-align:center;
+
+    color:#6B7280;
+
+    margin-top:15px;
+
+}
+
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="auth-section">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-5">
+
+                <div class="auth-card">
+
+                    <div class="text-center">
+
+                        <div class="assessment-icon"
+                             style="
+                             width:80px;
+                             height:80px;
+                             font-size:32px;
+                             margin:auto;
+                             ">
+
+                            <i class="bi bi-envelope-check-fill"></i>
+
+                        </div>
+
+                        <h2>
+                            Verify Your Email
+                        </h2>
+
+                        <p>
+                            We've sent a 6-digit OTP to
+                            your registered email address.
+                        </p>
+
+                    </div>
+
+
+                    {% if messages %}
+
+                        {% for message in messages %}
+
+                            <div class="alert alert-danger">
+
+                                {{ message }}
+
+                            </div>
+
+                        {% endfor %}
+
+                    {% endif %}
+
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        <div class="mb-4">
+
+                            <label>
+                                Enter OTP
+                            </label>
+
+                            <input
+                                type="text"
+                                name="otp"
+                                class="form-control otp-input"
+                                maxlength="6"
+                                minlength="6"
+                                pattern="[0-9]{6}"
+                                inputmode="numeric"
+                                placeholder="000000"
+                                required
+                            >
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="auth-btn">
+
+                            <i class="bi bi-check-circle me-2"></i>
+
+                            Verify OTP
+
+                        </button>
+
+                    </form>
+
+
+                    <p class="otp-help">
+
+                        OTP is valid for
+                        <strong>5 minutes</strong>.
+
+                    </p>
+
+
+                    <p class="text-center mt-4">
+
+                        <a href="{% url 'forgot_password' %}">
+                            Request a new OTP
+                        </a>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

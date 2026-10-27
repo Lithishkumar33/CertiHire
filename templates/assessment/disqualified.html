@@ -1,0 +1,293 @@
+{% extends "base_public.html" %}
+{% load static %}
+
+{% block title %}
+Assessment Disqualified | CertiHire
+{% endblock %}
+
+
+{% block css %}
+
+<style>
+
+.disqualified-page {
+
+    min-height: 75vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 60px 20px;
+
+}
+
+
+.disqualified-card {
+
+    width: 100%;
+
+    max-width: 620px;
+
+    padding: 45px 35px;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 15px 45px rgba(0, 0, 0, 0.08);
+
+}
+
+
+.disqualified-icon {
+
+    width: 85px;
+
+    height: 85px;
+
+    margin: 0 auto 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #fff0f0;
+
+    color: #dc3545;
+
+    font-size: 40px;
+
+}
+
+
+.disqualified-card h1 {
+
+    margin-bottom: 14px;
+
+    font-size: 30px;
+
+    font-weight: 700;
+
+    color: #212529;
+
+}
+
+
+.disqualified-card > p {
+
+    color: #6c757d;
+
+    line-height: 1.7;
+
+    margin-bottom: 25px;
+
+}
+
+
+.status-box {
+
+    padding: 20px;
+
+    margin: 25px 0;
+
+    border-radius: 12px;
+
+    background: #fff8f8;
+
+    border: 1px solid #f5c2c7;
+
+}
+
+
+.status-box strong {
+
+    display: block;
+
+    color: #dc3545;
+
+    margin-bottom: 8px;
+
+}
+
+
+.status-box span {
+
+    color: #666;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+}
+
+
+.buyer-box {
+
+    padding: 18px;
+
+    margin-bottom: 28px;
+
+    border-radius: 12px;
+
+    background: #f8f9fa;
+
+    color: #555;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+}
+
+
+.disqualified-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 12px 24px;
+
+    border-radius: 10px;
+
+    background: #212529;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    transition: 0.2s ease;
+
+}
+
+
+.disqualified-btn:hover {
+
+    color: #ffffff;
+
+    opacity: 0.9;
+
+    transform: translateY(-1px);
+
+}
+
+</style>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<section class="disqualified-page">
+
+
+    <div class="disqualified-card">
+
+
+        <!-- ICON -->
+
+        <div class="disqualified-icon">
+
+            <i class="bi bi-shield-x"></i>
+
+        </div>
+
+
+
+        <!-- TITLE -->
+
+        <h1>
+
+            Assessment Disqualified
+
+        </h1>
+
+
+
+        <p>
+
+            Your seller assessment has been
+            terminated because the maximum
+            number of malpractice warnings
+            was exceeded.
+
+        </p>
+
+
+
+        <!-- STATUS -->
+
+        <div class="status-box">
+
+            <strong>
+
+                Seller Eligibility: Not Eligible
+
+            </strong>
+
+
+            <span>
+
+                Your account can no longer be
+                approved as a seller through this
+                assessment.
+
+            </span>
+
+        </div>
+
+
+
+        <!-- BUYER INFORMATION -->
+
+        <div class="buyer-box">
+
+            <strong>
+
+                You can continue using CertiHire
+                as a buyer.
+
+            </strong>
+
+            <br>
+
+            You can browse services, hire
+            professionals and place orders normally.
+
+        </div>
+
+
+
+        <!-- BUTTON -->
+
+        <a
+            href="{% url 'dashboard' %}"
+            class="disqualified-btn">
+
+            <i class="bi bi-house-fill"></i>
+
+            Continue as Buyer
+
+        </a>
+
+
+    </div>
+
+</section>
+
+{% endblock %}

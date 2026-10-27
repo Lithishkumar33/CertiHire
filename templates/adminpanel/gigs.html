@@ -1,0 +1,291 @@
+{% extends "adminpanel/base_admin.html" %}
+{% load static %}
+
+{% block title %}
+Gigs Management | CertiHire
+{% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/pages/admin_gigs.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="admin-gigs-page">
+
+
+    <!-- HEADER -->
+
+    <div class="admin-gigs-header">
+
+        <div>
+
+            <span class="admin-badge">
+
+                <i class="bi bi-briefcase-fill"></i>
+
+                Gig Management
+
+            </span>
+
+            <h1>
+                All Gigs
+            </h1>
+
+            <p>
+                View and manage gigs published by CertiHire sellers.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- SUMMARY -->
+
+    <div class="gig-admin-stats">
+
+
+        <div class="gig-stat-card">
+
+            <div class="gig-stat-icon">
+
+                <i class="bi bi-briefcase-fill"></i>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Total Gigs
+                </span>
+
+                <strong>
+                    {{ gigs|length }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="gig-stat-card">
+
+            <div class="gig-stat-icon">
+
+                <i class="bi bi-check-circle-fill"></i>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Active Gigs
+                </span>
+
+                <strong>
+                    {{ active_gigs }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="gig-stat-card">
+
+            <div class="gig-stat-icon">
+
+                <i class="bi bi-pause-circle-fill"></i>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Inactive Gigs
+                </span>
+
+                <strong>
+                    {{ inactive_gigs }}
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- GIG LIST -->
+
+    <div class="admin-gigs-card">
+
+        <div class="admin-gigs-card-header">
+
+            <div>
+
+                <h3>
+                    Published Gigs
+                </h3>
+
+                <p>
+                    Review gigs created by sellers.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="admin-gigs-table">
+
+            {% for gig in gigs %}
+
+            <div class="admin-gig-row">
+
+
+                <!-- IMAGE -->
+
+                <div class="admin-gig-image">
+
+                    {% if gig.image %}
+
+                        <img
+                            src="{{ gig.image.url }}"
+                            alt="{{ gig.title }}">
+
+                    {% else %}
+
+                        <img
+                            src="{% static 'images/gig-placeholder.jpg' %}"
+                            alt="Gig">
+
+                    {% endif %}
+
+                </div>
+
+
+
+                <!-- GIG DETAILS -->
+
+                <div class="admin-gig-details">
+
+                    <span class="gig-category">
+
+                        {{ gig.category }}
+
+                    </span>
+
+                    <h4>
+
+                        {{ gig.title }}
+
+                    </h4>
+
+                    <p>
+
+                        {{ gig.description|truncatechars:100 }}
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- SELLER -->
+
+                <div class="admin-gig-seller">
+
+                    <span>
+                        Seller
+                    </span>
+
+                    <strong>
+                        {{ gig.seller.username }}
+                    </strong>
+
+                </div>
+
+
+
+                <!-- PRICE -->
+
+                <div class="admin-gig-price">
+
+                    <span>
+                        Price
+                    </span>
+
+                    <strong>
+                        ₹{{ gig.price }}
+                    </strong>
+
+                </div>
+
+
+
+                <!-- STATUS -->
+
+                <div class="admin-gig-status">
+
+                    {% if gig.is_active %}
+
+                        <span class="status active">
+
+                            <i class="bi bi-check-circle-fill"></i>
+
+                            Active
+
+                        </span>
+
+                    {% else %}
+
+                        <span class="status inactive">
+
+                            <i class="bi bi-pause-circle-fill"></i>
+
+                            Inactive
+
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+            </div>
+
+
+            {% empty %}
+
+            <div class="empty-gigs">
+
+                <i class="bi bi-briefcase"></i>
+
+                <h4>
+                    No Gigs Yet
+                </h4>
+
+                <p>
+                    Sellers have not published any gigs yet.
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+</div>
+
+{% endblock %}

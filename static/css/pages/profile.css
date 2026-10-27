@@ -1,0 +1,494 @@
+/* =========================================================
+   ULTRA PREMIUM FORM / CARD STYLE
+========================================================= */
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card {
+    position: relative;
+
+    border: 1px solid rgba(255, 255, 255, 0.8);
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.98),
+            rgba(248, 250, 255, 0.96)
+        );
+
+    box-shadow:
+        0 20px 60px rgba(37, 99, 235, 0.10),
+        0 8px 25px rgba(124, 58, 237, 0.07);
+
+    overflow: hidden;
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease,
+        border-color .35s ease;
+}
+
+
+/* Colorful premium glow */
+
+.card::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    top: -100px;
+    right: -80px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #60a5fa,
+            #a78bfa
+        );
+
+    border-radius: 50%;
+
+    filter: blur(55px);
+
+    opacity: .18;
+
+    pointer-events: none;
+}
+
+
+.card:hover {
+
+    transform: translateY(-5px);
+
+    border-color: rgba(99, 102, 241, .25);
+
+    box-shadow:
+        0 28px 70px rgba(37, 99, 235, 0.14),
+        0 12px 35px rgba(124, 58, 237, 0.10);
+}
+
+
+/* =========================================================
+   CARD HEADING
+========================================================= */
+
+.card h4 {
+
+    position: relative;
+
+    margin-bottom: 22px;
+
+    font-size: 21px;
+
+    font-weight: 750;
+
+    letter-spacing: -.4px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #111827,
+            #2563eb,
+            #7c3aed
+        );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+/* =========================================================
+   IMAGES
+========================================================= */
+
+img {
+
+    object-fit: cover;
+
+    transition:
+        transform .5s ease,
+        filter .5s ease;
+}
+
+
+.card:hover img {
+
+    transform: scale(1.025);
+
+    filter: saturate(1.08);
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+form p {
+
+    margin-bottom: 20px;
+
+    position: relative;
+}
+
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+form p label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #334155;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    letter-spacing: .2px;
+}
+
+
+/* =========================================================
+   INPUT + TEXTAREA
+========================================================= */
+
+form input,
+form textarea {
+
+    width: 100%;
+
+    padding: 13px 15px;
+
+    border-radius: 13px;
+
+    border: 1px solid #dbe3f0;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #f8faff
+        );
+
+    color: #1e293b;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color .25s ease,
+        box-shadow .25s ease,
+        background .25s ease,
+        transform .25s ease;
+}
+
+
+form input::placeholder,
+form textarea::placeholder {
+
+    color: #94a3b8;
+}
+
+
+/* Focus */
+
+form input:focus,
+form textarea:focus {
+
+    border-color: #6366f1;
+
+    background: #ffffff;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 0 0 4px rgba(99, 102, 241, .10),
+        0 8px 20px rgba(37, 99, 235, .08);
+}
+
+
+/* Textarea */
+
+form textarea {
+
+    min-height: 120px;
+
+    resize: vertical;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   SELECT
+========================================================= */
+
+form select {
+
+    width: 100%;
+
+    padding: 13px 15px;
+
+    border-radius: 13px;
+
+    border: 1px solid #dbe3f0;
+
+    background: #ffffff;
+
+    color: #1e293b;
+
+    font-size: 14px;
+
+    outline: none;
+
+    cursor: pointer;
+
+    transition: .25s;
+}
+
+
+form select:focus {
+
+    border-color: #6366f1;
+
+    box-shadow:
+        0 0 0 4px rgba(99, 102, 241, .10);
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+========================================================= */
+
+.btn-primary {
+
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 11px 26px;
+
+    border: none;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #4f46e5,
+            #7c3aed
+        );
+
+    color: #ffffff;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    letter-spacing: .2px;
+
+    box-shadow:
+        0 10px 25px rgba(37, 99, 235, .25);
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+}
+
+
+.btn-primary:hover {
+
+    background:
+        linear-gradient(
+            135deg,
+            #1d4ed8,
+            #4338ca,
+            #6d28d9
+        );
+
+    color: #ffffff;
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 16px 32px rgba(37, 99, 235, .32);
+}
+
+
+.btn-primary:active {
+
+    transform: scale(.97);
+}
+
+
+/* =========================================================
+   SECONDARY BUTTON
+========================================================= */
+
+.btn-secondary {
+
+    border: 1px solid #dbe3f0;
+
+    border-radius: 13px;
+
+    padding: 11px 24px;
+
+    background: #ffffff;
+
+    color: #475569;
+
+    font-weight: 600;
+
+    transition: .3s;
+}
+
+
+.btn-secondary:hover {
+
+    border-color: #a5b4fc;
+
+    background: #f5f3ff;
+
+    color: #4f46e5;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   FORM ERROR
+========================================================= */
+
+.errorlist {
+
+    margin: 6px 0 0;
+
+    padding: 0;
+
+    list-style: none;
+
+    color: #dc2626;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   HELP TEXT
+========================================================= */
+
+form p .helptext {
+
+    display: block;
+
+    margin-top: 6px;
+
+    color: #94a3b8;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   FILE INPUT
+========================================================= */
+
+form input[type="file"] {
+
+    padding: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f8faff,
+            #f5f3ff
+        );
+
+    cursor: pointer;
+}
+
+
+form input[type="file"]::file-selector-button {
+
+    margin-right: 12px;
+
+    padding: 8px 14px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed
+        );
+
+    color: #ffffff;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .card {
+
+        border-radius: 20px;
+
+        box-shadow:
+            0 15px 40px rgba(37, 99, 235, .09);
+    }
+
+    .card h4 {
+
+        font-size: 19px;
+    }
+
+    form input,
+    form textarea,
+    form select {
+
+        padding: 12px 13px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+
+        width: 100%;
+    }
+
+}

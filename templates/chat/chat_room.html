@@ -1,0 +1,510 @@
+{% extends "base_dashboard.html" %}
+{% load static %}
+
+{% block title %}
+Order #{{ order.id }} Chat
+{% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/pages/chat.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="chat-page">
+
+    <!-- =================================================
+    CHAT CARD
+    ================================================= -->
+
+    <div class="chat-card">
+
+        <!-- HEADER -->
+
+        <div class="chat-header">
+
+            <div class="chat-user">
+
+                <div class="chat-avatar">
+
+                    {% if request.user == order.buyer %}
+                        {{ order.seller.username|first|upper }}
+                    {% else %}
+                        {{ order.buyer.username|first|upper }}
+                    {% endif %}
+
+                </div>
+
+                <div class="chat-user-info">
+
+                    <h3>
+
+                        {% if request.user == order.buyer %}
+                            {{ order.seller.username }}
+                        {% else %}
+                            {{ order.buyer.username }}
+                        {% endif %}
+
+                    </h3>
+
+                    <span>
+                        <i class="bi bi-circle-fill"></i>
+                        Order #{{ order.id }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="chat-header-actions">
+
+                <span class="order-status">
+                    {{ order.status }}
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- ORDER INFO -->
+
+        <div class="chat-order-info">
+
+            <div class="order-icon">
+
+                <i class="bi bi-briefcase-fill"></i>
+
+            </div>
+
+            <div>
+
+                <span>Order</span>
+
+                <strong>
+                    {{ order.gig.title }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- CHAT BODY -->
+
+<div class="chat-body-wrapper">
+
+    <!-- Background Video -->
+
+    <video
+        class="chat-bg-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto">
+
+        <source
+            src="{% static 'images/4k3.mp4' %}"
+            type="video/mp4">
+
+    </video>
+
+
+    <!-- Dark / White Overlay -->
+
+    <div class="chat-video-overlay"></div>
+
+
+    <!-- Messages -->
+
+    <div id="chat-box"
+         class="chat-box">
+
+        {% for msg in messages %}
+
+            {% if msg.sender == request.user %}
+
+                <div class="message-row sent">
+
+                    <div class="message-content">
+
+                        <div class="message-bubble">
+                            {{ msg.message }}
+                        </div>
+
+                        <span class="message-time">
+                            {{ msg.created_at|date:"h:i A" }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            {% else %}
+
+                <div class="message-row received">
+
+                    <div class="message-avatar">
+                        {{ msg.sender.username|first|upper }}
+                    </div>
+
+                    <div class="message-content">
+
+                        <div class="message-bubble">
+                            {{ msg.message }}
+                        </div>
+
+                        <span class="message-time">
+                            {{ msg.created_at|date:"h:i A" }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+        {% empty %}
+
+            <div class="empty-chat">
+
+                <div class="empty-chat-icon">
+                    <i class="bi bi-chat-heart-fill"></i>
+                </div>
+
+                <h4>Start the conversation</h4>
+
+                <p>
+                    Send a message to discuss your order.
+                </p>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+
+        <!-- TYPING -->
+
+        <div id="typingIndicator"
+             class="typing-indicator">
+        </div>
+
+
+        <!-- MESSAGE INPUT -->
+
+        <div class="chat-input-area">
+
+            <div class="message-input-wrapper">
+
+                <input
+                    type="text"
+                    id="message-input"
+                    placeholder="Write a message..."
+                    autocomplete="off"
+                >
+
+                <button id="send-btn"
+                        type="button">
+
+                    <i class="bi bi-send-fill"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const orderId = "{{ order.id }}";
+const senderId = "{{ request.user.id }}";
+const username = "{{ request.user.username }}";
+
+const socket = new WebSocket(
+    "ws://" +
+    window.location.host +
+    "/ws/chat/" +
+    orderId +
+    "/"
+);
+
+const chatBox =
+    document.getElementById("chat-box");
+
+const messageInput =
+    document.getElementById("message-input");
+
+const typingIndicator =
+    document.getElementById("typingIndicator");
+
+
+// =====================================================
+// SOCKET CONNECTED
+// =====================================================
+
+socket.onopen = function () {
+
+    console.log("Chat connected");
+
+    chatBox.scrollTop =
+        chatBox.scrollHeight;
+
+};
+
+
+// =====================================================
+// RECEIVE MESSAGE
+// =====================================================
+
+socket.onmessage = function(e) {
+
+    const data = JSON.parse(e.data);
+
+
+    // -------------------------------
+    // Typing
+    // -------------------------------
+
+    if (data.event === "typing") {
+
+        if (data.username !== username) {
+
+            typingIndicator.innerHTML =
+                `<span>
+                    ${data.username} is typing...
+                 </span>`;
+
+            clearTimeout(
+                window.typingTimeout
+            );
+
+            window.typingTimeout =
+                setTimeout(function () {
+
+                    typingIndicator.innerHTML =
+                        "";
+
+                }, 1500);
+
+        }
+
+        return;
+
+    }
+
+
+    // -------------------------------
+    // Message
+    // -------------------------------
+
+    const isMine =
+        data.sender === username;
+
+
+    const row =
+        document.createElement("div");
+
+    row.className =
+        isMine
+            ? "message-row sent"
+            : "message-row received";
+
+
+    if (!isMine) {
+
+        const avatar =
+            document.createElement("div");
+
+        avatar.className =
+            "message-avatar";
+
+        avatar.textContent =
+            data.sender
+                .charAt(0)
+                .toUpperCase();
+
+        row.appendChild(avatar);
+
+    }
+
+
+    const content =
+        document.createElement("div");
+
+    content.className =
+        "message-content";
+
+
+    const bubble =
+        document.createElement("div");
+
+    bubble.className =
+        "message-bubble";
+
+    bubble.textContent =
+        data.message;
+
+
+    const time =
+        document.createElement("span");
+
+    time.className =
+        "message-time";
+
+    time.textContent =
+        "Just now";
+
+
+    content.appendChild(bubble);
+
+    content.appendChild(time);
+
+    row.appendChild(content);
+
+    chatBox.appendChild(row);
+
+
+    typingIndicator.innerHTML = "";
+
+    chatBox.scrollTop =
+        chatBox.scrollHeight;
+
+};
+
+
+// =====================================================
+// SEND MESSAGE
+// =====================================================
+
+function sendMessage() {
+
+    const message =
+        messageInput.value.trim();
+
+    if (message === "") {
+        return;
+    }
+
+    if (socket.readyState !== WebSocket.OPEN) {
+        return;
+    }
+
+
+    socket.send(JSON.stringify({
+
+        sender_id: senderId,
+
+        message: message
+
+    }));
+
+
+    messageInput.value = "";
+
+    messageInput.focus();
+
+}
+
+
+document.getElementById(
+    "send-btn"
+).onclick = sendMessage;
+
+
+// =====================================================
+// ENTER TO SEND
+// =====================================================
+
+messageInput.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Enter" &&
+            !event.shiftKey
+        ) {
+
+            event.preventDefault();
+
+            sendMessage();
+
+        }
+
+    }
+);
+
+
+// =====================================================
+// TYPING
+// =====================================================
+
+let typingTimer;
+
+messageInput.addEventListener(
+    "input",
+    function() {
+
+        if (
+            socket.readyState !==
+            WebSocket.OPEN
+        ) {
+            return;
+        }
+
+
+        socket.send(JSON.stringify({
+
+            event: "typing",
+
+            username: username
+
+        }));
+
+
+        clearTimeout(typingTimer);
+
+
+        typingTimer =
+            setTimeout(function() {
+
+                typingIndicator.innerHTML =
+                    "";
+
+            }, 1000);
+
+    }
+);
+
+
+// =====================================================
+// INITIAL SCROLL
+// =====================================================
+
+window.addEventListener(
+    "load",
+    function() {
+
+        chatBox.scrollTop =
+            chatBox.scrollHeight;
+
+    }
+);
+
+</script>
+
+{% endblock %}

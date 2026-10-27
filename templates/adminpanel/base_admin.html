@@ -1,0 +1,154 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}CertiHire Admin{% endblock %}
+    </title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{% static 'css/pages/admin.css' %}">
+
+    {% block css %}{% endblock %}
+
+</head>
+
+<body>
+
+<!-- =========================
+     ADMIN TOP NAVBAR
+========================= -->
+
+<header class="admin-navbar">
+
+    <!-- LOGO -->
+
+    <a href="{% url 'admin_dashboard' %}"
+       class="admin-logo">
+
+        <span class="admin-logo-icon">
+            <i class="bi bi-shield-check"></i>
+        </span>
+
+        <span>CertiHire</span>
+
+        <small>ADMIN</small>
+
+    </a>
+
+
+    <!-- NAVIGATION -->
+
+    <nav class="admin-nav">
+
+        <a href="{% url 'admin_dashboard' %}">
+            <i class="bi bi-grid"></i>
+            Dashboard
+        </a>
+
+        <a href="{% url 'manage_users' %}">
+            <i class="bi bi-people"></i>
+            Users
+        </a>
+
+        <a href="{% url 'assessment_management' %}">
+            <i class="bi bi-patch-question"></i>
+            Assessments
+        </a>
+
+        <a href="{% url 'manage_gigs' %}">
+            <i class="bi bi-briefcase"></i>
+            Gigs
+        </a>
+
+        <a href="{% url 'manage_orders' %}">
+            <i class="bi bi-cart-check"></i>
+            Orders
+        </a>
+
+        <a href="{% url 'revenue_management' %}">
+            <i class="bi bi-bar-chart"></i>
+            Revenue
+        </a>
+
+
+    </nav>
+
+
+    <!-- ADMIN ACCOUNT -->
+
+    <div class="admin-account">
+
+        
+
+        <a href="{% url 'admin_logout' %}"
+           class="admin-logout"
+           title="Logout">
+            Logout
+            <i class="bi bi-box-arrow-right"></i>
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- =========================
+     PAGE CONTENT
+========================= -->
+
+<main class="admin-content">
+
+    {% if messages %}
+
+        {% for message in messages %}
+
+            <div class="admin-message">
+
+                <i class="bi bi-check-circle-fill"></i>
+
+                {{ message }}
+
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+
+    {% block content %}
+
+    {% endblock %}
+
+</main>
+
+
+{% block js %}
+
+{% endblock %}
+
+</body>
+
+</html>

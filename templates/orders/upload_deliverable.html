@@ -1,0 +1,82 @@
+{% extends "base_dashboard.html" %}
+{% load static %}
+
+{% block title %}
+Upload Deliverables
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/pages/upload_deliverable.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="upload-container">
+
+    <div class="upload-card">
+
+        <h2>
+
+            Upload Deliverables
+
+        </h2>
+
+        <p>
+
+            <strong>Order #{{ order.id }}</strong><br>
+
+            {{ order.gig.title }}
+
+        </p>
+
+        <form method="POST"
+              enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <div class="mb-4">
+
+                <label class="form-label">
+
+                    Select File
+
+                </label>
+
+                {{ form.file }}
+
+            </div>
+
+            <div class="mb-4">
+
+                <label class="form-label">
+
+                    Delivery Message
+
+                </label>
+
+                {{ form.message }}
+
+            </div>
+
+            <button
+                type="submit"
+                class="upload-btn">
+
+                Submit Delivery
+
+            </button>
+
+            <a href="{% url 'order_detail' order.id %}"
+               class="cancel-btn">
+
+                Cancel
+
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

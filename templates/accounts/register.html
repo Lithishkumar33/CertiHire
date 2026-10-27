@@ -1,0 +1,594 @@
+{% extends "base_public.html" %}
+
+{% load static %}
+
+{% block title %}Register | CertiHire{% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet" href="{% static 'css/pages/auth.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+
+```
+<div class="container">
+
+    <div class="row align-items-center gy-5">
+
+        <!-- Left -->
+
+        <div class="col-lg-6">
+
+            <div class="auth-content">
+
+                <span class="auth-badge">
+                    🚀 Join CertiHire
+                </span>
+
+                <h1>
+                    Create Your
+                    <span>Account</span>
+                </h1>
+
+                <p>
+                    Join India's first assessment-based freelance marketplace
+                    and connect with trusted buyers and sellers.
+                </p>
+
+                <div class="auth-feature">
+                    <i class="bi bi-person-check-fill"></i>
+                    <span>Trusted Community</span>
+                </div>
+
+                <div class="auth-feature">
+                    <i class="bi bi-award-fill"></i>
+                    <span>Verified Skill Assessment</span>
+                </div>
+
+                <div class="auth-feature">
+                    <i class="bi bi-cash-stack"></i>
+                    <span>Secure Payments</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Right -->
+
+        <div class="col-lg-6">
+
+            <div class="auth-card">
+
+                <h2>Create Account</h2>
+
+                <p>Fill in your details to get started.</p>
+
+                <form method="POST" id="registerForm">
+
+                    {% csrf_token %}
+
+
+                    <!-- Role Selection -->
+
+                    <label class="mb-3">
+                        Choose Account Type
+                    </label>
+
+                    <div class="role-selection mb-4">
+
+                        <label class="role-card">
+
+                            <input
+                                type="radio"
+                                name="role"
+                                value="buyer"
+                                checked
+                            >
+
+                            <div>
+                                <i class="bi bi-person-fill"></i>
+                                <h5>Buyer</h5>
+                                <small>Hire Professionals</small>
+                            </div>
+
+                        </label>
+
+
+                        <label class="role-card">
+
+                            <input
+                                type="radio"
+                                name="role"
+                                value="seller"
+                            >
+
+                            <div>
+                                <i class="bi bi-briefcase-fill"></i>
+                                <h5>Seller</h5>
+                                <small>Offer Services</small>
+                            </div>
+
+                        </label>
+
+                    </div>
+
+                    <small
+                        id="roleError"
+                        class="validation-error">
+                    </small>
+
+
+                    <!-- Username -->
+
+                    <div class="mb-3">
+
+                        <label>Username</label>
+
+                        <input
+                            type="text"
+                            name="username"
+                            id="username"
+                            class="form-control"
+                        >
+
+                        <small
+                            id="usernameError"
+                            class="validation-error">
+                        </small>
+
+                    </div>
+
+
+                    <!-- Email -->
+
+                    <div class="mb-3">
+
+                        <label>Email</label>
+
+                        <input
+                            type="email"
+                            name="email"
+                            id="email"
+                            class="form-control"
+                        >
+
+                        <small
+                            id="emailError"
+                            class="validation-error">
+                        </small>
+
+                    </div>
+
+
+                    <!-- Password -->
+
+                    <div class="mb-3">
+
+                        <label>Password</label>
+
+                        <input
+                            type="password"
+                            name="password1"
+                            id="password1"
+                            class="form-control"
+                        >
+
+                        <small
+                            id="password1Error"
+                            class="validation-error">
+                        </small>
+
+                    </div>
+
+
+                    <!-- Confirm Password -->
+
+                    <div class="mb-4">
+
+                        <label>Confirm Password</label>
+
+                        <input
+                            type="password"
+                            name="password2"
+                            id="password2"
+                            class="form-control"
+                        >
+
+                        <small
+                            id="password2Error"
+                            class="validation-error">
+                        </small>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="auth-btn">
+
+                        Create Account
+
+                    </button>
+
+                </form>
+
+
+                <p class="text-center mt-4">
+
+                    Already have an account?
+
+                    <a href="{% url 'login' %}">
+                        Login
+                    </a>
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+```
+
+</section>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const form = document.getElementById("registerForm");
+
+    const username = document.getElementById("username");
+    const email = document.getElementById("email");
+    const password1 = document.getElementById("password1");
+    const password2 = document.getElementById("password2");
+
+    const usernameError = document.getElementById("usernameError");
+    const emailError = document.getElementById("emailError");
+    const password1Error = document.getElementById("password1Error");
+    const password2Error = document.getElementById("password2Error");
+    const roleError = document.getElementById("roleError");
+
+
+    /* --------------------------------
+       Clear Errors
+    -------------------------------- */
+
+    function clearError(input, errorElement) {
+
+        input.classList.remove("input-error");
+        errorElement.textContent = "";
+
+    }
+
+
+    /* --------------------------------
+       Username Validation
+    -------------------------------- */
+
+    function validateUsername() {
+
+        const value = username.value.trim();
+
+        clearError(username, usernameError);
+
+        if (value === "") {
+
+            usernameError.textContent =
+                "Username is required.";
+
+            username.classList.add("input-error");
+
+            return false;
+        }
+
+        if (value.length < 3) {
+
+            usernameError.textContent =
+                "Username must be at least 3 characters.";
+
+            username.classList.add("input-error");
+
+            return false;
+        }
+
+        if (value.length > 30) {
+
+            usernameError.textContent =
+                "Username cannot exceed 30 characters.";
+
+            username.classList.add("input-error");
+
+            return false;
+        }
+
+        if (!/^[A-Za-z0-9_.]+$/.test(value)) {
+
+            usernameError.textContent =
+                "Username can contain only letters, numbers, underscore and dot.";
+
+            username.classList.add("input-error");
+
+            return false;
+        }
+
+        return true;
+
+    }
+
+
+    /* --------------------------------
+       Email Validation
+    -------------------------------- */
+
+    function validateEmail() {
+
+        const value = email.value.trim();
+
+        clearError(email, emailError);
+
+        if (value === "") {
+
+            emailError.textContent =
+                "Email address is required.";
+
+            email.classList.add("input-error");
+
+            return false;
+        }
+
+        const emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+        if (!emailPattern.test(value)) {
+
+            emailError.textContent =
+                "Please enter a valid email address.";
+
+            email.classList.add("input-error");
+
+            return false;
+        }
+
+        return true;
+
+    }
+
+
+    /* --------------------------------
+       Password Validation
+    -------------------------------- */
+
+    function validatePassword() {
+
+        const value = password1.value;
+
+        clearError(password1, password1Error);
+
+        if (value === "") {
+
+            password1Error.textContent =
+                "Password is required.";
+
+            password1.classList.add("input-error");
+
+            return false;
+        }
+
+        if (value.length < 8) {
+
+            password1Error.textContent =
+                "Password must be at least 8 characters.";
+
+            password1.classList.add("input-error");
+
+            return false;
+        }
+
+        if (!/[A-Z]/.test(value)) {
+
+            password1Error.textContent =
+                "Password must contain at least one uppercase letter.";
+
+            password1.classList.add("input-error");
+
+            return false;
+        }
+
+        if (!/[a-z]/.test(value)) {
+
+            password1Error.textContent =
+                "Password must contain at least one lowercase letter.";
+
+            password1.classList.add("input-error");
+
+            return false;
+        }
+
+        if (!/[0-9]/.test(value)) {
+
+            password1Error.textContent =
+                "Password must contain at least one number.";
+
+            password1.classList.add("input-error");
+
+            return false;
+        }
+
+        if (!/[!@#$%^&*(),.?":{}|<>_\-+=/\\[\];']/ .test(value)) {
+
+            password1Error.textContent =
+                "Password must contain at least one special character.";
+
+            password1.classList.add("input-error");
+
+            return false;
+        }
+
+        return true;
+
+    }
+
+
+    /* --------------------------------
+       Confirm Password Validation
+    -------------------------------- */
+
+    function validateConfirmPassword() {
+
+        const value = password2.value;
+
+        clearError(password2, password2Error);
+
+        if (value === "") {
+
+            password2Error.textContent =
+                "Please confirm your password.";
+
+            password2.classList.add("input-error");
+
+            return false;
+        }
+
+        if (value !== password1.value) {
+
+            password2Error.textContent =
+                "Passwords do not match.";
+
+            password2.classList.add("input-error");
+
+            return false;
+        }
+
+        return true;
+
+    }
+
+
+    /* --------------------------------
+       Role Validation
+    -------------------------------- */
+
+    function validateRole() {
+
+        const selectedRole =
+            document.querySelector(
+                'input[name="role"]:checked'
+            );
+
+        roleError.textContent = "";
+
+        if (!selectedRole) {
+
+            roleError.textContent =
+                "Please select an account type.";
+
+            return false;
+
+        }
+
+        return true;
+
+    }
+
+
+    /* --------------------------------
+       Form Submit
+    -------------------------------- */
+
+    form.addEventListener("submit", function (event) {
+
+        const roleValid = validateRole();
+        const usernameValid = validateUsername();
+        const emailValid = validateEmail();
+        const passwordValid = validatePassword();
+        const confirmPasswordValid = validateConfirmPassword();
+
+
+        if (
+            !roleValid ||
+            !usernameValid ||
+            !emailValid ||
+            !passwordValid ||
+            !confirmPasswordValid
+        ) {
+
+            event.preventDefault();
+
+            if (!usernameValid) {
+                username.focus();
+            }
+            else if (!emailValid) {
+                email.focus();
+            }
+            else if (!passwordValid) {
+                password1.focus();
+            }
+            else if (!confirmPasswordValid) {
+                password2.focus();
+            }
+
+        }
+
+    });
+
+
+    /* --------------------------------
+       Live Validation
+    -------------------------------- */
+
+    username.addEventListener("input", function () {
+
+        this.value = this.value.replace(/\s/g, "");
+
+        if (this.value !== "") {
+            validateUsername();
+        }
+
+    });
+
+
+    email.addEventListener("input", function () {
+
+        if (this.value !== "") {
+            validateEmail();
+        }
+
+    });
+
+
+    password1.addEventListener("input", function () {
+
+        if (this.value !== "") {
+            validatePassword();
+        }
+
+        if (password2.value !== "") {
+            validateConfirmPassword();
+        }
+
+    });
+
+
+    password2.addEventListener("input", function () {
+
+        if (this.value !== "") {
+            validateConfirmPassword();
+        }
+
+    });
+
+
+});
+
+</script>
+
+{% endblock %}

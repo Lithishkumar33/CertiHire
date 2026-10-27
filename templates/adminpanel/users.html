@@ -1,0 +1,457 @@
+{% extends "adminpanel/base_admin.html" %}
+{% load static %}
+
+{% block title %}
+Users Management | CertiHire
+{% endblock %}
+
+
+{% block css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/pages/admin_users.css' %}">
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="admin-users-page">
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <div class="admin-users-header">
+
+        <div>
+
+            <span class="admin-badge">
+
+                <i class="bi bi-people-fill"></i>
+
+                User Management
+
+            </span>
+
+
+            <h1>
+                Buyers & Sellers
+            </h1>
+
+
+            <p>
+                View registered users and manage seller approvals.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         BUYERS
+    ========================== -->
+
+    <div class="user-section">
+
+
+        <div class="section-title">
+
+            <div>
+
+                <h3>
+                    Buyers
+                </h3>
+
+
+                <span>
+                    {{ buyers|length }}
+                    registered buyer{{ buyers|length|pluralize }}
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="users-table">
+
+
+            {% for buyer in buyers %}
+
+
+            <div class="user-row">
+
+
+                <!-- USER -->
+
+                <div class="user-info">
+
+
+                    {% if buyer.profile_image %}
+
+                        <img
+                            src="{{ buyer.profile_image.url }}"
+                            alt="{{ buyer.username }}">
+
+                    {% else %}
+
+                        <div class="avatar">
+
+                            {{ buyer.username|first|upper }}
+
+                        </div>
+
+                    {% endif %}
+
+
+
+                    <div>
+
+                        <strong>
+                            {{ buyer.username }}
+                        </strong>
+
+
+                        <small>
+                            {{ buyer.email }}
+                        </small>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- JOINED -->
+
+                <div class="user-date">
+
+                    Joined
+                    {{ buyer.created_at|date:"d M Y" }}
+
+                </div>
+
+
+
+                <!-- ROLE -->
+
+                <span class="status buyer-status">
+
+                    <i class="bi bi-person-fill"></i>
+
+                    Buyer
+
+                </span>
+
+
+            </div>
+
+
+            {% empty %}
+
+
+            <div class="empty-users">
+
+                <i class="bi bi-people"></i>
+
+
+                <p>
+                    No buyers registered yet.
+                </p>
+
+            </div>
+
+
+            {% endfor %}
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =========================
+         SELLERS
+    ========================== -->
+
+    <div class="user-section">
+
+
+        <div class="section-title">
+
+            <div>
+
+                <h3>
+                    Sellers
+                </h3>
+
+
+                <span>
+
+                    {{ sellers|length }}
+                    registered seller{{ sellers|length|pluralize }}
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="users-table">
+
+
+            {% for seller in sellers %}
+
+
+            <div class="user-row">
+
+
+                <!-- =================================
+                     SELLER INFORMATION
+                ================================== -->
+
+                <div class="user-info">
+
+
+                    {% if seller.profile_image %}
+
+                        <img
+                            src="{{ seller.profile_image.url }}"
+                            alt="{{ seller.username }}">
+
+                    {% else %}
+
+                        <div class="avatar">
+
+                            {{ seller.username|first|upper }}
+
+                        </div>
+
+                    {% endif %}
+
+
+
+                    <div>
+
+                        <strong>
+                            {{ seller.username }}
+                        </strong>
+
+
+                        <small>
+                            {{ seller.email }}
+                        </small>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================
+                     ASSESSMENT STATUS
+                ================================== -->
+
+                <div class="assessment-status">
+
+
+                    {% if seller.assessment_submitted %}
+
+
+                        {% if seller.assessment_passed %}
+
+
+                            <span class="status passed">
+
+                                <i class="bi bi-check-circle-fill"></i>
+
+                                Passed
+
+                            </span>
+
+
+                        {% else %}
+
+
+                            <span class="status failed">
+
+                                <i class="bi bi-x-circle-fill"></i>
+
+                                Not Passed
+
+                            </span>
+
+
+                        {% endif %}
+
+
+
+                        <small>
+
+                            {{ seller.assessment_score }} / 50
+
+                        </small>
+
+
+                        <small>
+
+                            {{ seller.assessment_percentage }}%
+
+                        </small>
+
+
+                    {% else %}
+
+
+                        <span class="status waiting">
+
+                            <i class="bi bi-clock-fill"></i>
+
+                            Not Attempted
+
+                        </span>
+
+
+                    {% endif %}
+
+
+                </div>
+
+
+
+                <!-- =================================
+                     APPROVAL STATUS / ACTIONS
+                ================================== -->
+
+                <div class="seller-approval">
+
+
+                    <!-- ALREADY APPROVED -->
+
+                    {% if seller.is_approved %}
+
+
+                        <span class="status approved">
+
+                            <i class="bi bi-patch-check-fill"></i>
+
+                            Approved
+
+                        </span>
+
+
+
+                    <!-- ADMIN ALREADY REJECTED -->
+
+                    {% elif seller.assessment_rejected %}
+
+
+                        <span class="status failed">
+
+                            <i class="bi bi-x-circle-fill"></i>
+
+                            Rejected
+
+                        </span>
+
+
+
+                    <!-- ASSESSMENT SUBMITTED -->
+
+                    {% elif seller.assessment_submitted %}
+
+
+                        <div class="approval-actions">
+
+
+                            <a
+                                href="{% url 'approve_seller' seller.id %}"
+                                class="approve-btn"
+                                onclick="return confirm('Are you sure you want to approve {{ seller.username }} as a seller?');">
+
+                                <i class="bi bi-check-lg"></i>
+
+                                Approve
+
+                            </a>
+
+
+
+                            <a
+                                href="{% url 'reject_seller' seller.id %}"
+                                class="reject-btn"
+                                onclick="return confirm('Are you sure you want to reject {{ seller.username }}?');">
+
+                                <i class="bi bi-x-lg"></i>
+
+                                Reject
+
+                            </a>
+
+
+                        </div>
+
+
+
+                    <!-- NOT YET SUBMITTED -->
+
+                    {% else %}
+
+
+                        <span class="status waiting">
+
+                            <i class="bi bi-clock-fill"></i>
+
+                            Waiting for Assessment
+
+                        </span>
+
+
+                    {% endif %}
+
+
+                </div>
+
+
+            </div>
+
+
+            {% empty %}
+
+
+            <div class="empty-users">
+
+                <i class="bi bi-person-workspace"></i>
+
+
+                <p>
+                    No sellers registered yet.
+                </p>
+
+            </div>
+
+
+            {% endfor %}
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+{% endblock %}

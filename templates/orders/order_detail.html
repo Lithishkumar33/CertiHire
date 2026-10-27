@@ -1,0 +1,440 @@
+{% extends "base_dashboard.html" %}
+{% load static %}
+
+{% block title %}
+Order Details
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/pages/order_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="order-detail">
+
+    <!-- LEFT -->
+
+    <div class="order-main">
+
+        <!-- =======================================================
+        ORDER INFORMATION
+        ======================================================== -->
+
+        <div class="order-card">
+
+            <div class="order-header">
+
+                <div>
+
+                    <h2>{{ order.gig.title }}</h2>
+
+                    <p>
+
+                        Order ID #{{ order.id }}
+
+                    </p>
+
+                </div>
+
+                <div>
+
+                    {% if order.status == "Pending" %}
+
+                        <span class="badge bg-warning text-dark">
+
+                            Pending
+
+                        </span>
+
+                    {% elif order.status == "Confirmed" %}
+
+                        <span class="badge bg-info">
+
+                            Confirmed
+
+                        </span>
+
+                    {% elif order.status == "In Progress" %}
+
+                        <span class="badge bg-primary">
+
+                            In Progress
+
+                        </span>
+
+                    {% elif order.status == "Delivered" %}
+
+                        <span class="badge bg-secondary">
+
+                            Delivered
+
+                        </span>
+
+                    {% elif order.status == "Revision" %}
+
+                        <span class="badge bg-warning text-dark">
+
+                            Revision Requested
+
+                        </span>
+
+                    {% elif order.status == "Completed" %}
+
+                        <span class="badge bg-success">
+
+                            Completed
+
+                        </span>
+
+                    {% else %}
+
+                        <span class="badge bg-danger">
+
+                            Cancelled
+
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            <hr>
+
+            <div class="info-grid">
+
+                <div>
+
+                    <span>Buyer</span>
+
+                    <h5>{{ order.buyer.username }}</h5>
+
+                </div>
+
+                <div>
+
+                    <span>Seller</span>
+
+                    <h5>{{ order.seller.username }}</h5>
+
+                </div>
+
+                <div>
+
+                    <span>Amount</span>
+
+                    <h5>₹{{ order.amount }}</h5>
+
+                </div>
+
+                <div>
+
+                    <span>Ordered On</span>
+
+                    <h5>{{ order.created_at|date:"d M Y" }}</h5>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- =======================================================
+        TIMELINE
+        ======================================================== -->
+
+        <div class="order-card mt-4">
+
+            <h4>
+
+                Order Timeline
+
+            </h4>
+
+            <ul class="timeline">
+
+                <li class="active">
+
+                    Payment Completed
+
+                </li>
+
+                <li class="{% if order.status != 'Pending' %}active{% endif %}">
+
+                    Order Accepted
+
+                </li>
+
+                <li class="{% if order.status == 'In Progress' or order.status == 'Delivered' or order.status == 'Revision' or order.status == 'Completed' %}active{% endif %}">
+
+                    Work In Progress
+
+                </li>
+
+                <li class="{% if order.status == 'Delivered' or order.status == 'Completed' %}active{% endif %}">
+
+                    Deliverables Submitted
+
+                </li>
+
+                <li class="{% if order.status == 'Completed' %}active{% endif %}">
+
+                    Buyer Approved
+
+                </li>
+
+            </ul>
+
+        </div>
+
+        <!-- =======================================================
+        DELIVERED FILES
+        ======================================================== -->
+
+        <div class="order-card mt-4">
+
+            <h4>
+
+                Delivered Files
+
+            </h4>
+
+            {% for file in order.deliverables.all %}
+
+                <div class="d-flex justify-content-between align-items-center border rounded p-3 mb-3">
+
+                    <div>
+
+                        <strong>
+
+                            {{ file.file.name|cut:"deliverables/" }}
+
+                        </strong>
+
+                        <br>
+
+                        <small class="text-muted">
+
+                            {{ file.uploaded_at|date:"d M Y H:i" }}
+
+                        </small>
+
+                        {% if file.message %}
+
+                            <p class="mt-2 mb-0">
+
+                                {{ file.message }}
+
+                            </p>
+
+                        {% endif %}
+
+                    </div>
+
+                    <a href="{{ file.file.url }}"
+                       class="btn btn-primary"
+                       download>
+
+                        Download
+
+                    </a>
+
+                </div>
+
+            {% empty %}
+
+                <p class="text-muted">
+
+                    No deliverables uploaded yet.
+
+                </p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    <!-- =======================================================
+    RIGHT SIDEBAR
+    ======================================================== -->
+
+    <div class="order-sidebar">
+
+    <div class="order-card">
+
+        <h4>Quick Actions</h4>
+
+        {% if user.is_seller %}
+
+            {% if order.status == "Pending" %}
+
+                <a href="{% url 'accept_order' order.id %}"
+                   class="action-btn">
+
+                    Accept Order
+
+                </a>
+
+            {% elif order.status == "Confirmed" %}
+
+                <a href="{% url 'start_order' order.id %}"
+                   class="action-btn">
+
+                    Start Work
+
+                </a>
+
+            {% elif order.status == "In Progress" %}
+
+                <a href="{% url 'upload_deliverable' order.id %}"
+                   class="action-btn">
+
+                    Upload Deliverables
+
+                </a>
+
+            {% elif order.status == "Delivered" %}
+
+                <div class="alert alert-info">
+
+                    Waiting for buyer approval.
+
+                </div>
+
+            {% elif order.status == "Revision" %}
+
+                <div class="alert alert-warning">
+
+                    Buyer requested revision.
+
+                </div>
+
+                <a href="{% url 'upload_deliverable' order.id %}"
+                   class="action-btn">
+
+                    Upload Revised Files
+
+                </a>
+
+            {% elif order.status == "Completed" %}
+
+                <div class="alert alert-success">
+
+                    <i class="bi bi-check-circle-fill"></i>
+
+                    Order completed successfully.
+
+                </div>
+
+            {% endif %}
+
+        {% else %}
+
+            {% if order.status == "Delivered" %}
+
+                <a href="{% url 'approve_delivery' order.id %}"
+                   class="action-btn">
+
+                    Approve Delivery
+
+                </a>
+
+                <a href="{% url 'request_revision' order.id %}"
+                   class="secondary-btn">
+
+                    Request Revision
+
+                </a>
+
+            {% elif order.status == "Completed" %}
+
+                <div class="alert alert-success">
+
+                    <i class="bi bi-check-circle-fill"></i>
+
+                    Delivery approved successfully.
+
+                </div>
+
+                {% if has_review %}
+
+                    <div class="card border-0 shadow-sm mt-3">
+
+                        <div class="card-body">
+
+                            <h5 class="mb-3">
+
+                                Your Review
+
+                            </h5>
+
+                            <div class="mb-3">
+
+                                {% for i in "12345" %}
+
+                                    {% if forloop.counter <= review.rating %}
+
+                                        <i class="bi bi-star-fill text-warning"></i>
+
+                                    {% else %}
+
+                                        <i class="bi bi-star text-warning"></i>
+
+                                    {% endif %}
+
+                                {% endfor %}
+
+                            </div>
+
+                            <h6 class="fw-bold">
+
+                                {{ review.title }}
+
+                            </h6>
+
+                            <p class="text-muted">
+
+                                {{ review.comment }}
+
+                            </p>
+
+                            <small class="text-secondary">
+
+                                Reviewed on {{ review.created_at|date:"d M Y" }}
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                {% else %}
+
+                    <a href="{% url 'add_review' order.id %}"
+                       class="action-btn mt-3">
+
+                        ⭐ Leave Review
+
+                    </a>
+
+                {% endif %}
+
+            {% endif %}
+
+        {% endif %}
+
+        <a href="{% url 'chat_room' order.id %}"
+           class="secondary-btn mt-3">
+
+            Open Chat
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

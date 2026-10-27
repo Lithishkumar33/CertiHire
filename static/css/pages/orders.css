@@ -1,0 +1,167 @@
+.page-header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:30px;
+
+}
+
+.page-header h2{
+
+font-size:34px;
+
+font-weight:700;
+
+margin-bottom:8px;
+
+}
+
+.page-header p{
+
+margin:0;
+
+color:#6B7280;
+
+}
+
+.orders-table{
+
+background:#fff;
+
+border-radius:20px;
+
+overflow:hidden;
+
+box-shadow:0 10px 30px rgba(15,23,42,.08);
+
+}
+
+.orders-table thead{
+
+background:#2563EB;
+
+color:#fff;
+
+}
+
+.orders-table th{
+
+padding:18px;
+
+border:none;
+
+}
+
+.orders-table td{
+
+padding:18px;
+
+vertical-align:middle;
+
+}
+
+.orders-table tbody tr:hover{
+
+background:#F8FAFC;
+
+}
+
+.btn{
+
+border-radius:10px;
+
+font-weight:600;
+
+padding:8px 16px;
+
+}
+
+/* ==========================================
+   CERTIFICATE BUTTON
+========================================== */
+
+.certificate-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    width: fit-content;
+
+    padding: 8px 13px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #7c3aed
+    );
+
+    color: #fff;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    transition: all .3s ease;
+
+    box-shadow:
+        0 5px 12px rgba(37, 99, 235, .16);
+}
+
+
+.certificate-btn:hover {
+
+    color: #fff;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 18px rgba(37, 99, 235, .24);
+}
+
+
+.certificate-btn i {
+
+    font-size: 14px;
+
+}
+
+
+/* Already downloaded */
+
+.certificate-disabled {
+
+    background: #e2e8f0;
+
+    color: #64748b;
+
+    cursor: not-allowed;
+
+    box-shadow: none;
+
+}
+
+
+.certificate-disabled:hover {
+
+    color: #64748b;
+
+    transform: none;
+
+    box-shadow: none;
+
+}

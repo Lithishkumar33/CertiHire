@@ -1,0 +1,378 @@
+{% extends "base_dashboard.html" %}
+{% load static %}
+
+{% block title %}
+Buyer Dashboard
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet"
+      href="{% static 'css/pages/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- =====================================================
+HERO
+===================================================== -->
+
+<section class="dashboard-hero">
+
+    <div class="hero-left">
+
+        <span class="hero-badge">
+            👋 Welcome Back
+        </span>
+
+        <h1>
+            Hello, {{ user.username }}
+        </h1>
+
+        <p>
+            Discover verified freelancers, manage your orders,
+            and hire professionals with confidence.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="{% url 'gig_list' %}"
+               class="hero-btn-primary">
+
+                <i class="bi bi-search"></i>
+                Browse Marketplace
+
+            </a>
+
+            <a href="{% url 'orders' %}"
+               class="hero-btn-secondary">
+
+                <i class="bi bi-bag-check-fill"></i>
+                My Orders
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="hero-right">
+
+        <img src="{% static 'images/heroo.png' %}"
+             alt="Hero">
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+STATISTICS
+===================================================== -->
+
+<section class="stats-grid">
+
+    <!-- ORDERS -->
+
+    <div class="stat-card">
+
+        <div class="stat-icon orders">
+
+            <i class="bi bi-bag-check-fill"></i>
+
+        </div>
+
+        <div>
+
+            <span>Orders Placed</span>
+
+            <h3>{{ total_orders }}</h3>
+
+            <small>Total Purchases</small>
+
+        </div>
+
+    </div>
+
+
+    <!-- TOTAL SPENDING -->
+
+    <div class="stat-card">
+
+        <div class="stat-icon revenue">
+
+            <i class="bi bi-currency-rupee"></i>
+
+        </div>
+
+        <div>
+
+            <span>Total Spending</span>
+
+            <h3>₹{{ total_spent }}</h3>
+
+            <small>All Time</small>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+SPENDING OVERVIEW
+===================================================== -->
+
+<section class="dashboard-card spending-overview mt-4">
+
+    <div class="spending-header">
+
+        <div>
+
+            <span class="spending-label">
+                TOTAL SPENDING
+            </span>
+
+            <h2 class="spending-value">
+                ₹{{ total_spent }}
+            </h2>
+
+            <span class="spending-subtitle">
+                Your total purchases on CertiHire
+            </span>
+
+        </div>
+
+        <div class="spending-icon">
+
+            <i class="bi bi-wallet2"></i>
+
+        </div>
+
+    </div>
+
+
+    <div class="spending-progress">
+
+        <div class="spending-progress-bar"
+             style="width: 100%;">
+        </div>
+
+    </div>
+
+
+    <div class="spending-footer">
+
+        <span>
+
+            <i class="bi bi-bag-check-fill"></i>
+
+            {{ total_orders }} Orders
+
+        </span>
+
+        <span>
+            All Time
+        </span>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+RECENT ORDERS
+===================================================== -->
+
+<section class="dashboard-card mt-4">
+
+    <div class="card-header">
+
+        <div>
+
+            <h4>My Recent Orders</h4>
+
+            <small class="text-muted">
+                Your latest purchases from freelancers
+            </small>
+
+        </div>
+
+        <a href="{% url 'orders' %}"
+           class="btn btn-sm btn-primary">
+
+            View All
+
+            <i class="bi bi-arrow-right ms-1"></i>
+
+        </a>
+
+    </div>
+
+
+    <div class="table-responsive">
+
+        <table class="table align-middle">
+
+            <thead>
+
+                <tr>
+
+                    <th>Seller</th>
+                    <th>Gig</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Date</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for order in recent_orders %}
+
+                <tr>
+
+                    <td>
+
+                        <div class="d-flex align-items-center gap-2">
+
+                            <div class="rounded-circle bg-primary text-white
+                                        d-flex align-items-center justify-content-center"
+                                 style="width:38px;height:38px;">
+
+                                {{ order.seller.username|first|upper }}
+
+                            </div>
+
+                            <strong>
+                                {{ order.seller.username }}
+                            </strong>
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+
+                        <strong>
+                            {{ order.gig.title }}
+                        </strong>
+
+                    </td>
+
+
+                    <td>
+
+                        <strong>
+                            ₹{{ order.amount }}
+                        </strong>
+
+                    </td>
+
+
+                    <td>
+
+                        {% if order.status == "Completed" %}
+
+                        <span class="badge bg-success">
+
+                            <i class="bi bi-check-circle-fill me-1"></i>
+
+                            {{ order.status }}
+
+                        </span>
+
+                        {% elif order.status == "Pending" %}
+
+                        <span class="badge bg-warning text-dark">
+
+                            <i class="bi bi-clock-fill me-1"></i>
+
+                            {{ order.status }}
+
+                        </span>
+
+                        {% elif order.status == "Cancelled" %}
+
+                        <span class="badge bg-danger">
+
+                            <i class="bi bi-x-circle-fill me-1"></i>
+
+                            {{ order.status }}
+
+                        </span>
+
+                        {% else %}
+
+                        <span class="badge bg-primary">
+
+                            {{ order.status }}
+
+                        </span>
+
+                        {% endif %}
+
+                    </td>
+
+
+                    <td>
+
+                        {{ order.created_at|date:"d M Y" }}
+
+                    </td>
+
+                </tr>
+
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="5"
+                        class="text-center py-5">
+
+                        <div class="mb-3">
+
+                            <i class="bi bi-bag-x"
+                               style="font-size:45px;color:#94a3b8;">
+                            </i>
+
+                        </div>
+
+                        <h5>No Orders Yet</h5>
+
+                        <p class="text-muted mb-3">
+
+                            Start exploring the marketplace
+                            and hire a freelancer.
+
+                        </p>
+
+                        <a href="{% url 'gig_list' %}"
+                           class="btn btn-primary">
+
+                            <i class="bi bi-search me-1"></i>
+
+                            Browse Marketplace
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+{% endblock %}

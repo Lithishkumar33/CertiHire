@@ -1,0 +1,1199 @@
+/* =========================================================
+   CERTIHIRE ADMIN DASHBOARD — COLORFUL PREMIUM
+========================================================= */
+
+.admin-dashboard-page {
+    padding: 18px 8px 50px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.admin-dashboard-header {
+    margin-bottom: 30px;
+}
+
+.admin-dashboard-header h1 {
+    margin: 12px 0 6px;
+    color: #172033;
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.admin-dashboard-header p {
+    margin: 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   ADMIN BADGE
+========================================================= */
+
+.admin-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 8px 15px;
+
+    border-radius: 50px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef2ff,
+            #f5f3ff
+        );
+
+    color: #4f46e5;
+
+    border: 1px solid #ddd6fe;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    box-shadow:
+        0 6px 18px rgba(79,70,229,.08);
+}
+
+.admin-badge i {
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   STATISTICS GRID
+========================================================= */
+
+.dashboard-stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 18px;
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================================================
+   STAT CARD
+========================================================= */
+
+.dashboard-stat-card {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    padding: 21px;
+
+    background: #ffffff;
+
+    border: 1px solid #e8edf5;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 10px 30px rgba(15,23,42,.06);
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+}
+
+
+/* Colored top glow */
+
+.dashboard-stat-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #2563eb,
+            #7c3aed
+        );
+}
+
+
+.dashboard-stat-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 18px 40px rgba(15,23,42,.11);
+}
+
+
+/* =========================================================
+   STAT ICON
+========================================================= */
+
+.dashboard-stat-icon {
+    width: 55px;
+    height: 55px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 17px;
+
+    font-size: 21px;
+
+    box-shadow:
+        0 8px 18px rgba(0,0,0,.08);
+}
+
+
+/* BLUE */
+
+.dashboard-stat-icon.blue {
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #06b6d4
+        );
+}
+
+
+/* PURPLE */
+
+.dashboard-stat-icon.purple {
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #ec4899
+        );
+}
+
+
+/* ORANGE */
+
+.dashboard-stat-icon.orange {
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f97316,
+            #f59e0b
+        );
+}
+
+
+/* GREEN */
+
+.dashboard-stat-icon.green {
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #16a34a,
+            #10b981
+        );
+}
+
+
+/* =========================================================
+   STAT CONTENT
+========================================================= */
+
+.dashboard-stat-content span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #64748b;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+.dashboard-stat-content strong {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #172033;
+
+    font-size: 27px;
+
+    font-weight: 800;
+}
+
+
+.dashboard-stat-content small {
+    color: #94a3b8;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   MAIN GRID
+========================================================= */
+
+.dashboard-main-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.5fr)
+        minmax(320px, 1fr);
+
+    gap: 20px;
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================================================
+   REVENUE CARD
+========================================================= */
+
+.dashboard-revenue-card {
+    position: relative;
+
+    padding: 28px;
+
+    overflow: hidden;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #111c4e 0%,
+            #3730a3 45%,
+            #7c3aed 100%
+        );
+
+    color: white;
+
+    box-shadow:
+        0 18px 45px rgba(79,70,229,.25);
+}
+
+
+/* Decorative circles */
+
+.dashboard-revenue-card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    right: -70px;
+    top: -100px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.10);
+}
+
+
+.dashboard-revenue-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 160px;
+    height: 160px;
+
+    left: -80px;
+    bottom: -100px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(6,182,212,.18);
+}
+
+
+.dashboard-revenue-card > * {
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.dashboard-card-header {
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+
+.dashboard-card-label {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color: rgba(255,255,255,.75);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: .5px;
+}
+
+
+.dashboard-revenue-card h2 {
+    margin: 12px 0 5px;
+
+    color: #ffffff;
+
+    font-size: 38px;
+
+    font-weight: 800;
+
+    letter-spacing: -1px;
+}
+
+
+.dashboard-revenue-card p {
+    margin: 0;
+
+    color: rgba(255,255,255,.65);
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   VIEW REVENUE BUTTON
+========================================================= */
+
+.dashboard-view-btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 9px 14px;
+
+    border:
+        1px solid rgba(255,255,255,.25);
+
+    border-radius: 50px;
+
+    background:
+        rgba(255,255,255,.10);
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    backdrop-filter: blur(10px);
+
+    transition: .3s;
+}
+
+
+.dashboard-view-btn:hover {
+    background:
+        rgba(255,255,255,.20);
+
+    color: #ffffff;
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* =========================================================
+   REVENUE LINE
+========================================================= */
+
+.revenue-line {
+    width: 100%;
+
+    height: 9px;
+
+    margin-top: 38px;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,.15);
+}
+
+
+.revenue-line-fill {
+    width: 72%;
+
+    height: 100%;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #22d3ee,
+            #ffffff
+        );
+
+    box-shadow:
+        0 0 15px rgba(255,255,255,.35);
+}
+
+
+/* =========================================================
+   REVENUE FOOTER
+========================================================= */
+
+.revenue-footer {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-top: 18px;
+}
+
+
+.revenue-footer span {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    color:
+        rgba(255,255,255,.65);
+
+    font-size: 10px;
+}
+
+
+.revenue-footer span i {
+    color: #4ade80;
+}
+
+
+.revenue-footer strong {
+    color: #ffffff;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   SELLER APPROVAL
+========================================================= */
+
+.dashboard-approval-card {
+    padding: 25px;
+
+    background: #ffffff;
+
+    border:
+        1px solid #e8edf5;
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 10px 30px rgba(15,23,42,.06);
+
+    transition: .3s;
+}
+
+
+.dashboard-approval-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 16px 35px rgba(15,23,42,.09);
+}
+
+
+.dashboard-approval-card .dashboard-card-label {
+    color: #7c3aed;
+}
+
+
+.dashboard-approval-card h3 {
+    margin: 8px 0 0;
+
+    color: #172033;
+
+    font-size: 20px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   APPROVAL LIST
+========================================================= */
+
+.approval-list {
+    margin-top: 20px;
+}
+
+
+.approval-item {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 13px 12px;
+
+    margin-bottom: 5px;
+
+    border-radius: 12px;
+
+    transition: .25s;
+}
+
+
+.approval-item:hover {
+    background: #f8fafc;
+}
+
+
+.approval-item:last-child {
+    border-bottom: none;
+}
+
+
+.approval-item-left {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: #475569;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+.approval-item strong {
+    color: #172033;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   APPROVAL DOTS
+========================================================= */
+
+.approval-dot {
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 4px rgba(0,0,0,.04);
+}
+
+
+.approval-dot.submitted {
+    background: #3b82f6;
+}
+
+.approval-dot.passed {
+    background: #22c55e;
+}
+
+.approval-dot.pending {
+    background: #f59e0b;
+}
+
+.approval-dot.approved {
+    background: #a855f7;
+}
+
+
+/* =========================================================
+   MANAGE SELLERS
+========================================================= */
+
+.approval-manage-btn {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    width: 100%;
+
+    margin-top: 15px;
+
+    padding: 11px;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef2ff,
+            #f5f3ff
+        );
+
+    color: #4f46e5;
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    transition: .3s;
+}
+
+
+.approval-manage-btn:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #4f46e5,
+            #7c3aed
+        );
+
+    color: #ffffff;
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* =========================================================
+   MANAGEMENT SECTION
+========================================================= */
+
+.dashboard-section {
+    margin-bottom: 30px;
+}
+
+
+.dashboard-section-header {
+    margin-bottom: 16px;
+}
+
+
+.section-label {
+    color: #7c3aed;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+
+.dashboard-section-header h3 {
+    margin: 6px 0 4px;
+
+    color: #172033;
+
+    font-size: 22px;
+
+    font-weight: 800;
+}
+
+
+.dashboard-section-header p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   QUICK MANAGEMENT
+========================================================= */
+
+.quick-management-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    gap: 15px;
+}
+
+
+.quick-management-card {
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    min-height: 165px;
+
+    padding: 20px;
+
+    background: #ffffff;
+
+    border:
+        1px solid #e8edf5;
+
+    border-radius: 20px;
+
+    text-decoration: none;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 8px 25px rgba(15,23,42,.05);
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+}
+
+
+.quick-management-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 100px;
+    height: 100px;
+
+    right: -45px;
+    bottom: -45px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(99,102,241,.06);
+}
+
+
+.quick-management-card:hover {
+    transform:
+        translateY(-6px);
+
+    box-shadow:
+        0 18px 40px rgba(15,23,42,.10);
+}
+
+
+/* =========================================================
+   QUICK ICONS
+========================================================= */
+
+.quick-icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 18px;
+
+    border-radius: 15px;
+
+    color: #ffffff;
+
+    font-size: 19px;
+
+    box-shadow:
+        0 8px 18px rgba(0,0,0,.10);
+}
+
+
+.quick-icon.blue {
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #06b6d4
+        );
+}
+
+
+.quick-icon.purple {
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #ec4899
+        );
+}
+
+
+.quick-icon.orange {
+    background:
+        linear-gradient(
+            135deg,
+            #f97316,
+            #f59e0b
+        );
+}
+
+
+.quick-icon.green {
+    background:
+        linear-gradient(
+            135deg,
+            #16a34a,
+            #10b981
+        );
+}
+
+
+.quick-icon.teal {
+    background:
+        linear-gradient(
+            135deg,
+            #0891b2,
+            #14b8a6
+        );
+}
+
+
+/* =========================================================
+   QUICK TEXT
+========================================================= */
+
+.quick-management-card h4 {
+    margin: 0 0 5px;
+
+    color: #172033;
+
+    font-size: 15px;
+
+    font-weight: 800;
+}
+
+
+.quick-management-card p {
+    margin: 0;
+
+    color: #94a3b8;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+
+.quick-arrow {
+    position: absolute;
+
+    right: 17px;
+    top: 18px;
+
+    color: #cbd5e1;
+
+    font-size: 15px;
+
+    transition: .3s;
+}
+
+
+.quick-management-card:hover .quick-arrow {
+    color: #4f46e5;
+
+    transform:
+        translate(3px,-3px);
+}
+
+
+/* =========================================================
+   PLATFORM OVERVIEW
+========================================================= */
+
+.platform-overview {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 17px;
+
+    padding: 22px 24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef2ff,
+            #f5f3ff 50%,
+            #ecfeff
+        );
+
+    border:
+        1px solid #ddd6fe;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 30px rgba(79,70,229,.08);
+
+    overflow: hidden;
+}
+
+
+.platform-overview::after {
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    right: -70px;
+    top: -100px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(124,58,237,.08);
+}
+
+
+.platform-overview-icon {
+    width: 50px;
+    height: 50px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4f46e5,
+            #7c3aed
+        );
+
+    color: #ffffff;
+
+    font-size: 21px;
+
+    box-shadow:
+        0 8px 20px rgba(79,70,229,.25);
+}
+
+
+.platform-overview h3 {
+    margin: 0 0 5px;
+
+    color: #312e81;
+
+    font-size: 15px;
+
+    font-weight: 800;
+}
+
+
+.platform-overview p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+
+.platform-overview-status {
+    position: relative;
+
+    z-index: 2;
+
+    margin-left: auto;
+
+    flex-shrink: 0;
+
+    text-align: right;
+}
+
+
+.platform-overview-status span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #94a3b8;
+
+    font-size: 9px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .7px;
+}
+
+
+.platform-overview-status strong {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 7px 11px;
+
+    border-radius: 50px;
+
+    background: #dcfce7;
+
+    color: #15803d;
+
+    font-size: 11px;
+}
+
+
+.platform-overview-status i {
+    font-size: 6px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .dashboard-stats {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .quick-management-grid {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+}
+
+
+@media (max-width: 950px) {
+
+    .dashboard-main-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-management-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .admin-dashboard-page {
+        padding: 8px 0 30px;
+    }
+
+    .admin-dashboard-header h1 {
+        font-size: 28px;
+    }
+
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-management-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-card-header {
+        flex-direction: column;
+    }
+
+    .dashboard-revenue-card {
+        padding: 23px;
+    }
+
+    .dashboard-revenue-card h2 {
+        font-size: 30px;
+    }
+
+    .platform-overview {
+        align-items: flex-start;
+
+        flex-wrap: wrap;
+    }
+
+    .platform-overview-status {
+        width: 100%;
+
+        margin-left: 67px;
+
+        text-align: left;
+    }
+
+}

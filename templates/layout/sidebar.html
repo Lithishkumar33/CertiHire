@@ -1,0 +1,148 @@
+{% load static %}
+
+<aside class="sidebar">
+
+    <!-- Logo -->
+
+    <div>
+
+        <a href="{% url 'dashboard' %}" class="sidebar-logo">
+
+            <i class="bi bi-patch-check-fill"></i>
+
+            <span>CertiHire</span>
+
+        </a>
+
+        <!-- Menu -->
+
+        <div class="sidebar-menu">
+
+            <p class="menu-title">
+
+                MAIN
+
+            </p>
+
+            <a href="{% url 'dashboard' %}" class="active">
+
+                <i class="bi bi-grid-1x2-fill"></i>
+
+                Dashboard
+
+            </a>
+
+            <a href="{% url 'gig_list' %}">
+
+                <i class="bi bi-shop"></i>
+
+                Marketplace
+
+            </a>
+
+            {% if user.is_seller %}
+
+            <p class="menu-title">
+
+                SELLER
+
+            </p>
+
+            <a href="{% url 'create_gig' %}">
+
+                <i class="bi bi-plus-circle-fill"></i>
+
+                Create Gig
+
+            </a>
+
+            <a href="{% url 'my_gigs' %}">
+
+                <i class="bi bi-briefcase-fill"></i>
+
+                My Gigs
+
+            </a>
+
+            {% endif %}
+
+            <p class="menu-title">
+
+                BUSINESS
+
+            </p>
+
+            <a href="{% url 'orders' %}">
+
+                <i class="bi bi-bag-check-fill"></i>
+
+                Orders
+
+            </a>
+            
+            
+            <a href="{% url 'payment_history' %}">
+
+                <i class="bi bi-credit-card-fill"></i>
+
+                Payments
+
+            </a>
+
+            <a href="{% url 'messages_list' %}">
+
+                <i class="bi bi-chat-dots-fill"></i>
+
+                Messages
+
+            </a>
+
+            <a href="{% url 'reviews' %}">
+
+                <i class="bi bi-star-fill"></i>
+
+                Reviews
+
+            </a>
+
+            <p class="menu-title">
+
+                ACCOUNT
+
+            </p>
+
+            <a href="{% url 'profile' %}">
+
+                <i class="bi bi-person-circle"></i>
+
+                Profile
+
+            </a>
+
+            <a href="{% url 'settings' %}">
+
+                <i class="bi bi-gear-fill"></i>
+
+                Settings
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- Logout -->
+
+    <div class="sidebar-footer">
+
+        <a href="{% url 'logout' %}" class="logout-btn">
+
+            <i class="bi bi-box-arrow-right"></i>
+
+            Logout
+
+        </a>
+
+    </div>
+
+</aside>

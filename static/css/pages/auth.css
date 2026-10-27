@@ -1,0 +1,1141 @@
+/* ==========================================================
+   AUTH SECTION
+========================================================== */
+
+.auth-section{
+
+    padding:25px;
+
+    background:#F8FAFC;
+
+    min-height:calc(100vh - 180px);
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+/* ==========================================================
+   LEFT SIDE
+========================================================== */
+
+.auth-content h1{
+
+    font-size:64px;
+
+    font-weight:800;
+
+    line-height:1.15;
+
+    margin-bottom:25px;
+
+    color:#111827;
+
+}
+
+.auth-content h1 span{
+
+    color:#2563EB;
+
+}
+
+.auth-content p{
+
+    font-size:20px;
+
+    line-height:1.8;
+
+    color:#6B7280;
+
+    margin-bottom:40px;
+
+}
+
+.auth-badge{
+
+    display:inline-block;
+
+    padding:10px 20px;
+
+    border-radius:50px;
+
+    background:#EEF2FF;
+
+    color:#2563EB;
+
+    font-weight:600;
+
+    margin-bottom:25px;
+
+}
+
+.auth-feature{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    margin-bottom:22px;
+
+    font-size:18px;
+
+    font-weight:600;
+
+}
+
+.auth-feature i{
+
+    width:52px;
+
+    height:52px;
+
+    border-radius:14px;
+
+    background:linear-gradient(135deg,#2563EB,#7C3AED);
+
+    color:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:22px;
+
+}
+
+/* ==========================================================
+   CARD
+========================================================== */
+
+.auth-card{
+
+    background:#fff;
+
+    padding:45px;
+
+    border-radius:28px;
+
+    box-shadow:0 20px 45px rgba(15,23,42,.08);
+
+}
+
+.auth-card h2{
+
+    font-size:36px;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
+}
+
+.auth-card p{
+
+    color:#6B7280;
+
+    margin-bottom:30px;
+
+}
+
+/* ==========================================================
+   FORM
+========================================================== */
+
+.auth-card label{
+
+    font-weight:600;
+
+    margin-bottom:10px;
+
+}
+
+.auth-card .form-control{
+
+    height:58px;
+
+    border-radius:16px;
+
+    border:1px solid #E5E7EB;
+
+    padding:0 18px;
+
+    box-shadow:none;
+
+    transition:.3s;
+
+}
+
+.auth-card .form-control:focus{
+
+    border-color:#2563EB;
+
+    box-shadow:0 0 0 4px rgba(37,99,235,.08);
+
+}
+
+/* ==========================================================
+   BUTTON
+========================================================== */
+
+.auth-btn{
+
+    width:100%;
+
+    height:58px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:linear-gradient(135deg,#2563EB,#7C3AED);
+
+    color:#fff;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    transition:.35s;
+
+    box-shadow:0 12px 25px rgba(37,99,235,.25);
+
+}
+
+.auth-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 18px 35px rgba(37,99,235,.35);
+
+}
+
+/* ==========================================================
+   DIVIDER
+========================================================== */
+
+.divider{
+
+    display:flex;
+
+    align-items:center;
+
+    text-align:center;
+
+    color:#9CA3AF;
+
+    margin:30px 0;
+
+}
+
+.divider::before,
+
+.divider::after{
+
+    content:"";
+
+    flex:1;
+
+    border-bottom:1px solid #E5E7EB;
+
+}
+
+.divider:not(:empty)::before{
+
+    margin-right:15px;
+
+}
+
+.divider:not(:empty)::after{
+
+    margin-left:15px;
+
+}
+
+/* ==========================================================
+   GOOGLE BUTTON
+========================================================== */
+
+.google-btn{
+
+    width:100%;
+
+    height:58px;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:16px;
+
+    background:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:12px;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.google-btn:hover{
+
+    background:#F8FAFC;
+
+}
+
+.google-btn i{
+
+    color:#EA4335;
+
+}
+
+/* ==========================================================
+   LINKS
+========================================================== */
+.auth-card{
+
+    background:#fff;
+
+    padding:35px 40px;
+
+    border-radius:24px;
+
+    box-shadow:0 20px 45px rgba(15,23,42,.08);
+
+}
+.auth-card a{
+
+    color:#2563EB;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+}
+
+.auth-card a:hover{
+
+    text-decoration:underline;
+
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media(max-width:991px){
+
+.auth-section{
+
+padding:20px;
+
+}
+
+.auth-content{
+
+text-align:center;
+
+margin:20%;
+
+}
+
+.auth-content h1{
+
+font-size:46px;
+
+}
+
+.auth-feature{
+
+justify-content:center;
+
+}
+
+}
+
+@media(max-width:576px){
+
+.auth-card{
+
+padding:30px;
+
+}
+
+.auth-content h1{
+
+font-size:38px;
+
+}
+
+}
+/* ==========================================================
+   ROLE SELECTION
+========================================================== */
+
+.role-selection{
+
+display:flex;
+
+gap:18px;
+
+}
+
+.role-card{
+
+flex:1;
+
+cursor:pointer;
+
+}
+
+.role-card input{
+
+display:none;
+
+}
+
+.role-card div{
+
+padding:22px;
+
+border:2px solid #E5E7EB;
+
+border-radius:18px;
+
+text-align:center;
+
+transition:.3s;
+
+}
+
+.role-card div i{
+
+font-size:30px;
+
+color:#2563EB;
+
+margin-bottom:12px;
+
+display:block;
+
+}
+
+.role-card div h5{
+
+font-weight:700;
+
+margin-bottom:6px;
+
+}
+
+.role-card div small{
+
+color:#6B7280;
+
+}
+
+.role-card div:hover{
+
+border-color:#2563EB;
+
+transform:translateY(-5px);
+
+box-shadow:0 12px 25px rgba(37,99,235,.12);
+
+}
+
+.role-card input:checked + div{
+
+background:#EEF2FF;
+
+border-color:#2563EB;
+
+}
+/*=========================
+ASSESSMENT CARD
+=========================*/
+
+.assessment-card{
+
+max-width:650px;
+
+margin:auto;
+
+background:#fff;
+
+padding:60px;
+
+border-radius:28px;
+
+box-shadow:0 20px 45px rgba(15,23,42,.08);
+
+}
+
+.assessment-icon{
+
+width:110px;
+
+height:110px;
+
+margin:auto;
+
+border-radius:24px;
+
+background:linear-gradient(135deg,#2563EB,#7C3AED);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:50px;
+
+color:#fff;
+
+margin-bottom:30px;
+
+}
+
+.assessment-card h1{
+
+font-size:42px;
+
+font-weight:700;
+
+margin-bottom:20px;
+
+}
+
+.assessment-card p{
+
+font-size:18px;
+
+color:#6B7280;
+
+margin-bottom:30px;
+
+}
+
+.assessment-card ul{
+
+list-style:none;
+
+padding:0;
+
+margin-bottom:35px;
+
+}
+
+.assessment-card li{
+
+padding:12px 0;
+
+font-size:18px;
+
+}
+
+/* ==========================================================
+   AUTH PAGE - COMPACT & BETTER BALANCED
+   Add this at the END of auth.css
+========================================================== */
+
+
+/* ==========================================================
+   MAIN SECTION
+========================================================== */
+
+.auth-section {
+    padding: 35px 20px;
+    min-height: calc(100vh - 190px);
+}
+
+
+/* ==========================================================
+   LEFT CONTENT
+========================================================== */
+
+.auth-content {
+    max-width: 600px;
+
+    /* Move content slightly upward */
+    transform: translateY(-25px);
+}
+
+.auth-content h1 {
+    font-size: 58px;
+    line-height: 1.12;
+    margin-bottom: 20px;
+}
+
+.auth-content p {
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 32px;
+}
+
+.auth-badge {
+    padding: 8px 17px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.auth-feature {
+    gap: 15px;
+    margin-bottom: 17px;
+    font-size: 16px;
+}
+
+.auth-feature i {
+    width: 46px;
+    height: 46px;
+    border-radius: 13px;
+    font-size: 20px;
+}
+
+
+/* ==========================================================
+   LOGIN / REGISTER CARD
+========================================================== */
+
+.auth-card {
+
+    width: 100%;
+
+    max-width: 560px;
+
+    margin-left: auto;
+
+    padding: 30px 34px;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 15px 35px rgba(15, 23, 42, .07);
+}
+
+
+/* Heading */
+
+.auth-card h2 {
+    font-size: 30px;
+    margin-bottom: 6px;
+}
+
+.auth-card > p {
+    font-size: 15px;
+    margin-bottom: 24px;
+}
+
+
+/* ==========================================================
+   FORM SPACING
+========================================================== */
+
+.auth-card .mb-4 {
+    margin-bottom: 18px !important;
+}
+
+.auth-card .mb-3 {
+    margin-bottom: 15px !important;
+}
+
+
+/* Labels */
+
+.auth-card label {
+    font-size: 14px;
+    margin-bottom: 7px;
+}
+
+
+/* Inputs */
+
+.auth-card .form-control {
+
+    height: 52px;
+
+    border-radius: 14px;
+
+    padding: 0 15px;
+
+    font-size: 14px;
+}
+
+
+/* ==========================================================
+   LOGIN BUTTON
+========================================================== */
+
+.auth-btn {
+
+    height: 52px;
+
+    border-radius: 14px;
+
+    font-size: 16px;
+
+    box-shadow:
+        0 9px 20px rgba(37, 99, 235, .20);
+}
+
+.auth-btn:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 13px 25px rgba(37, 99, 235, .28);
+}
+
+
+/* ==========================================================
+   GOOGLE BUTTON
+========================================================== */
+
+.google-btn {
+
+    height: 52px;
+
+    border-radius: 14px;
+
+    font-size: 15px;
+}
+
+
+/* ==========================================================
+   DIVIDER
+========================================================== */
+
+.divider {
+    margin: 22px 0;
+}
+
+
+/* ==========================================================
+   REGISTER ROLE SELECTION
+========================================================== */
+
+.role-selection {
+    gap: 12px;
+    margin-bottom: 20px !important;
+}
+
+.role-card div {
+
+    padding: 17px 12px;
+
+    border-radius: 15px;
+}
+
+.role-card div i {
+
+    font-size: 25px;
+
+    margin-bottom: 8px;
+}
+
+.role-card div h5 {
+
+    font-size: 16px;
+
+    margin-bottom: 4px;
+}
+
+.role-card div small {
+
+    font-size: 12px;
+}
+
+
+/* ==========================================================
+   REGISTER CARD SPECIFIC
+========================================================== */
+
+.auth-card .role-selection + .mb-3 {
+    margin-top: 0;
+}
+
+
+/* ==========================================================
+   BOTTOM LOGIN / REGISTER TEXT
+========================================================== */
+
+.auth-card .text-center {
+
+    font-size: 14px;
+
+    margin-top: 18px !important;
+}
+
+
+/* ==========================================================
+   DESKTOP BALANCE
+========================================================== */
+
+@media (min-width: 992px) {
+
+    .auth-section .row {
+        align-items: center !important;
+    }
+
+    /*
+       Keeps the left content slightly above
+       the visual center of the form card.
+    */
+
+    .auth-content {
+        transform: translateY(-35px);
+    }
+
+}
+
+
+/* ==========================================================
+   TABLET
+========================================================== */
+
+@media (max-width: 991px) {
+
+    .auth-section {
+        padding: 30px 20px;
+    }
+
+    .auth-content {
+
+        transform: none;
+
+        max-width: 650px;
+
+        margin: 0 auto 10px;
+
+        text-align: center;
+    }
+
+    .auth-content h1 {
+        font-size: 46px;
+    }
+
+    .auth-feature {
+        justify-content: center;
+    }
+
+    .auth-card {
+        max-width: 560px;
+        margin: auto;
+    }
+
+}
+
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 576px) {
+
+    .auth-section {
+        padding: 20px 15px;
+    }
+
+    .auth-content {
+        margin-bottom: 5px;
+    }
+
+    .auth-content h1 {
+        font-size: 36px;
+    }
+
+    .auth-content p {
+        font-size: 16px;
+    }
+
+    .auth-card {
+
+        padding: 25px 20px;
+
+        border-radius: 20px;
+    }
+
+    .auth-card h2 {
+        font-size: 27px;
+    }
+
+    .role-selection {
+        gap: 8px;
+    }
+
+    .role-card div {
+        padding: 15px 8px;
+    }
+
+}
+
+/* ==========================================================
+   REGISTER PAGE - EXTRA COMPACT
+   Does NOT affect LOGIN
+========================================================== */
+
+/* Register card */
+.auth-card:has(.role-selection) {
+
+    max-width: 540px;
+
+    padding: 25px 32px;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 14px 32px rgba(15, 23, 42, 0.07);
+}
+
+
+/* Register heading */
+.auth-card:has(.role-selection) h2 {
+
+    font-size: 29px;
+
+    margin-bottom: 4px;
+}
+
+
+/* Register subtitle */
+.auth-card:has(.role-selection) > p {
+
+    font-size: 14px;
+
+    margin-bottom: 18px;
+}
+
+
+/* Account type label */
+.auth-card:has(.role-selection) > form > label {
+
+    font-size: 14px;
+
+    margin-bottom: 8px !important;
+}
+
+
+/* Buyer / Seller boxes */
+.auth-card:has(.role-selection) .role-selection {
+
+    gap: 10px;
+
+    margin-bottom: 16px !important;
+}
+
+
+/* Individual role box */
+.auth-card:has(.role-selection) .role-card div {
+
+    padding: 14px 10px;
+
+    border-radius: 14px;
+}
+
+
+/* Role icon */
+.auth-card:has(.role-selection) .role-card div i {
+
+    font-size: 23px;
+
+    margin-bottom: 5px;
+}
+
+
+/* Buyer / Seller text */
+.auth-card:has(.role-selection) .role-card div h5 {
+
+    font-size: 15px;
+
+    margin-bottom: 2px;
+}
+
+
+/* Description */
+.auth-card:has(.role-selection) .role-card div small {
+
+    font-size: 11px;
+}
+
+
+/* ==========================================================
+   REGISTER INPUTS
+========================================================== */
+
+.auth-card:has(.role-selection) .mb-3 {
+
+    margin-bottom: 11px !important;
+}
+
+
+.auth-card:has(.role-selection) .mb-4 {
+
+    margin-bottom: 14px !important;
+}
+
+
+.auth-card:has(.role-selection) label {
+
+    font-size: 13px;
+
+    margin-bottom: 5px;
+}
+
+
+.auth-card:has(.role-selection) .form-control {
+
+    height: 47px;
+
+    min-height: 47px;
+
+    border-radius: 12px;
+
+    padding: 0 14px;
+
+    font-size: 14px;
+}
+
+
+/* ==========================================================
+   REGISTER BUTTON
+========================================================== */
+
+.auth-card:has(.role-selection) .auth-btn {
+
+    height: 49px;
+
+    border-radius: 13px;
+
+    font-size: 15px;
+}
+
+
+/* ==========================================================
+   REGISTER BOTTOM TEXT
+========================================================== */
+
+.auth-card:has(.role-selection) .text-center {
+
+    margin-top: 14px !important;
+
+    font-size: 13px;
+}
+
+
+/* ==========================================================
+   REGISTER LEFT SIDE
+========================================================== */
+
+@media (min-width: 992px) {
+
+    .auth-section:has(.role-selection) .auth-content {
+
+        transform: translateY(-45px);
+
+    }
+
+}
+
+
+/* ==========================================================
+   REGISTER DESKTOP CARD POSITION
+========================================================== */
+
+@media (min-width: 992px) {
+
+    .auth-section:has(.role-selection) .auth-card {
+
+        transform: translateY(-5px);
+
+    }
+
+}
+
+
+/* ==========================================================
+   REGISTER TABLET
+========================================================== */
+
+@media (max-width: 991px) {
+
+    .auth-section:has(.role-selection) .auth-content {
+
+        transform: none;
+
+    }
+
+    .auth-card:has(.role-selection) {
+
+        max-width: 540px;
+
+        margin-left: auto;
+
+        margin-right: auto;
+
+    }
+
+}
+
+
+/* ==========================================================
+   REGISTER MOBILE
+========================================================== */
+
+@media (max-width: 576px) {
+
+    .auth-card:has(.role-selection) {
+
+        padding: 22px 18px;
+
+    }
+
+    .auth-card:has(.role-selection) h2 {
+
+        font-size: 26px;
+
+    }
+
+    .auth-card:has(.role-selection) .role-card div {
+
+        padding: 13px 7px;
+
+    }
+
+    .auth-card:has(.role-selection) .form-control {
+
+        height: 46px;
+
+    }
+
+}
+
+
+
+
+/* Login validation */
+
+.validation-error {
+display: block;
+min-height: 18px;
+margin-top: 5px;
+color: #dc3545;
+font-size: 12px;
+font-weight: 500;
+}
+
+.input-error {
+border-color: #dc3545 !important;
+box-shadow: 0 0 0 0.15rem rgba(220, 53, 69, 0.10) !important;
+}
