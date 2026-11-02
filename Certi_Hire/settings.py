@@ -104,9 +104,9 @@ else:
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
-CASHFREE_CLIENT_ID = config("CASHFREE_CLIENT_ID")
-CASHFREE_CLIENT_SECRET = config("CASHFREE_CLIENT_SECRET")
-CASHFREE_BASE_URL = config("CASHFREE_BASE_URL")
+CASHFREE_CLIENT_ID = config("CASHFREE_CLIENT_ID", default="TEST_CASHFREE_CLIENT_ID")
+CASHFREE_CLIENT_SECRET = config("CASHFREE_CLIENT_SECRET", default="TEST_CASHFREE_CLIENT_SECRET")
+CASHFREE_BASE_URL = config("CASHFREE_BASE_URL", default="https://sandbox.cashfree.com/pg")
 
 AUTH_PASSWORD_VALIDATORS = [
     {
