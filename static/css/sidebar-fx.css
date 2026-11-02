@@ -1,0 +1,97 @@
+/* ==========================================================
+   CertiHire sidebar FX. Load AFTER your main sidebar/base CSS.
+   ========================================================== */
+
+:root {
+    --sx-a: #6366f1;
+    --sx-b: #22d3ee;
+    --sx-ease: cubic-bezier(.22, 1, .36, 1);
+    --sx-spring: cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.sidebar > div { position: relative; z-index: 1; }
+
+/* cursor-following light inside the sidebar */
+.fx-side-glow {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background: radial-gradient(260px circle at var(--sx, 50%) var(--sy, 30%), rgba(99, 102, 241, .18), transparent 70%);
+    opacity: 0; transition: opacity .35s;
+}
+.sidebar:hover .fx-side-glow { opacity: 1; }
+
+/* ---------- logo ---------- */
+
+.sidebar-logo i {
+    display: inline-block;
+    transition: transform .8s var(--sx-spring);
+}
+.sidebar-logo:hover i { transform: rotate(360deg) scale(1.15); }
+.fx-ready .sidebar-logo { animation: fx-s-in .7s var(--sx-ease) both; }
+
+/* ---------- menu ---------- */
+
+.sidebar-menu { position: relative; }
+
+.sidebar-menu a {
+    position: relative; z-index: 1; overflow: hidden;
+    transition: color .25s, translate .35s var(--sx-ease);
+}
+.sidebar-menu a i {
+    display: inline-block;
+    transition: transform .4s var(--sx-spring);
+}
+.sidebar-menu a:hover { translate: 5px 0; }
+.sidebar-menu a:hover i { transform: scale(1.25) rotate(-8deg); }
+.sidebar-menu a:active i { transform: scale(.85); }
+
+/* the pill replaces each link's own hover/active background */
+.sidebar .sidebar-menu a:hover,
+.sidebar .sidebar-menu a.active { background: transparent; box-shadow: none; }
+.sidebar .sidebar-menu a.active { color: #fff; }
+
+.fx-pill {
+    position: absolute; top: 0; left: 0; z-index: 0; pointer-events: none;
+    border-radius: 12px; opacity: 0;
+    background: rgba(99, 102, 241, .16);
+    transition: transform .5s var(--sx-spring), width .5s var(--sx-ease), height .5s var(--sx-ease),
+                background .3s, box-shadow .3s, opacity .3s;
+}
+.fx-pill.rest {
+    background: linear-gradient(135deg, var(--sx-a), #8b5cf6);
+    box-shadow: 0 10px 24px -8px rgba(99, 102, 241, .65);
+}
+.fx-pill.no-anim { transition: none; }
+
+/* staggered entrance, one sequence on page load */
+.fx-ready .sidebar-menu > :not(.fx-pill) {
+    animation: fx-s-in .6s var(--sx-ease) both;
+    animation-delay: calc(var(--i, 0) * 45ms + 120ms);
+}
+.fx-ready .sidebar-footer { animation: fx-s-in .6s .7s var(--sx-ease) both; }
+@keyframes fx-s-in {
+    from { opacity: 0; translate: -22px 0; }
+    to   { opacity: 1; translate: 0 0; }
+}
+
+.sidebar-menu a:focus-visible, .logout-btn:focus-visible {
+    outline: 2px solid var(--sx-b); outline-offset: 2px;
+}
+
+.fx-sripple {
+    position: absolute; border-radius: 50%; pointer-events: none;
+    background: rgba(255, 255, 255, .35); transform: scale(0);
+    animation: fx-sripple .6s ease-out forwards;
+}
+@keyframes fx-sripple { to { transform: scale(1); opacity: 0; } }
+
+/* ---------- logout ---------- */
+
+.logout-btn { position: relative; overflow: hidden; transition: background .3s, color .3s, translate .3s var(--sx-ease); }
+.logout-btn i { display: inline-block; transition: transform .4s var(--sx-spring); }
+.logout-btn:hover { background: rgba(239, 68, 68, .14); color: #ef4444; }
+.logout-btn:hover i { transform: translateX(6px); }
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; }
+    .sidebar-menu a:hover { translate: none; }
+}

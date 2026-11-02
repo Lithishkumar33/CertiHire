@@ -8,6 +8,7 @@ Buyer Dashboard
 {% block css %}
 <link rel="stylesheet"
       href="{% static 'css/pages/dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/pages/dashboard-fx.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -375,4 +376,8 @@ RECENT ORDERS
 
 </section>
 
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/dashboard-fx.js' %}"></script>
 {% endblock %}
