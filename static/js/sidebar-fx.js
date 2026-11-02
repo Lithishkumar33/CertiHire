@@ -1,5 +1,5 @@
 /* CertiHire sidebar FX: gliding highlight pill, auto active link,
-   cursor glow, click ripple. No dependencies. */
+   cursor glow, click ripple, and mobile drawer toggle. No dependencies. */
 (function () {
     'use strict';
 
@@ -39,6 +39,7 @@
         menu.insertBefore(pill, menu.firstChild);
 
         function place(a, isRest) {
+            if (!a || a.offsetWidth === 0) return;
             pill.style.width = a.offsetWidth + 'px';
             pill.style.height = a.offsetHeight + 'px';
             pill.style.transform = 'translate(' + a.offsetLeft + 'px,' + a.offsetTop + 'px)';
@@ -50,7 +51,10 @@
         }
 
         // start at the top, then glide down to the current page after the entrance
-        place(links[0], false); pill.style.opacity = 0;
+        if (links[0]) {
+            place(links[0], false);
+            pill.style.opacity = 0;
+        }
         requestAnimationFrame(function () {
             requestAnimationFrame(function () {
                 pill.classList.remove('no-anim');
@@ -75,6 +79,75 @@
         });
         menu.addEventListener('pointerleave', rest);
         addEventListener('resize', rest);
+
+        /* Mobile Drawer Toggle */
+        var toggleBtn = document.getElementById('sidebarToggle');
+        var closeBtn = document.getElementById('sidebarClose');
+        var backdrop = document.getElementById('sidebarBackdrop');
+
+        function openSidebar() {
+            sidebar.classList.add('show');
+            if (backdrop) backdrop.classList.add('show');
+            document.body.classList.add('sidebar-open');
+            // Re-measure pill once sidebar has completed slide-in
+            setTimeout(rest, 320);
+        }
+
+        function closeSidebar() {
+            sidebar.classList.remove('show');
+            if (backdrop) backdrop.classList.remove('show');
+            document.body.classList.remove('sidebar-open');
+        }
+
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (sidebar.classList.contains('show')) {
+                    closeSidebar();
+                } else {
+                    openSidebar();
+                }
+            });
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                closeSidebar();
+            });
+        }
+
+        if (backdrop) {
+            backdrop.addEventListener('click', function () {
+                closeSidebar();
+            });
+        }
+
+        // Close sidebar on mobile when any link is clicked
+        var allSidebarLinks = sidebar.querySelectorAll('a');
+        allSidebarLinks.forEach(function (a) {
+            a.addEventListener('click', function () {
+                if (window.innerWidth <= 992) {
+                    closeSidebar();
+                }
+            });
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && sidebar.classList.contains('show')) {
+                closeSidebar();
+            }
+        });
+
+        // Auto close if window is resized above 992px
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 992 && sidebar.classList.contains('show')) {
+                closeSidebar();
+            }
+        });
 
         /* cursor-following glow */
         if (!reduce && matchMedia('(hover: hover)').matches) {

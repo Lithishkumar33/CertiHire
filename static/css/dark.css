@@ -96,3 +96,19 @@
     cursor:pointer;
 
 }
+/* Dark Mode Mobile Sidebar & Toggle */
+.dark-mode .sidebar-toggle-btn {
+    background: #1e293b;
+    border-color: #334155;
+    color: #f8fafc;
+}
+
+.dark-mode .sidebar-toggle-btn:hover {
+    background: #334155;
+    color: #60a5fa;
+    border-color: #475569;
+}
+
+.dark-mode .mobile-brand-logo {
+    color: #fff;
+}

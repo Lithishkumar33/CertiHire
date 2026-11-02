@@ -2,17 +2,17 @@
 
 <aside class="sidebar">
 
-    <!-- Logo -->
-
+    <!-- Header: Logo & Mobile Close -->
     <div>
-
-        <a href="{% url 'dashboard' %}" class="sidebar-logo">
-
-            <i class="bi bi-patch-check-fill"></i>
-
-            <span>CertiHire</span>
-
-        </a>
+        <div class="sidebar-header">
+            <a href="{% url 'dashboard' %}" class="sidebar-logo">
+                <i class="bi bi-patch-check-fill"></i>
+                <span>CertiHire</span>
+            </a>
+            <button type="button" class="sidebar-close-btn d-lg-none" id="sidebarClose" aria-label="Close sidebar">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
 
         <!-- Menu -->
 
