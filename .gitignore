@@ -54,3 +54,6 @@ media/
 *.swo
 
 .vercel
+
+staticfiles/
+staticfiles_build/
